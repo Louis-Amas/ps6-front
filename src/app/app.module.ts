@@ -9,14 +9,16 @@ import {MatIconModule} from '@angular/material/icon';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
-import { MatMenuModule, MatButtonModule, MatToolbarModule} from '@angular/material';
+import { MatMenuModule, MatButtonModule, MatToolbarModule, MatInputModule, MatFormFieldModule} from '@angular/material';
+import { ConnectionComponent } from './connection/connection.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StudentHomeComponent,
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    ConnectionComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +30,9 @@ import { MatMenuModule, MatButtonModule, MatToolbarModule} from '@angular/materi
     NoopAnimationsModule,
     MatMenuModule,
     MatButtonModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatInputModule,
+    MatFormFieldModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
