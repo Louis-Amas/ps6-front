@@ -3,14 +3,20 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import {MatCardModule} from '@angular/material/card';
+import { StudentHomeComponent } from './student-home/student-home.component';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    StudentHomeComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatCardModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
