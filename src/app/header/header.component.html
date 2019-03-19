@@ -4,7 +4,7 @@
   <span class="connection"></span>
   <button mat-button *ngIf="!connected" [matMenuTriggerFor]="menu">Se connecter</button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>Etudiant</button>
+    <button mat-menu-item routerLink="/student">Etudiant</button>
     <button mat-menu-item>Professeur</button>
     <button mat-menu-item>BRI</button>
   </mat-menu>
