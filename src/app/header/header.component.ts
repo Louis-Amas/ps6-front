@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -15,4 +15,7 @@ export class HeaderComponent implements OnInit {
     console.log(this.connected);
   }
 
+  etudiantConnection(){
+
+  }
 }

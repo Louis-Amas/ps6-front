@@ -11,6 +11,7 @@ import { NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { MatMenuModule, MatButtonModule, MatToolbarModule, MatInputModule, MatFormFieldModule} from '@angular/material';
 import { ConnectionComponent } from './connection/connection.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { ConnectionComponent } from './connection/connection.component';
     StudentHomeComponent,
     AppComponent,
     HeaderComponent,
-    ConnectionComponent
+    ConnectionComponent,
+    HeaderComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
