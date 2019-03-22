@@ -1,12 +1,18 @@
 <form class="connection-form" [formGroup]="studentForm">
   <mat-form-field class="input-form">
-    <input type="email" matInput placeholder="Email" [formControlName]="'email'">
+    <input  matInput placeholder="Email" [formControlName]="'email'" required>
+    <mat-error *ngIf="email.invalid">{{getErrorEmailMessage()}}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="input-form">
-    <input type="password" matInput placeholder="Mot de passe" [formControlName]="'password'">
+    <input type="password" matInput placeholder="Mot de passe" [formControlName]="'password'" required [type]="visible ? 'text' : 'password'">
+    <mat-icon matSuffix (click)="visible = !visible">{{visible ? 'visibility' : 'visibility_off'}}</mat-icon>
+    <mat-error *ngIf="email.invalid">{{getErrorPasswordMessage()}}</mat-error>
   </mat-form-field>
   <br>
   <br>
   <button mat-button (click)="getStudentByConnection()">Se connecter</button>
+  <br>
+  <br>
+  <span>{{messageError}}</span>
 </form>

@@ -3,6 +3,7 @@ import {StudentService} from '../../services/student/student.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Student} from '../../models/student';
 import {Router} from '@angular/router';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-connection',
@@ -10,6 +11,10 @@ import {Router} from '@angular/router';
   styleUrls: ['./connection.component.css']
 })
 export class ConnectionComponent implements OnInit {
+
+  email = new FormControl('', [Validators.required]);
+  password = new FormControl('', [Validators.required]);
+  messageError: string;
 
   public studentForm: FormGroup;
 
@@ -33,5 +38,14 @@ export class ConnectionComponent implements OnInit {
         this.router.navigate([link]);
       }
     }
+    this.messageError = 'Les identifiants sont incorrects';
+  }
+
+  getErrorEmailMessage() {
+    return this.email.hasError('required') ? 'Vous devez entrer un e-mail' : '';
+  }
+
+  getErrorPasswordMessage() {
+    return this.password.hasError('required') ? 'Vous devez entrer un mot de passe' : '';
   }
 }

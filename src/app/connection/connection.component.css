@@ -17,3 +17,9 @@
 .mat-button {
   background-color: #00aeef;
 }
+
+span {
+  font-family: Arial;
+  font-size: small;
+  color: #f44336;
+}
