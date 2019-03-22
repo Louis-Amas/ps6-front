@@ -2,3 +2,23 @@ span {
   text-align: center;
   margin-left: 50%;
 }
+
+.roundedImage{
+  max-width: 30%;
+  border-radius:50px;
+  padding-top: 25px;
+}
+
+.mat-card-content{
+  float: right;
+}
+
+.mat-card {
+  max-width: 400px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px grey;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
