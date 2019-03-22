@@ -24,6 +24,5 @@ export class StudentService {
   public students$: BehaviorSubject<Student[]> = new BehaviorSubject(this.studentList);
 
   constructor(private http: HttpClient) {
-    this.students$.next(this.studentList);
   }
 }

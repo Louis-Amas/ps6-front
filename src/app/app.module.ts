@@ -11,7 +11,10 @@ import { NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { MatMenuModule, MatButtonModule, MatToolbarModule, MatInputModule, MatFormFieldModule} from '@angular/material';
 import { ConnectionComponent } from './connection/connection.component';
+import { HttpClientModule} from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {StudentService} from '../services/student/student.service';
 
 @NgModule({
   declarations: [
@@ -36,8 +39,10 @@ import { HomeComponent } from './home/home.component';
     MatToolbarModule,
     MatInputModule,
     MatFormFieldModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [StudentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

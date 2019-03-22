@@ -1,12 +1,12 @@
-<form class="connection-form">
+<form class="connection-form" [formGroup]="studentForm">
   <mat-form-field class="input-form">
-    <input type="email" matInput placeholder="Email">
+    <input type="email" matInput placeholder="Email" [formControlName]="'email'">
   </mat-form-field>
 
   <mat-form-field class="input-form">
-    <input type="password" matInput placeholder="Mot de passe">
+    <input type="password" matInput placeholder="Mot de passe" [formControlName]="'password'">
   </mat-form-field>
   <br>
   <br>
-  <button mat-button>Se connecter</button>
+  <button mat-button (click)="getStudentByConnection()">Se connecter</button>
 </form>
