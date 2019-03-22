@@ -1,4 +1,5 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
+import {ConnectionService} from '../../services/connection/connection.service';
 
 @Component({
   selector: 'app-header',
@@ -7,15 +8,18 @@ import {Component, Input, OnInit, Output} from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() connected: boolean;
+  private connected;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(public connection: ConnectionService) {
+    console.log(this.connected);
+    this.connection.connection$.subscribe(c => this.connected = c);
     console.log(this.connected);
   }
 
-  etudiantConnection(){
+  ngOnInit() {
+  }
 
+  disconnection(){
+    this.connection.updateConnection();
   }
 }

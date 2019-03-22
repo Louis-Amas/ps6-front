@@ -8,5 +8,5 @@
     <button mat-menu-item routerLink="/teacher">Professeur</button>
     <button mat-menu-item routerLink="/bri">BRI</button>
   </mat-menu>
-  <button mat-button routerLink="" *ngIf="connected">Se déconnecter</button>
+  <button mat-button routerLink="" *ngIf="connected" (click)="disconnection()">Se déconnecter</button>
 </mat-toolbar>
