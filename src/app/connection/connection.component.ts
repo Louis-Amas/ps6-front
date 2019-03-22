@@ -38,7 +38,7 @@ export class ConnectionComponent implements OnInit {
         this.router.navigate([link]);
       }
     }
-    this.messageError = 'Les identifiants sont incorrects';
+    this.messageError = 'Les identifiants sont incorrects ';
   }
 
   getErrorEmailMessage() {
