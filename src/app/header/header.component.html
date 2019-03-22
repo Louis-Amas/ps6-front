@@ -5,8 +5,8 @@
   <button mat-button *ngIf="!connected" [matMenuTriggerFor]="menu">Se connecter</button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item routerLink="/student">Etudiant</button>
-    <button mat-menu-item>Professeur</button>
-    <button mat-menu-item>BRI</button>
+    <button mat-menu-item routerLink="/teacher">Professeur</button>
+    <button mat-menu-item routerLink="/bri">BRI</button>
   </mat-menu>
   <button mat-button routerLink="" *ngIf="connected">Se déconnecter</button>
 </mat-toolbar>
