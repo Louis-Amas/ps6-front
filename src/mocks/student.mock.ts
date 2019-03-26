@@ -7,6 +7,18 @@ export const STUDENTS_MOCKED: Student[] = [
     firstName : 'Jean-Yves',
     email : 'delmote@test.fr',
     password : 'test1',
+    wishList: [
+      {
+        id : 1,
+        position : 1,
+        university : "polytech",
+      },
+      {
+        id : 2,
+        position : 2,
+        university : "Insa",
+      }
+    ],
   },
   {
     id : 2,

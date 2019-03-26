@@ -1,3 +1,5 @@
+import {Wish} from './wish';
+
 export interface Student {
   id?: number;
   lastName?: string;
@@ -5,4 +7,5 @@ export interface Student {
   email?: string;
   password?: string;
   lastConnection?: Date;
+  wishList?: Wish[];
 }

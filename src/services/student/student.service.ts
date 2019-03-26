@@ -25,4 +25,8 @@ export class StudentService {
 
   constructor(private http: HttpClient) {
   }
+
+  getStudentById(id: number){
+    //need server
+  }
 }

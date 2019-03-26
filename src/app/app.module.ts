@@ -15,6 +15,8 @@ import { HttpClientModule} from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {StudentService} from '../services/student/student.service';
+import { StudentWishListComponent } from './student-wish-list/student-wish-list.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import {StudentService} from '../services/student/student.service';
     HeaderComponent,
     ConnectionComponent,
     HeaderComponent,
-    HomeComponent
+    HomeComponent,
+    StudentWishListComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import {StudentService} from '../services/student/student.service';
     MatInputModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DragDropModule
   ],
   providers: [StudentService],
   bootstrap: [AppComponent]
