@@ -3,6 +3,7 @@ import { STUDENTS_MOCKED } from '../../mocks/student.mock';
 import {Student} from '../../models/student';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable, of} from 'rxjs';
+import {Wish} from '../../models/wish';
 
 
 @Injectable({
@@ -28,5 +29,21 @@ export class StudentService {
 
   getStudentById(id: number){
     //need server
+  }
+
+  putWishPositionOfOneStudent(studentId: number, wishId: number, nextPosition: number) {
+    this.studentList.forEach(x => {
+      if (x.id === studentId) {
+        x.wishList.forEach( w => {
+            if (w.position === wishId) {
+              w.position = nextPosition;
+            } else if (w.position === nextPosition) {
+              w.position = wishId;
+            }
+          }
+        );
+      }
+    });
+    this.students$.next(this.studentList);
   }
 }

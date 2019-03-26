@@ -1,6 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Wish} from '../../models/wish';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {StudentService} from '../../services/student/student.service';
+import {Student} from '../../models/student';
 
 @Component({
   selector: 'app-student-wish-list',
@@ -10,23 +12,23 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 export class StudentWishListComponent implements OnInit {
 
   @Input()
-  public wishes: Wish[] = [];
+    student: Student;
 
-  constructor() { }
+  wishes: Wish[] = [];
+
+  constructor(public studentService: StudentService) {}
 
   ngOnInit() {
+    this.wishes = this.student.wishList;
     console.log(this.wishes);
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    this.wishes.forEach(w => {
-        if (w.position === (event.previousIndex + 1)) {
-          w.position = event.currentIndex + 1;
-        } else if (w.position === (event.currentIndex + 1)) {
-          w.position = event.previousIndex + 1;
-        }
-      }
-    );
+    const wishId = this.student.wishList.filter(x => {
+      return x.position === (event.previousIndex + 1);
+    })[0].id;
+
+    this.studentService.putWishPositionOfOneStudent(this.student.id, wishId, event.currentIndex + 1);
     moveItemInArray(this.wishes, event.previousIndex, event.currentIndex);
   }
 }
