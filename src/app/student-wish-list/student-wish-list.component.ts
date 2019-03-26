@@ -24,7 +24,11 @@ export class StudentWishListComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    this.studentService.putWishPositionOfOneStudent(this.student.id, event.previousIndex + 1, event.currentIndex + 1);
+    const wishId = this.student.wishList.filter(x => {
+      return x.position === (event.previousIndex + 1);
+    })[0].id;
+
+    this.studentService.putWishPositionOfOneStudent(this.student.id, wishId, event.currentIndex + 1);
     moveItemInArray(this.wishes, event.previousIndex, event.currentIndex);
   }
 }

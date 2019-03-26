@@ -31,14 +31,14 @@ export class StudentService {
     //need server
   }
 
-  putWishPositionOfOneStudent(studentId: number, prevPosition: number, nextPosition: number) {
+  putWishPositionOfOneStudent(studentId: number, wishId: number, nextPosition: number) {
     this.studentList.forEach(x => {
       if (x.id === studentId) {
         x.wishList.forEach( w => {
-            if (w.position === prevPosition) {
+            if (w.position === wishId) {
               w.position = nextPosition;
             } else if (w.position === nextPosition) {
-              w.position = prevPosition;
+              w.position = wishId;
             }
           }
         );
