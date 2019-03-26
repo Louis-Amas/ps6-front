@@ -8,4 +8,5 @@ export interface Student {
   password?: string;
   lastConnection?: Date;
   wishList?: Wish[];
+  major?: string;
 }

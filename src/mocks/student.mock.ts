@@ -7,6 +7,7 @@ export const STUDENTS_MOCKED: Student[] = [
     firstName : 'Jean-Yves',
     email : 'delmote@test.fr',
     password : 'test1',
+    major: 'SI3',
     wishList: [
       {
         id : 1,
@@ -26,5 +27,6 @@ export const STUDENTS_MOCKED: Student[] = [
     firstName : 'Rémi',
     email : 'delmote@test.fr',
     password : 'test1',
+    major: 'MAM',
   },
 ];
