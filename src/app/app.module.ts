@@ -12,6 +12,7 @@ import { HeaderComponent } from './header/header.component';
 import { MatMenuModule, MatButtonModule, MatToolbarModule, MatInputModule, MatFormFieldModule} from '@angular/material';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSelectModule} from '@angular/material/select';
+import {MatListModule} from '@angular/material/list';
 import { ConnectionComponent } from './connection/connection.component';
 import { HttpClientModule} from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
@@ -47,6 +48,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatToolbarModule,
     MatInputModule,
     MatFormFieldModule,
+    MatListModule,
     ReactiveFormsModule,
     HttpClientModule,
     MatDividerModule,

@@ -1,4 +1,32 @@
 .mat-list{
+display: block;
+width: 50%;
   margin-right: auto;
   margin-left: auto;
+}
+
+.mat-divider {
+}
+
+.form{
+  display: block;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.mat-form-field{
+  width: 50%;
+  display: block;
+  margin: auto;
+}
+
+.button-validate{
+  display: block;
+  margin: auto;
+}
+
+.mat-card {
+  width:50%;
+  margin: auto;
 }
