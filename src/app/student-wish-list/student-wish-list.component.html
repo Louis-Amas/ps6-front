@@ -1,5 +1,9 @@
-<div cdkDropList *ngIf="wishes != undefined" class="wish-list" (cdkDropListDropped)="drop($event)">
-  <div class="wish-box" *ngFor="let wish of wishes" cdkDrag>
-    {{wish.position}} - {{wish.university}}
+<div *ngIf="wishes != undefined" class="container">
+  <span>Triez vos voeux</span>
+  <div cdkDropList class="wish-list" (cdkDropListDropped)="drop($event)">
+    <div class="wish-box" *ngFor="let wish of wishes" cdkDrag>
+      {{wish.position}} - {{wish.university}}
+    </div>
   </div>
 </div>
+

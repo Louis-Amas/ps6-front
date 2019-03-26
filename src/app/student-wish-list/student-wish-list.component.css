@@ -1,15 +1,19 @@
-.wish-list {
+.container{
   width: 500px;
   max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2%;
+  margin-top: 5%;
+}
+
+.wish-list {
   border: solid 1px #ccc;
   min-height: 60px;
   display: block;
   background: white;
   border-radius: 4px;
   overflow: hidden;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 2%;
 }
 
 .wish-box {
