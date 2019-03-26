@@ -1,0 +1,46 @@
+<button mat-button> < Retour</button>
+
+<!--
+<mat-list>
+  <mat-list-item>Nom : {{student.lastName}}</mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>Prénom : {{student.firstName}}</mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>Email : {{student.email}}</mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>Filière actuelle : {{student.firstName}}</mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>Spécialité de dernière année : {{student.firstName}}</mat-list-item>
+</mat-list> -->
+
+<br>
+<mat-form-field>
+  <mat-label>Semestre d'échange :</mat-label>
+  <mat-select>
+    <mat-option value="semestre7">Semestre 7</mat-option>
+    <mat-option value="semestre8">Semestre 8</mat-option>
+  </mat-select>
+</mat-form-field>
+<br>
+
+<mat-form-field>
+  <mat-label>Pays</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let country of countries" [value]="country">
+      {{country}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<br>
+<mat-form-field>
+  <mat-label>Université</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let university of universities" [value]="university.name">
+      {{university.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+
+
