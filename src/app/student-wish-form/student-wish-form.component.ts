@@ -53,15 +53,8 @@ export class StudentWishFormComponent implements OnInit {
   }
 
   getStudent() {
-    /*const id = +this.route.snapshot.paramMap.get('id');
-    this.studentService.students$.subscribe( x => {
-      x.forEach( s => {
-        if (s._id === id) {
-          this.student = s;
-          console.log(this.student);
-        }
-      });
-    });*/
+    const id = this.route.snapshot.paramMap.get('id');
+    this.studentService.getStudentById(id).subscribe(s => this.student = s);
   }
 
   validateForm() {
