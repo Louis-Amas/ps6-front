@@ -16,24 +16,25 @@ export class StudentService {
    * https://angular.io/docs/ts/latest/tutorial/toh-pt4.html
    */
 
-  private studentUrl = '';
+  private studentUrl = 'http://127.0.0.1:9428/api/users';
   public studentList: Student[] = STUDENTS_MOCKED;
   /**
    * Observable which contains the list of the tickets.
    * Naming convention: Add '$' at the end of the variable name to highlight it as an Observable.
    */
   public students$: BehaviorSubject<Student[]> = new BehaviorSubject(this.studentList);
+  private header$: BehaviorSubject<string> = new BehaviorSubject('');
 
   constructor(private http: HttpClient) {
   }
 
-  getStudentById(id: number){
-    //need server
+  getStudentById(id: string): Observable<Student> {
+    return this.http.get<Student>(this.studentUrl + '/' + id);
   }
 
-  putWishPositionOfOneStudent(studentId: number, wishId: number, nextPosition: number) {
-    this.studentList.forEach(x => {
-      if (x.id === studentId) {
+  putWishPositionOfOneStudent(studentId: string, wishId: number, nextPosition: number) {
+    /*this.studentList.forEach(x => {
+      if (x._id === studentId) {
         x.wishList.forEach( w => {
             if (w.position === wishId) {
               w.position = nextPosition;
@@ -44,6 +45,6 @@ export class StudentService {
         );
       }
     });
-    this.students$.next(this.studentList);
+    this.students$.next(this.studentList);*/
   }
 }

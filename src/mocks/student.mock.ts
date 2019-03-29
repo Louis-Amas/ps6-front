@@ -2,7 +2,7 @@ import {Student} from '../models/student';
 
 export const STUDENTS_MOCKED: Student[] = [
   {
-    id : 1,
+    _id : '1',
     lastName : 'Delmotte',
     firstName : 'Jean-Yves',
     email : 'delmote@test.fr',
@@ -22,7 +22,7 @@ export const STUDENTS_MOCKED: Student[] = [
     ],
   },
   {
-    id : 2,
+    _id : '2',
     lastName : 'Pourtier',
     firstName : 'Rémi',
     email : 'delmote@test.fr',

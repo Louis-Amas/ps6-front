@@ -14,13 +14,14 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatSelectModule} from '@angular/material/select';
 import {MatListModule} from '@angular/material/list';
 import { ConnectionComponent } from './connection/connection.component';
-import { HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {StudentService} from '../services/student/student.service';
 import { StudentWishFormComponent } from './student-wish-form/student-wish-form.component';
 import { StudentWishListComponent } from './student-wish-list/student-wish-list.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {AuthInterceptor} from '../services/connection/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,12 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     HttpClientModule,
     DragDropModule,
   ],
-  providers: [StudentService],
+  providers: [StudentService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

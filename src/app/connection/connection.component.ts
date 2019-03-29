@@ -5,6 +5,8 @@ import {Student} from '../../models/student';
 import {Router} from '@angular/router';
 import {FormControl, Validators} from '@angular/forms';
 import {ConnectionService} from '../../services/connection/connection.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {catchError} from 'rxjs/operators';
 
 @Component({
   selector: 'app-connection',
@@ -20,7 +22,8 @@ export class ConnectionComponent implements OnInit {
   public studentForm: FormGroup;
 
   constructor(public formBuilder: FormBuilder, public studentService: StudentService,
-              public router: Router, public connection: ConnectionService) {
+              public router: Router, public connection: ConnectionService,
+              private http: HttpClient) {
     // Form creation
     this.studentForm = this.formBuilder.group({
       email: [''],
@@ -33,15 +36,20 @@ export class ConnectionComponent implements OnInit {
 
   getStudentByConnection() {
     const studentToConnect: Student = this.studentForm.getRawValue() as Student;
-    const studentFind = this.studentService.studentList.find(x => x.email === studentToConnect.email);
-    if (studentFind) {
-      if (studentFind.password === studentToConnect.password) {
-        const link = 'student/' + studentFind.id;
-        this.connection.updateConnection();
+
+    const headercontent = studentToConnect.email + ':' + studentToConnect.password;
+    localStorage.setItem('token', headercontent);
+    console.log(localStorage.getItem('token'));
+
+    this.connection.getIdOfCurrentConnection().subscribe( student => {
+      if ( student) {
+        this.studentService.getStudentById(student._id);
+        const link = 'student/' + student._id;
         this.router.navigate([link]);
+      } else {
+        this.messageError = 'Adresse email ou mot de passe invalide';
       }
-    }
-    this.messageError = 'Les identifiants sont incorrects ';
+    });
   }
 
   getErrorEmailMessage() {

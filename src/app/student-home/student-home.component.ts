@@ -20,14 +20,10 @@ export class StudentHomeComponent implements OnInit {
   }
 
   getStudent() {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.studentService.students$.subscribe( x => {
-      x.forEach( s => {
-        if (s.id === id) {
-          this.student = s;
-          console.log(this.student);
-        }
-      });
+    const id = this.route.snapshot.paramMap.get('id');
+    console.log(id);
+    this.studentService.getStudentById(id).subscribe( student => {
+      this.student = student;
     });
   }
 }
