@@ -15,8 +15,9 @@ export class UniversityService {
    * https://angular.io/docs/ts/latest/tutorial/toh-pt4.html
    */
 
-  private universityUrl = '';
-  public universityList: University[] = UNIVERSITY_MOCKED;
+  private universityUrl = 'http://localhost:9428/api/university';
+  public universityList: University[] = [];
+  public university: University;
   /**
    * Observable which contains the list of the tickets.
    * Naming convention: Add '$' at the end of the variable name to highlight it as an Observable.
@@ -24,10 +25,22 @@ export class UniversityService {
   public universities$: BehaviorSubject<University[]> = new BehaviorSubject(this.universityList);
 
   constructor(private http: HttpClient) {
+    this.getUniversities();
   }
 
   getCountries() {
     const countryList = this.universityList.map(value => value.country);
     return countryList;
+  }
+
+  getUniversities() {
+    return this.http.get<University[]>(this.universityUrl).subscribe((univ) => {
+      this.universityList = univ;
+      this.universities$.next(univ);
+    });
+  }
+
+  getUniversitiesByCountryAndMajor(country: string, concernedDepartment: string) {
+    return this.http.get<University[]>(this.universityUrl + '/' + country + '/' + concernedDepartment);
   }
 }

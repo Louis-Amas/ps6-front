@@ -16,7 +16,7 @@ export class StudentWishFormComponent implements OnInit {
 
   student: Student;
   countries: string[];
-  universities: University[];
+  public universitiesList: University[] = [];
 
   courses: Course[];
 
@@ -26,31 +26,30 @@ export class StudentWishFormComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder, private route: ActivatedRoute,
               private studentService: StudentService, public universityService: UniversityService) {
+
     this.wishForm = this.formBuilder.group({
       semester: [''],
       country: [''],
       university: [''],
     });
+    this.universityService.getUniversities();
+    this.universityService.universities$.subscribe((univ) => this.universitiesList = univ);
+
   }
 
 
   ngOnInit() {
     this.getCountry();
-    this.getUniversity();
     this.getStudent();
-
   }
 
-  getUniversity() {
-    this.universities = this.universityService.universityList;
-  }
   getCountry() {
     this.countries = this.universityService.getCountries();
   }
 
-  getUniversityByCountryAndMajor(country: string) {
-    return this.universities.filter(x => x.country === country  && x.concernedDepartement
-      === this.student.major);
+  getUniversityByCountryAndMajor(country: string, concernedDepartment: string) {
+    this.universityService.getUniversitiesByCountryAndMajor(country, concernedDepartment).subscribe( univ =>
+      this.universitiesList = univ);
   }
 
   getStudent() {
@@ -67,12 +66,8 @@ export class StudentWishFormComponent implements OnInit {
 
   validateForm() {
     const name = this.wishForm.get('university').value;
-    this.university = this.universities.find(x => x.name === name);
+    this.university = this.universitiesList.find(x => x.name === name);
     const semester = this.wishForm.get('semester').value;
-    /*
-    console.log(semester);
-    console.log(this.university);
-    console.log(this.universities); */
     this.courses = this.university.courses.filter(x => {
       return x.semester.valueOf() == semester && x.major === this.student.major;
     });

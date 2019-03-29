@@ -1,5 +1,5 @@
 <div class="form">
-  <button mat-button> < Retour</button>
+  <button mat-button routerLink=".."> < Retour</button>
 
   <mat-list>
     <mat-list-item>Nom : {{student.lastName}}</mat-list-item>
@@ -12,6 +12,7 @@
     <mat-divider></mat-divider>
     <mat-list-item>Spécialité de dernière année : {{student.firstName}}</mat-list-item>
   </mat-list>
+
 
   <br>
   <form class="connection-form" [formGroup]="wishForm">
@@ -27,7 +28,7 @@
   <mat-form-field>
     <mat-label>Pays</mat-label>
     <mat-select [formControlName]="'country'" [(ngModel)]="country">
-      <mat-option *ngFor="let country of countries" [value]="country">
+      <mat-option (onSelectionChange)="getUniversityByCountryAndMajor(country, student.major)" *ngFor="let country of countries" [value]="country">
         {{country}}
       </mat-option>
     </mat-select>
@@ -37,7 +38,7 @@
   <mat-form-field>
     <mat-label>Université</mat-label>
     <mat-select [formControlName]="'university'" [(ngModel)]="university">
-      <mat-option *ngFor="let univ of getUniversityByCountryAndMajor(country)" [value]="univ.name">
+      <mat-option *ngFor="let univ of universitiesList" [value]="univ.name">
         {{univ.name}}
       </mat-option>
     </mat-select>
@@ -57,5 +58,5 @@
     <mat-list>
       <mat-list-item *ngFor="let course of courses"> {{course.name}}</mat-list-item>
     </mat-list>
-  </mat-card>
+  </mat-card> -->
 </div>
