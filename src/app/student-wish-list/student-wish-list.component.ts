@@ -28,7 +28,7 @@ export class StudentWishListComponent implements OnInit {
       return x.position === (event.previousIndex + 1);
     })[0].id;
 
-    this.studentService.putWishPositionOfOneStudent(this.student.id, wishId, event.currentIndex + 1);
+    this.studentService.putWishPositionOfOneStudent(this.student._id, wishId, event.currentIndex + 1);
     moveItemInArray(this.wishes, event.previousIndex, event.currentIndex);
   }
 }

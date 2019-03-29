@@ -1,7 +1,7 @@
 import {Wish} from './wish';
 
 export interface Student {
-  id?: number;
+  _id?: string;
   lastName?: string;
   firstName?: string;
   email?: string;
