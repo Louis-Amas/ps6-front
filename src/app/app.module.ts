@@ -9,15 +9,23 @@ import {MatIconModule} from '@angular/material/icon';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
-import { MatMenuModule, MatButtonModule, MatToolbarModule, MatInputModule, MatFormFieldModule} from '@angular/material';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatSelectModule} from '@angular/material/select';
+import {
+  MatMenuModule,
+  MatButtonModule,
+  MatToolbarModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatDividerModule
+} from '@angular/material';
 import {MatListModule} from '@angular/material/list';
 import { ConnectionComponent } from './connection/connection.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {StudentService} from '../services/student/student.service';
+import {StudentFormComponent} from './student-form/student-form.component';
+import {MatSelectModule} from '@angular/material/select';
+
 import { StudentWishFormComponent } from './student-wish-form/student-wish-form.component';
 import { StudentWishListComponent } from './student-wish-list/student-wish-list.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -31,6 +39,8 @@ import {AuthInterceptor} from '../services/connection/auth.interceptor';
     HeaderComponent,
     ConnectionComponent,
     HeaderComponent,
+    HomeComponent,
+    StudentFormComponent,
     HomeComponent,
     StudentWishFormComponent,
     HomeComponent,
@@ -51,6 +61,8 @@ import {AuthInterceptor} from '../services/connection/auth.interceptor';
     MatFormFieldModule,
     MatListModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    MatSelectModule,
     HttpClientModule,
     MatDividerModule,
     MatSelectModule,

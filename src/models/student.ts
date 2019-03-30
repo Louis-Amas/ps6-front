@@ -5,8 +5,10 @@ export interface Student {
   lastName?: string;
   firstName?: string;
   email?: string;
+  phoneNumber?: string;
   password?: string;
   lastConnection?: Date;
   wishList?: Wish[];
   major?: string;
+  year?: string;
 }

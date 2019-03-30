@@ -1,0 +1,37 @@
+<div class="form-container">
+
+  <form class ='student-form' [formGroup]="studentForm">
+
+    <mat-form-field>
+      <input matInput placeholder="Nom" value ="{{studentForm.value['lastName']}}" [formControlName]="'lastName'">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Prénom" value ="{{studentForm.value['firstName']}}" [formControlName]="'firstName'">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Adresse mail" value ="{{studentForm.value['email']}}" [formControlName]="'email'">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Téléphone" value ="{{studentForm.value['phoneNumber']}}" [formControlName]="'phoneNumber'">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Filière">
+          <mat-option *ngFor="let major of MAJOR_LIST" [value]="major">{{major}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Année">
+        <mat-option *ngFor="let year of YEAR_LIST" [value]="year" >{{year}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </form>
+
+  <button mat-button (click)="saveChanges()"> Sauvegarder les modification </button>
+
+</div>
