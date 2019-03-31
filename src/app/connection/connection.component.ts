@@ -32,24 +32,16 @@ export class ConnectionComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-  getStudentByConnection() {
-    const studentToConnect: Student = this.studentForm.getRawValue() as Student;
-
-    const headercontent = studentToConnect.email + ':' + studentToConnect.password;
-    localStorage.setItem('token', headercontent);
-    console.log(localStorage.getItem('token'));
-
-    this.connection.getIdOfCurrentConnection().subscribe( student => {
-      if ( student) {
-        this.studentService.getStudentById(student._id);
-        const link = 'student/' + student._id;
-        this.router.navigate([link]);
-      } else {
-        this.messageError = 'Adresse email ou mot de passe invalide';
+    this.connection.connection$.subscribe((isConnected) => {
+      if (isConnected) {
+        this.router.navigate([`student/${this.connection.student._id}`]);
       }
     });
+  }
+
+  tryToConnect() {
+    const studentToConnect: Student = this.studentForm.getRawValue() as Student;
+    this.connection.connectWithCredientials(studentToConnect.email, studentToConnect.password);
   }
 
   getErrorEmailMessage() {

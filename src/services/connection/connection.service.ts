@@ -14,8 +14,9 @@ export class ConnectionService {
    * https://angular.io/docs/ts/latest/tutorial/toh-pt4.html
    */
 
-  private url = 'http://127.0.0.1:9428/api/';
+  private url = 'http://127.0.0.1:9428/api/auth';
   public isConnected: boolean;
+  public student: Student;
 
   /**
    * Observable which contains the list of the tickets.
@@ -28,16 +29,23 @@ export class ConnectionService {
     this.connection$.next(this.isConnected);
   }
 
-  getIdOfCurrentConnection(): Observable<Student>  {
-    return this.http.get<Student>(this.url + 'auth');
+  connectWithCredientials(email: string, password: string) {
+    const credientials = `${email}:${password}`;
+    localStorage.setItem('token', credientials);
+    this.http.get<Student>(this.url)
+      .subscribe(res => {
+        this.student = res;
+        this.isConnected = true;
+        this.connection$.next(this.isConnected);
+      }, err => {
+        this.isConnected = false;
+        this.connection$.next(this.isConnected);
+      });
   }
 
-  updateConnection() {
-    if (!this.isConnected) {
-      this.isConnected = true;
-    } else {
-      this.isConnected = false;
-    }
+  disconnect() {
+    this.isConnected = !this.isConnected;
     this.connection$.next(this.isConnected);
+    localStorage.removeItem('token');
   }
 }

@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  disconnection(){
-    this.connection.updateConnection();
+  disconnection() {
+    this.connection.disconnect();
   }
 }
