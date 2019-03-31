@@ -20,7 +20,6 @@ export class StudentWishListComponent implements OnInit {
 
   ngOnInit() {
     this.wishes = this.student.wishList;
-    console.log(this.wishes);
   }
 
   drop(event: CdkDragDrop<string[]>) {

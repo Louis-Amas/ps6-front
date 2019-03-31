@@ -11,9 +11,7 @@ export class HeaderComponent implements OnInit {
   private connected;
 
   constructor(public connection: ConnectionService) {
-    console.log(this.connected);
     this.connection.connection$.subscribe(c => this.connected = c);
-    console.log(this.connected);
   }
 
   ngOnInit() {

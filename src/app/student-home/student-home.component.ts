@@ -21,7 +21,6 @@ export class StudentHomeComponent implements OnInit {
 
   getStudent() {
     const id = this.route.snapshot.paramMap.get('id');
-    console.log(id);
     this.studentService.getStudentById(id).subscribe( student => {
       this.student = student;
     });
