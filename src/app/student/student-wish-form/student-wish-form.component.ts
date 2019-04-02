@@ -1,12 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Student} from '../../models/student';
-import {UniversityService} from '../../services/university/university.service';
-import {University} from '../../models/university';
+import {Student} from '../../../models/student';
+import {UniversityService} from '../../../services/university/university.service';
+import {University} from '../../../models/university';
 import {ActivatedRoute} from '@angular/router';
-import {StudentService} from '../../services/student/student.service';
+import {StudentService} from '../../../services/student/student.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {Course} from '../../models/course';
-import {CourseService} from '../../services/course/course.service';
+import {Course} from '../../../models/course';
+import {CourseService} from '../../../services/course/course.service';
 
 @Component({
   selector: 'app-student-wish-form',

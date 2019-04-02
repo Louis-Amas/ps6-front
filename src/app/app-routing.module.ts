@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import { ConnectionComponent} from './connection/connection.component';
-import {StudentHomeComponent} from './student-home/student-home.component';
-import {StudentFormComponent} from './student-form/student-form.component';
-import {StudentWishFormComponent} from './student-wish-form/student-wish-form.component';
+import {StudentHomeComponent} from './student/student-home/student-home.component';
+import {StudentFormComponent} from './student/student-form/student-form.component';
+import {StudentWishFormComponent} from './student/student-wish-form/student-wish-form.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
