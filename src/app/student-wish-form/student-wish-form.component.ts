@@ -6,7 +6,7 @@ import {ActivatedRoute} from '@angular/router';
 import {StudentService} from '../../services/student/student.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Course} from '../../models/course';
-import {MatOptionSelectionChange} from "@angular/material";
+import {CourseService} from '../../services/course/course.service';
 
 @Component({
   selector: 'app-student-wish-form',
@@ -29,7 +29,8 @@ export class StudentWishFormComponent implements OnInit {
   public wishForm: FormGroup;
 
   constructor(public formBuilder: FormBuilder, private route: ActivatedRoute,
-              private studentService: StudentService, public universityService: UniversityService) {
+              private studentService: StudentService, public universityService: UniversityService,
+              public courseService: CourseService) {
 
     this.wishForm = this.formBuilder.group({
       semester: [''],
@@ -64,8 +65,15 @@ export class StudentWishFormComponent implements OnInit {
     const name = this.wishForm.get('university').value;
     this.university = this.universitiesList.find(x => x.name === name);
     const semester = this.wishForm.get('semester').value;
-    this.courses = this.university.courses.filter(x => {
-      return x.semester.valueOf() === semester && x.major === this.student.major;
+    console.log(semester);
+    console.log(this.university);
+    this.getCoursesByUniv(this.university._id, semester);
+  }
+
+  getCoursesByUniv(id: string, semester: number) {
+    this.courseService.getCoursesByUniversity(id, semester).subscribe(courses => {
+      console.log(courses);
+      this.courses = courses;
     });
   }
 

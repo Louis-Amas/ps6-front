@@ -49,14 +49,16 @@
 <br>
 <br>
 <br>
-  <div *ngIf="university!=null">
+  <div class="univ" *ngIf="university!=null">
    Vous avez choisi l'université {{university.name}}
   </div>
 <br>
-  <mat-card *ngIf="university!=null">
-    <mat-card-title *ngIf="university.courses!=null">Liste de voeux</mat-card-title>
+  <mat-card *ngIf="university!=null && courses != undefined">
+    <mat-card-title>Liste de voeux</mat-card-title>
     <mat-list>
       <mat-list-item *ngFor="let course of courses"> {{course.name}}</mat-list-item>
     </mat-list>
   </mat-card>
 </div>
+<br>
+<br>
