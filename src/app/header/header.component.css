@@ -1,5 +1,6 @@
 .header{
   background-color: #00aeef;
+  height: 7vh;
 }
 .connection{
   flex: 1 1 auto;
