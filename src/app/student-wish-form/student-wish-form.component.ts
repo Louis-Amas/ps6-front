@@ -6,6 +6,7 @@ import {ActivatedRoute} from '@angular/router';
 import {StudentService} from '../../services/student/student.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Course} from '../../models/course';
+import {MatOptionSelectionChange} from "@angular/material";
 
 @Component({
   selector: 'app-student-wish-form',
@@ -17,6 +18,9 @@ export class StudentWishFormComponent implements OnInit {
   student: Student;
   countries: string[];
   public universitiesList: University[];
+  public universitiesChangedList: University[];
+
+  country: string;
 
   courses: Course[];
 
@@ -44,9 +48,11 @@ export class StudentWishFormComponent implements OnInit {
   }
 
 
-  getUniversityByCountryAndMajor(country: string, concernedDepartment: string) {
-    return this.universitiesList.filter(univ => univ.country === country &&
-      concernedDepartment === univ.concernedDepartement);
+  getUniversityByCountryAndMajor(event, country: string, concernedDepartment: string) {
+    if (event.source.selected === true) {
+      this.universitiesChangedList = this.universitiesList.filter(univ => univ.country === country &&
+        concernedDepartment === univ.concernedDepartement);
+    }
   }
 
   getStudent() {
