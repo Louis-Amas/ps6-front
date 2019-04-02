@@ -65,8 +65,6 @@ export class StudentWishFormComponent implements OnInit {
     const name = this.wishForm.get('university').value;
     this.university = this.universitiesList.find(x => x.name === name);
     const semester = this.wishForm.get('semester').value;
-    console.log(semester);
-    console.log(this.university);
     this.getCoursesByUniv(this.university._id, semester);
   }
 
