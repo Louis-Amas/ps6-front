@@ -46,16 +46,19 @@ export class StudentFormComponent implements OnInit {
 
   initializeStudentForm() {
     const studentId = +this.route.snapshot.paramMap.get('id');
-    const student: Student = this.studentService.findStudent(studentId.toString());
-    this.studentForm.setValue({
-      _id: studentId,
-      lastName: student.lastName,
-      firstName: student.firstName,
-      phoneNumber: student.phoneNumber,
-      email: student.email,
-      major: student.major,
-      year: student.year
+    this.studentService.getStudentById(studentId.toString())
+      .subscribe(student => {
+        this.studentForm.setValue({
+          _id: studentId,
+          lastName: student.lastName,
+          firstName: student.firstName,
+          phoneNumber: student.phoneNumber,
+          email: student.email,
+          major: student.major,
+          year: student.year
+        });
       });
+
   }
 
   saveChanges() {

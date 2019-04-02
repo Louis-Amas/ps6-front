@@ -1,9 +1,9 @@
 .student-card {
   max-width: 400px;
-  background-color: #004878;
+  background-color: black;
   border-radius: 5px;
   box-shadow: 3px 2px 2px grey;
-
+  color: white;
   margin: 150px auto 15px;
   cursor: pointer;
 }

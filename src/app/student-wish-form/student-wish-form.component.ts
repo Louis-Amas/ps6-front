@@ -16,7 +16,7 @@ export class StudentWishFormComponent implements OnInit {
 
   student: Student;
   countries: string[];
-  public universitiesList: University[] = [];
+  public universitiesList: University[];
 
   courses: Course[];
 
@@ -32,24 +32,21 @@ export class StudentWishFormComponent implements OnInit {
       country: [''],
       university: [''],
     });
-    this.universityService.getUniversities();
     this.universityService.universities$.subscribe((univ) => this.universitiesList = univ);
+    this.universityService.countries$.subscribe((countries) => this.countries = countries);
 
   }
 
 
   ngOnInit() {
-    this.getCountry();
     this.getStudent();
+    this.universityService.getUniversities();
   }
 
-  getCountry() {
-    this.countries = this.universityService.getCountries();
-  }
 
   getUniversityByCountryAndMajor(country: string, concernedDepartment: string) {
-    this.universityService.getUniversitiesByCountryAndMajor(country, concernedDepartment).subscribe( univ =>
-      this.universitiesList = univ);
+    return this.universitiesList.filter(univ => univ.country === country &&
+      concernedDepartment === univ.concernedDepartement);
   }
 
   getStudent() {
@@ -62,9 +59,8 @@ export class StudentWishFormComponent implements OnInit {
     this.university = this.universitiesList.find(x => x.name === name);
     const semester = this.wishForm.get('semester').value;
     this.courses = this.university.courses.filter(x => {
-      return x.semester.valueOf() == semester && x.major === this.student.major;
+      return x.semester.valueOf() === semester && x.major === this.student.major;
     });
-    console.log(this.courses);
   }
 
 

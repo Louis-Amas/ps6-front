@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {University} from '../../models/university';
 import {UNIVERSITY_MOCKED} from '../../mocks/university.mock';
 
@@ -16,27 +16,22 @@ export class UniversityService {
    */
 
   private universityUrl = 'http://localhost:9428/api/university';
-  public universityList: University[] = [];
   public university: University;
   /**
    * Observable which contains the list of the tickets.
    * Naming convention: Add '$' at the end of the variable name to highlight it as an Observable.
    */
-  public universities$: BehaviorSubject<University[]> = new BehaviorSubject(this.universityList);
+  public universities$: Subject<University[]> = new Subject();
+  public countries$: Subject<string[]> = new Subject<string[]>();
 
   constructor(private http: HttpClient) {
     this.getUniversities();
   }
 
-  getCountries() {
-    const countryList = this.universityList.map(value => value.country);
-    return countryList;
-  }
-
   getUniversities() {
-    return this.http.get<University[]>(this.universityUrl).subscribe((univ) => {
-      this.universityList = univ;
-      this.universities$.next(univ);
+    return this.http.get<University[]>(this.universityUrl).subscribe((universities) => {
+      this.universities$.next(universities.map(value => value));
+      this.countries$.next(universities.map(value => value.country));
     });
   }
 
