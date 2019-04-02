@@ -30,6 +30,7 @@ import { StudentWishFormComponent } from './student-wish-form/student-wish-form.
 import { StudentWishListComponent } from './student-wish-list/student-wish-list.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {AuthInterceptor} from '../services/connection/auth.interceptor';
+import { TeacherHomeComponent } from './teacher/teacher-home/teacher-home.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import {AuthInterceptor} from '../services/connection/auth.interceptor';
     HomeComponent,
     StudentWishFormComponent,
     HomeComponent,
-    StudentWishListComponent
+    StudentWishListComponent,
+    TeacherHomeComponent
   ],
   imports: [
     BrowserModule,
