@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { STUDENTS_MOCKED } from '../../mocks/student.mock';
 import {Student} from '../../models/student';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Observable, of} from 'rxjs';
-import {FormGroup} from '@angular/forms';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 
 @Injectable({
@@ -26,10 +25,6 @@ export class StudentService {
   private header$: BehaviorSubject<string> = new BehaviorSubject('');
 
   constructor(private http: HttpClient) {
-  }
-  public addStudent(student: Student) {
-    this.studentList.push(student);
-    this.students$.next(this.studentList);
   }
   public findStudent(id: string) {
     return this.studentList.find((stud) => stud._id === id );
@@ -55,19 +50,40 @@ export class StudentService {
     this.students$.next(this.studentList);*/
   }
 
-  updateStudent(studentForm: FormGroup) {
-    const id: string = studentForm.value._id;
-    const index: number = this.studentList.findIndex((stud) => stud._id === id.toString());
-    const tmp: Student[] = this.studentList.slice(index, index + 1);
-    const student: Student = tmp[0];
-    const student1: Student = studentForm.getRawValue() as Student;
-    student.firstName = student1.firstName;
-    student.lastName = student1.lastName;
-    student.email = student1.email;
-    student.phoneNumber = student1.phoneNumber;
-    student.major = student1.major;
-    student.year = student1.year;
-    this.studentList.push(student);
-    console.log(this.studentList[0]);
+  updateStudent(student: Student) {
+    /* const id: string = studentForm.value._id;
+     const index: number = this.studentList.findIndex((stud) => stud._id === id.toString());
+     const tmp: Student[] = this.studentList.slice(index, index + 1);
+     const student: Student = tmp[0];
+     const student1: Student = studentForm.getRawValue() as Student;
+     student.firstName = student1.firstName;
+     student.lastName = student1.lastName;
+     student.email = student1.email;
+     student.phoneNumber = student1.phoneNumber;
+     student.major = student1.major;
+     student.year = student1.year;
+     this.studentList.push(student);
+     console.log(this.studentList[0]); */
+    const id: string = student._id;
+    this.http.put(this.studentUrl + '/' + id, {
+      firstName: student.firstName,
+      lastName: student.lastName,
+      email: student.email,
+      /* phoneNumber: student.phoneNumber,
+      major: student.major,
+      year: student.year */});
+
+  }
+  refactorStudent(student: Student) {
+    student.phoneNumber = this.testFormValue(student.phoneNumber);
+    student.major = this.testFormValue(student.major);
+    student.year = this.testFormValue(student.year);
+  }
+
+  testFormValue(value: string) {
+    if (value === undefined) {
+      return '';
+    }
+    return value;
   }
 }
