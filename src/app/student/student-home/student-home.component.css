@@ -4,7 +4,8 @@
   border-radius: 5px;
   box-shadow: 3px 2px 2px grey;
   color: white;
-  margin: 150px auto 15px;
+  margin-top: 1vh;
+  margin-left: 5vw;
   cursor: pointer;
 }
 
