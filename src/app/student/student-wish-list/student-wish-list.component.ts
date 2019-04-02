@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Wish} from '../../models/wish';
+import {Wish} from '../../../models/wish';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import {StudentService} from '../../services/student/student.service';
-import {Student} from '../../models/student';
+import {StudentService} from '../../../services/student/student.service';
+import {Student} from '../../../models/student';
 
 @Component({
   selector: 'app-student-wish-list',

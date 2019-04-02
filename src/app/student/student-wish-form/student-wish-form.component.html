@@ -28,7 +28,7 @@
   <mat-form-field>
     <mat-label>Pays</mat-label>
     <mat-select [formControlName]="'country'" [(ngModel)]="country">
-      <mat-option (onSelectionChange)="getUniversityByCountryAndMajor(country, student.major)" *ngFor="let country of countries" [value]="country">
+      <mat-option (onSelectionChange)="getUniversityByCountryAndMajor($event, country, student.major)" *ngFor="let country of countries" [value]="country">
         {{country}}
       </mat-option>
     </mat-select>
@@ -38,7 +38,7 @@
   <mat-form-field>
     <mat-label>Université</mat-label>
     <mat-select [formControlName]="'university'" [(ngModel)]="university">
-      <mat-option *ngFor="let univ of universitiesList" [value]="univ.name">
+      <mat-option *ngFor="let univ of universitiesChangedList" [value]="univ.name">
         {{univ.name}}
       </mat-option>
     </mat-select>
@@ -49,14 +49,16 @@
 <br>
 <br>
 <br>
-  <div *ngIf="university!=null">
+  <div class="univ" *ngIf="university!=null">
    Vous avez choisi l'université {{university.name}}
   </div>
 <br>
-  <mat-card *ngIf="university!=null">
+  <mat-card *ngIf="university!=null && courses != undefined">
     <mat-card-title>Liste de voeux</mat-card-title>
     <mat-list>
       <mat-list-item *ngFor="let course of courses"> {{course.name}}</mat-list-item>
     </mat-list>
-  </mat-card> -->
+  </mat-card>
 </div>
+<br>
+<br>

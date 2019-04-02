@@ -1,7 +1,7 @@
 import {Course} from './course';
 
 export interface University {
-  id?: number;
+  _id?: string;
   country?: string;
   name?: string;
   concernedDepartement?: string;

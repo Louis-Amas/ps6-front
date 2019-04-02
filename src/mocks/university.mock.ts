@@ -2,7 +2,7 @@ import {University} from '../models/university';
 
 export const UNIVERSITY_MOCKED: University[] = [
   {
-    id : 1,
+    _id : '1',
     country: 'Suede',
     name : 'University1',
     concernedDepartement: 'SI3',
@@ -34,14 +34,14 @@ export const UNIVERSITY_MOCKED: University[] = [
     ],
   },
   {
-    id : 2,
+    _id : '2',
     country: 'Espagne',
     name: 'University2',
     concernedDepartement: 'MAM',
     courses: [],
   },
   {
-    id : 3,
+    _id : '3',
     country: 'Espagne',
     name: 'University3',
     concernedDepartement: 'SI3',
