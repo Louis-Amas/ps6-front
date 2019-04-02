@@ -45,9 +45,10 @@ export class StudentFormComponent implements OnInit {
   }
 
   initializeStudentForm() {
-    const studentId = +this.route.snapshot.paramMap.get('id');
-    this.studentService.getStudentById(studentId.toString())
+    const studentId = this.route.snapshot.paramMap.get('id');
+    this.studentService.getStudentById(studentId)
       .subscribe(student => {
+        this.studentService.refactorStudent(student);
         this.studentForm.setValue({
           _id: studentId,
           lastName: student.lastName,
@@ -59,11 +60,11 @@ export class StudentFormComponent implements OnInit {
         });
       });
 
-  }
+}
 
   saveChanges() {
     const student: Student = this.studentForm.getRawValue() as Student;
-    this.studentService.updateStudent(this.studentForm);
+    this.studentService.updateStudent(student);
   }
 
 }
