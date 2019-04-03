@@ -29,12 +29,14 @@
         <mat-option *ngFor="let year of YEAR_LIST" [value]="year" >{{year}}</mat-option>
       </mat-select>
     </mat-form-field>
-
+    <br>
+    <br>
+    <br>
+    <div>
+      <button mat-button (click)="saveChanges()"> Sauvegarder les modification </button>
+    </div>
   </form>
-  <br>
-  <div>
-    <button mat-button (click)="saveChanges()"> Sauvegarder les modification </button>
-  </div>
+
 
 
 

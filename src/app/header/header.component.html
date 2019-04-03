@@ -1,12 +1,7 @@
 <mat-toolbar color="primary" class="header">
-  <span>Dossier Erasmus</span>
+  <span routerLink="/"><a>Dossier Erasmus</a></span>
 
   <span class="connection"></span>
-  <button mat-button *ngIf="!connected" [matMenuTriggerFor]="menu">Se connecter</button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item routerLink="/student">Etudiant</button>
-    <button mat-menu-item routerLink="/teacher">Professeur</button>
-    <button mat-menu-item routerLink="/bri">BRI</button>
-  </mat-menu>
+  <button mat-button *ngIf="!connected" routerLink="/connection" [matMenuTriggerFor]="menu">Se connecter</button>
   <button mat-button routerLink="" *ngIf="connected" (click)="disconnection()">Se déconnecter</button>
 </mat-toolbar>

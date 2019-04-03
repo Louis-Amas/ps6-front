@@ -8,10 +8,8 @@ import {StudentWishFormComponent} from './student/student-wish-form/student-wish
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'student', component: ConnectionComponent},
+  {path: 'connection', component: ConnectionComponent},
   {path: 'student/:id', component: StudentHomeComponent},
-  {path: 'teacher', component: ConnectionComponent},
-  {path: 'bri', component: ConnectionComponent},
   {path: 'student/:id/form', component: StudentFormComponent},
   {path: 'wishcreation', component: StudentWishFormComponent},
   {path: 'student/:id/wishcreation', component: StudentWishFormComponent},
