@@ -21,6 +21,11 @@ width: 50%;
   margin: auto;
 }
 
+.mat-progress-bar{
+  width: 50%;
+  margin: auto;
+}
+
 .button-validate{
   display: block;
   margin: auto;

@@ -15,7 +15,10 @@ import {
   MatToolbarModule,
   MatInputModule,
   MatFormFieldModule,
-  MatDividerModule
+  MatDividerModule,
+  MatCheckboxModule,
+  MatProgressBarModule,
+  MatTableModule,
 } from '@angular/material';
 import {MatListModule} from '@angular/material/list';
 import { ConnectionComponent } from './connection/connection.component';
@@ -62,6 +65,9 @@ import { TeacherHomeComponent } from './teacher/teacher-home/teacher-home.compon
     MatInputModule,
     MatFormFieldModule,
     MatListModule,
+    MatCheckboxModule,
+    MatProgressBarModule,
+    MatTableModule,
     ReactiveFormsModule,
     HttpClientModule,
     MatSelectModule,

@@ -3,4 +3,5 @@ export interface Course {
   major?: string;
   semester?: number;
   ECTS_count?: number;
+  link_to_courses?: string;
 }

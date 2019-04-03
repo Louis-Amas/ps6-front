@@ -23,8 +23,11 @@ export class StudentWishFormComponent implements OnInit {
   country: string;
 
   courses: Course[];
+  coursesSelected: Course[];
 
   university: University;
+
+  nbECTS: number;
 
   public wishForm: FormGroup;
 
@@ -39,6 +42,8 @@ export class StudentWishFormComponent implements OnInit {
     });
     this.universityService.universities$.subscribe((univ) => this.universitiesList = univ);
     this.universityService.countries$.subscribe((countries) => this.countries = countries);
+    this.coursesSelected = [];
+    this.nbECTS = 0;
 
   }
 
@@ -70,9 +75,19 @@ export class StudentWishFormComponent implements OnInit {
 
   getCoursesByUniv(id: string, semester: number) {
     this.courseService.getCoursesByUniversity(id, semester).subscribe(courses => {
-      console.log(courses);
       this.courses = courses;
     });
+  }
+
+  addCourse(event, course: Course) {
+    if (event.checked === true) {
+      this.coursesSelected.push(course);
+      this.nbECTS += course.ECTS_count;
+    }
+    if (event.checked === false) {
+      this.coursesSelected.splice(0, this.coursesSelected.indexOf(course));
+      this.nbECTS -= course.ECTS_count;
+    }
   }
 
 

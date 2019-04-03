@@ -15,7 +15,7 @@
 
 
   <br>
-  <form class="connection-form" [formGroup]="wishForm">
+  <form class="wish-form" [formGroup]="wishForm">
   <mat-form-field>
     <mat-label>Semestre d'échange </mat-label>
     <mat-select [formControlName]="'semester'" [(ngModel)]="semester">
@@ -53,12 +53,30 @@
    Vous avez choisi l'université {{university.name}}
   </div>
 <br>
-  <mat-card *ngIf="university!=null && courses != undefined">
-    <mat-card-title>Liste de voeux</mat-card-title>
-    <mat-list>
-      <mat-list-item *ngFor="let course of courses"> {{course.name}}</mat-list-item>
-    </mat-list>
-  </mat-card>
+  <div class="wish" *ngIf="university!=null && courses !=undefined">
+    <mat-card>
+      <mat-card-title>Liste de voeux</mat-card-title>
+      <mat-card-content>
+       <mat-list>
+          <mat-list-item *ngFor="let course of courses">
+            <mat-checkbox
+              (change)="addCourse($event, course)">
+              {{course.name}} - {{course.link_to_courses}} - ECTS : {{course.ECTS_count}}
+            </mat-checkbox>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+    <br>
+    <br>
+
+    <h2>Nombre d'ECTS</h2>
+    <mat-progress-bar
+      [value]="nbECTS"
+     >
+    </mat-progress-bar>
+  </div>
+
 </div>
 <br>
 <br>
