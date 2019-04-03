@@ -16,7 +16,7 @@ export class CourseService {
    * Services Documentation:
    * https://angular.io/docs/ts/latest/tutorial/toh-pt4.html
    */
-  private coursesUrl = 'http://localhost:9428/api/courses';
+  private universityUrl = 'http://localhost:9428/api/university';
   public university: University;
   /**
    * Observable which contains the list of the tickets.
@@ -29,7 +29,7 @@ export class CourseService {
 
   }
 
-  getCoursesByUniversity(id: string, semester: number) {
-    return this.http.get<Course[]>(this.coursesUrl + '/' + id + '/' + semester);
+  getCoursesByUniversity(univId: string, semester: number) {
+    return this.http.get<Course[]>(this.universityUrl + '/' + univId + '/courses/semester/' + semester);
   }
 }

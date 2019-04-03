@@ -19,11 +19,11 @@ export class StudentWishListComponent implements OnInit {
   constructor(public studentService: StudentService) {}
 
   ngOnInit() {
-    this.wishes = this.student.wishList;
+    //this.wishes = this.student.studentInfo.wishes;
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    const wishId = this.student.wishList.filter(x => {
+    const wishId = this.student.wishes.filter(x => {
       return x.position === (event.previousIndex + 1);
     })[0].id;
 

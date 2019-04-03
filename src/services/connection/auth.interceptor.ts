@@ -12,7 +12,6 @@ export class AuthInterceptor implements  HttpInterceptor {
         localStorage.getItem('token')
       )
     });
-    console.log(newRequest);
     return next.handle(newRequest);
   }
 }

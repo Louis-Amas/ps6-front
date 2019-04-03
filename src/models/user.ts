@@ -1,4 +1,5 @@
 import {Wish} from './wish';
+import {Student} from './student';
 
 enum Role {
   STUDENT = 'student',
@@ -15,7 +16,5 @@ export interface User {
   lastConnection?: Date;
   createAd?: Date;
   role?: Role;
-  wishList?: Wish[];
-  major?: string;
-  year?: string;
+  studentInfo?: Student;
 }
