@@ -27,16 +27,21 @@ width: 50%;
 }
 
 .button-validate{
+  background-color: rgb(0, 174, 239);
   display: block;
   margin: auto;
 }
 
 .mat-card {
-  width:50%;
+  width:90%;
   margin: auto;
 }
 
 .univ {
   margin:auto;
   text-align: center;
+}
+
+#form {
+  width: 90%;
 }

@@ -1,51 +1,59 @@
 <div *ngIf="student!=undefined" class="form">
-  <button mat-button routerLink=".."> < Retour</button>
+  <button mat-button routerLink="..">Retour</button>
 
-  <mat-list>
-    <mat-list-item>Nom : {{student.lastName}}</mat-list-item>
-    <mat-divider></mat-divider>
-    <mat-list-item>Prénom : {{student.firstName}}</mat-list-item>
-    <mat-divider></mat-divider>
-    <mat-list-item>Email : {{student.email}}</mat-list-item>
-    <mat-divider></mat-divider>
-    <mat-list-item>Filière actuelle : {{student.major}}</mat-list-item>
-    <mat-divider></mat-divider>
-    <mat-list-item>Spécialité de dernière année : {{student.firstName}}</mat-list-item>
-  </mat-list>
-
-
-  <br>
-  <form class="wish-form" [formGroup]="wishForm">
-  <mat-form-field>
-    <mat-label>Semestre d'échange </mat-label>
-    <mat-select [formControlName]="'semester'" [(ngModel)]="semester">
-      <mat-option value="7">Semestre 7</mat-option>
-      <mat-option value="8">Semestre 8</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <br>
-
-  <mat-form-field>
-    <mat-label>Pays</mat-label>
-    <mat-select [formControlName]="'country'" [(ngModel)]="country">
-      <mat-option (onSelectionChange)="getUniversityByCountryAndMajor($event, country, student.major)" *ngFor="let country of countries" [value]="country">
-        {{country}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+  <mat-card>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item>Nom : {{student.lastName}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Prénom : {{student.firstName}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Email : {{student.email}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Filière actuelle : {{student.major}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Spécialité de dernière année : {{student.firstName}}</mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
 
   <br>
-  <mat-form-field>
-    <mat-label>Université</mat-label>
-    <mat-select [formControlName]="'university'" [(ngModel)]="university">
-      <mat-option *ngFor="let univ of universitiesChangedList" [value]="univ.name">
-        {{univ.name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-    <br>
-    <button mat-button class="button-validate" (click)="validateForm()">Valider</button>
-  </form>
+  <mat-card id="form">
+    <mat-card-content>
+      <form class="wish-form" [formGroup]="wishForm">
+        <mat-form-field>
+          <mat-label>Semestre d'échange </mat-label>
+          <mat-select [formControlName]="'semester'" [(ngModel)]="semester">
+            <mat-option value="7">Semestre 7</mat-option>
+            <mat-option value="8">Semestre 8</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br>
+
+        <mat-form-field>
+          <mat-label>Pays</mat-label>
+          <mat-select [formControlName]="'country'" [(ngModel)]="country">
+            <mat-option (onSelectionChange)="getUniversityByCountryAndMajor($event, country, student.major)" *ngFor="let country of countries" [value]="country">
+              {{country}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <br>
+        <mat-form-field>
+          <mat-label>Université</mat-label>
+          <mat-select [formControlName]="'university'" [(ngModel)]="university">
+            <mat-option *ngFor="let univ of universitiesChangedList" [value]="univ.name">
+              {{univ.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br>
+        <button mat-button class="button-validate" (click)="validateForm()">Valider</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
 <br>
 <br>
 <br>
@@ -53,6 +61,7 @@
    Vous avez choisi l'université {{university.name}}
   </div>
 <br>
+
   <div class="wish" *ngIf="university!=null && courses !=undefined">
     <mat-card>
       <mat-card-title>Liste de voeux</mat-card-title>
@@ -70,16 +79,21 @@
     <br>
     <br>
 
-    <h2>Nombre d'ECTS</h2>
-    <mat-progress-bar
-      [value]="nbECTS"
-      [bufferValue]="30">
-    </mat-progress-bar>
+    <mat-card>
+      <mat-card-title>
+        30 ECTS requis :
+      </mat-card-title>
+      <mat-card-content>
+        <mat-progress-bar
+          [value]="nbECTS*100/30">
+        </mat-progress-bar>
+      </mat-card-content>
+    </mat-card>
+
+    <br>
+    <button routerLink=".." *ngIf="nbECTS>=30" mat-button class="button-validate" (click)="validateWish()">Valider ce voeu</button>
   </div>
 
-
-  <br>
-  <button *ngIf="nbECTS>=30" mat-button class="button-validate" (click)="validateWish()">Valider ce voeu</button>
 
 </div>
 <br>
