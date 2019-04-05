@@ -12,12 +12,10 @@ export const STUDENTS_MOCKED: Student[] = [
       {
         id : 1,
         position : 1,
-        university : 'polytech',
       },
       {
         id : 2,
         position : 2,
-        university : 'Insa',
       }
     ],
     year: '3',
