@@ -1,9 +1,30 @@
 <div *ngIf="wishes != undefined" class="container">
-  <span>Triez vos voeux</span>
-  <div cdkDropList class="wish-list" (cdkDropListDropped)="drop($event)">
-    <div class="wish-box" *ngFor="let wish of wishes" cdkDrag>
-      {{wish.position}} - {{wish.university}}
-    </div>
+  <div *ngIf="wishes.length > 0">
+    <span>Triez vos voeux</span>
+    <mat-accordion cdkDropList class="wish-list" (cdkDropListDropped)="drop($event)">
+        <mat-expansion-panel *ngFor="let wish of wishes" cdkDrag>
+
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Voeux n°{{wish.position}}
+            </mat-panel-title>
+            <mat-panel-description>
+              <a href="{{wish.university.url_to_website}}">{{wish.university.name}}</a>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <mat-list>
+            <mat-list-item *ngFor="let course of getCourseOfWish(wish)">
+
+            </mat-list-item>
+          </mat-list>
+
+          <mat-action-row>
+            <button mat-button color="warn">Supprimer</button>
+          </mat-action-row>
+
+        </mat-expansion-panel>
+    </mat-accordion>
   </div>
 </div>
 

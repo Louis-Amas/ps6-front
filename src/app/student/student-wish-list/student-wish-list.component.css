@@ -9,7 +9,6 @@
 
 .wish-list {
   border: solid 1px #ccc;
-  min-height: 60px;
   display: block;
   background: white;
   border-radius: 4px;
@@ -17,8 +16,7 @@
 }
 
 .wish-box {
-  padding: 20px 10px;
-  border-bottom: solid 1px #ccc;
+  padding-left: 10px;
   color: rgba(0, 0, 0, 0.87);
   display: flex;
   flex-direction: row;
@@ -27,7 +25,7 @@
   box-sizing: border-box;
   cursor: move;
   background: white;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .cdk-drag-preview {

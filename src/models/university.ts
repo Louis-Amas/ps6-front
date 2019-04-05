@@ -5,5 +5,6 @@ export interface University {
   country?: string;
   name?: string;
   concernedDepartement?: string;
-  courses: Course[];
+  courses?: Course[];
+  url_to_website?: string;
 }

@@ -15,7 +15,7 @@ import {
   MatToolbarModule,
   MatInputModule,
   MatFormFieldModule,
-  MatDividerModule
+  MatDividerModule, MatExpansionModule
 } from '@angular/material';
 import {MatListModule} from '@angular/material/list';
 import { ConnectionComponent } from './connection/connection.component';
@@ -70,6 +70,7 @@ import { TeacherHomeComponent } from './teacher/teacher-home/teacher-home.compon
     MatSelectModule,
     HttpClientModule,
     DragDropModule,
+    MatExpansionModule,
   ],
   providers: [StudentService,
     {
