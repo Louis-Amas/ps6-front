@@ -2,6 +2,6 @@
   <span routerLink="/"><a>Dossier Erasmus</a></span>
 
   <span class="connection"></span>
-  <button mat-button *ngIf="!connected" routerLink="/connection" [matMenuTriggerFor]="menu">Se connecter</button>
+  <button mat-button *ngIf="!connected" routerLink="/connection">Se connecter</button>
   <button mat-button routerLink="" *ngIf="connected" (click)="disconnection()">Se déconnecter</button>
 </mat-toolbar>

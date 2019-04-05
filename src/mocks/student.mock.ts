@@ -8,7 +8,7 @@ export const STUDENTS_MOCKED: Student[] = [
     email : 'delmote@test.fr',
     password : 'test1',
     major: 'SI',
-    wishList: [
+    wishes: [
       {
         id : 1,
         position : 1,

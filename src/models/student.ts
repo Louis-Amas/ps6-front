@@ -8,7 +8,7 @@ export interface Student {
   phoneNumber?: string;
   password?: string;
   lastConnection?: Date;
-  wishList?: Wish[];
+  wishes?: Wish[];
   major?: string;
   year?: string;
 }
