@@ -4,7 +4,6 @@ import {Student} from '../../models/student';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -16,6 +15,7 @@ export class StudentService {
    */
 
   private studentUrl = 'http://127.0.0.1:9428/api/users';
+  private studentUrl2 = 'http://127.0.0.1:9428/api';
   public studentList: Student[] = STUDENTS_MOCKED;
   /**
    * Observable which contains the list of the tickets.
@@ -85,5 +85,12 @@ export class StudentService {
       return '';
     }
     return value;
+  }
+
+  addWish(coursesId: string[], univId: string, studentId: string) {
+    return this.http.post(this.studentUrl + '/student/' + studentId + '/wishes', {
+      university: univId,
+      courses: coursesId,
+    });
   }
 }

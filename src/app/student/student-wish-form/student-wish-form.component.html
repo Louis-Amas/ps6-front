@@ -65,6 +65,12 @@
             </mat-checkbox>
           </mat-list-item>
         </mat-list>
+      <!--
+        <mat-selection-list #course (selectionChange)="addCourse($event, course)">
+          <mat-list-option *ngFor="let course of courses">
+            {{course.name}} - {{course.link_to_courses}} - ECTS : {{course.ECTS_count}}
+          </mat-list-option>
+        </mat-selection-list> -->
       </mat-card-content>
     </mat-card>
     <br>
@@ -73,9 +79,14 @@
     <h2>Nombre d'ECTS</h2>
     <mat-progress-bar
       [value]="nbECTS"
+      [bufferValue]="30"
      >
     </mat-progress-bar>
   </div>
+
+
+  <br>
+  <button *ngIf="nbECTS>=30" mat-button class="button-validate" (click)="validateWish()">Valider ce voeu</button>
 
 </div>
 <br>

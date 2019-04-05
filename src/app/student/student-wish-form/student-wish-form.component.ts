@@ -90,5 +90,11 @@ export class StudentWishFormComponent implements OnInit {
     }
   }
 
+  validateWish() {
+    const coursesId = [];
+    this.coursesSelected.forEach(course => coursesId.push(course._id));
+    this.studentService.addWish(coursesId, this.university._id, this.student._id).subscribe();
+  }
+
 
 }
