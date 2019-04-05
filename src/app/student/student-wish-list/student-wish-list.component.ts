@@ -37,9 +37,9 @@ export class StudentWishListComponent implements OnInit {
 
   getCourseOfWish(wish: Wish) {
     const idCourses = wish.courses;
-    return wish.university.courses.reduce( course => {
+    return  wish.university.courses.filter( course => {
       if (course !== undefined) {
-        if (idCourses.find(x => x == course._id)) {
+        if (idCourses.find(x => x === course._id)) {
           return course;
         }
       }

@@ -6,7 +6,7 @@
 
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Voeux n°{{wish.position}}
+              Voeu n°{{wish.position}}
             </mat-panel-title>
             <mat-panel-description>
               <a href="{{wish.university.url_to_website}}">{{wish.university.name}}</a>
@@ -15,7 +15,8 @@
 
           <mat-list>
             <mat-list-item *ngFor="let course of getCourseOfWish(wish)">
-
+              {{course.name}}
+              <mat-divider></mat-divider>
             </mat-list-item>
           </mat-list>
 
