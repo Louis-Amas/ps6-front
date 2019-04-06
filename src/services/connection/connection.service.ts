@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {Student} from '../../models/student';
 import {User} from '../../models/user';
 
 
@@ -39,6 +38,9 @@ export class ConnectionService {
   }
 
   connectWithCredientials(email: string, password: string) {
+    this.isStudent = false;
+    this.isTeacher = false;
+    this.isBRI = false;
     const credientials = `${email}:${password}`;
     localStorage.setItem('token', credientials);
     this.http.get<User>(this.url)
