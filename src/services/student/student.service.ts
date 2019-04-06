@@ -42,6 +42,10 @@ export class StudentService {
   putWishPositionOfOneStudent(studentId: string, wishId: number, nextPosition: number) {
   }
 
+  deleteWishOfOneStudent(studentId: string, univId: string) {
+    return this.http.delete<Wish[]>(this.studentUrl + '/student/' + studentId + '/wishes/' + univId);
+  }
+
   updateStudent(student: Student) {
     /* const id: string = studentForm.value._id;
      const index: number = this.studentList.findIndex((stud) => stud._id === id.toString());

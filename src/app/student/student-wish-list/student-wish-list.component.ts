@@ -45,4 +45,10 @@ export class StudentWishListComponent implements OnInit {
       }
     });
   }
+
+  deleteWish(wish: Wish) {
+    this.studentService.deleteWishOfOneStudent(this.student._id, wish.university._id).subscribe(wishes => {
+      this.wishes = wishes;
+    });
+  }
 }

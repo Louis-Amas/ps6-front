@@ -1,10 +1,7 @@
 .container{
   width: 500px;
   max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 2%;
-  margin-top: 5%;
+  margin: 5% auto 2%;
 }
 
 .wish-list {
@@ -50,4 +47,9 @@
 
 .wish-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.validate{
+  display: block;
+  margin: auto;
 }
