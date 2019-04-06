@@ -18,6 +18,7 @@ import {
   MatCheckboxModule,
   MatProgressBarModule,
   MatTableModule,
+  MatTabsModule,
   MatDividerModule, MatExpansionModule
 } from '@angular/material';
 import {MatListModule} from '@angular/material/list';
@@ -34,6 +35,9 @@ import { StudentWishListComponent } from './student/student-wish-list/student-wi
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {AuthInterceptor} from '../services/connection/auth.interceptor';
 import { TeacherHomeComponent } from './teacher/teacher-home/teacher-home.component';
+import { TeacherFileInProcessComponent } from './teacher/teacher-home/teacher-file-in-process/teacher-file-in-process.component';
+import { FilterBarComponent } from './teacher/teacher-home/filter-bar/filter-bar.component';
+import { TeacherFileProcessedComponent } from './teacher/teacher-home/teacher-file-processed/teacher-file-processed.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +53,10 @@ import { TeacherHomeComponent } from './teacher/teacher-home/teacher-home.compon
     StudentWishFormComponent,
     HomeComponent,
     StudentWishListComponent,
-    TeacherHomeComponent
+    TeacherHomeComponent,
+    TeacherFileInProcessComponent,
+    FilterBarComponent,
+    TeacherFileProcessedComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +67,7 @@ import { TeacherHomeComponent } from './teacher/teacher-home/teacher-home.compon
     BrowserAnimationsModule,
     NoopAnimationsModule,
     MatMenuModule,
+    MatTabsModule,
     MatButtonModule,
     MatToolbarModule,
     MatInputModule,
@@ -77,6 +85,7 @@ import { TeacherHomeComponent } from './teacher/teacher-home/teacher-home.compon
     HttpClientModule,
     DragDropModule,
     MatExpansionModule,
+    FormsModule,
   ],
   providers: [StudentService,
     {

@@ -17,10 +17,11 @@ export class ConnectionService {
 
   private url = 'http://127.0.0.1:9428/api/auth';
   public isConnected: boolean;
-  public student: Student;
-  private isStudent: boolean;
-  private isTeacher: boolean;
-  private isBRI: boolean;
+  public user: User;
+  public isStudent: boolean;
+  public isTeacher: boolean;
+  public isBRI: boolean;
+  public isError: boolean;
 
   /**
    * Observable which contains the list of the tickets.
@@ -33,6 +34,7 @@ export class ConnectionService {
     this.isBRI = false;
     this.isStudent = false;
     this.isTeacher = false;
+    this.isError = false;
     this.connection$.next(this.isConnected);
   }
 
@@ -44,15 +46,18 @@ export class ConnectionService {
         switch (res.role) {
           case 'student':
             this.isStudent = true;
-            this.student = res;
             break;
           case 'teacher':
-            this.isBRI = true;
+            this.isTeacher = true;
+            break;
         }
+        this.user = res;
         this.isConnected = true;
+        this.isError = false;
         this.connection$.next(this.isConnected);
       }, err => {
         this.isConnected = false;
+        this.isError = true;
         this.connection$.next(this.isConnected);
       });
   }

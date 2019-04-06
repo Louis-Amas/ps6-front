@@ -34,7 +34,14 @@ export class ConnectionComponent implements OnInit {
   ngOnInit() {
     this.connection.connection$.subscribe((isConnected) => {
       if (isConnected) {
-        this.router.navigate([`student/${this.connection.student._id}`]);
+        if (this.connection.isStudent) {
+          this.router.navigate([`student/${this.connection.user._id}`]);
+        }
+        if (this.connection.isTeacher) {
+          this.router.navigate([`teacher/${this.connection.user._id}`]);
+        }
+      } else if (this.connection.isError) {
+          this.messageError = 'Identifiants incorrects';
       }
     });
   }

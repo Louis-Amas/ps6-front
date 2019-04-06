@@ -5,6 +5,7 @@ import { ConnectionComponent} from './connection/connection.component';
 import {StudentHomeComponent} from './student/student-home/student-home.component';
 import {StudentFormComponent} from './student/student-form/student-form.component';
 import {StudentWishFormComponent} from './student/student-wish-form/student-wish-form.component';
+import {TeacherHomeComponent} from "./teacher/teacher-home/teacher-home.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path: 'student/:id/form', component: StudentFormComponent},
   {path: 'wishcreation', component: StudentWishFormComponent},
   {path: 'student/:id/wishcreation', component: StudentWishFormComponent},
+  {path: 'teacher/:id', component: TeacherHomeComponent}
 ];
 
 @NgModule({
