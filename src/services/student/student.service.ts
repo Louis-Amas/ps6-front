@@ -39,7 +39,10 @@ export class StudentService {
     return this.http.get<Wish[]>(this.studentUrl + '/student/' + studentId + '/wishes');
   }
 
-  putWishPositionOfOneStudent(studentId: string, wishId: number, nextPosition: number) {
+  putWishPositionOfOneStudent(studentId: string, univId: string, nextPosition: number) {
+    return this.http.put<Wish[]>(this.studentUrl + '/student/' + studentId + '/wishes/' + univId, {
+      position: nextPosition
+    });
   }
 
   deleteWishOfOneStudent(studentId: string, univId: string) {

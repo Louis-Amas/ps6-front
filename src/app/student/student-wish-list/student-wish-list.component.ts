@@ -28,11 +28,14 @@ export class StudentWishListComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    const wishId = this.wishes.filter(x => {
+    const univId = this.wishes.filter(x => {
       return x.position === (event.previousIndex + 1);
-    })[0].id;
+    })[0].university._id;
 
-    this.studentService.putWishPositionOfOneStudent(this.student._id, wishId, event.currentIndex + 1);
+    this.studentService.putWishPositionOfOneStudent(this.student._id, univId, event.currentIndex + 1).
+    subscribe( wishes => {
+      this.wishes = wishes;
+    });
     moveItemInArray(this.wishes, event.previousIndex, event.currentIndex);
   }
 
