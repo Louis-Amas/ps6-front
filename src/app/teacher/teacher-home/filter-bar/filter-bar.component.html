@@ -1,0 +1,28 @@
+<mat-card>
+  <mat-card-content>
+    <mat-form-field class="search-bar">
+      <input matInput type="text" placeholder="Rechercher un étudiant" [(ngModel)]="value">
+      <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field class="destination">
+      <mat-label>Destination</mat-label>
+      <mat-select [(ngModel)]="selectedValue" name="destination">
+        <mat-option *ngFor="let food of foods" [value]="food.value">
+          {{food.viewValue}} <!-- a changer -->
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="specialty">
+      <mat-label>Filière de dernière année</mat-label>
+      <mat-select [(ngModel)]="selectedValue" name="specialty">
+        <mat-option *ngFor="let food of foods" [value]="food.value">
+          {{food.viewValue}} <!-- a changer -->
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>
+
+
