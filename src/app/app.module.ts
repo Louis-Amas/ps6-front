@@ -18,7 +18,8 @@ import {
   MatCheckboxModule,
   MatProgressBarModule,
   MatTableModule,
-  MatDividerModule, MatExpansionModule
+  MatDividerModule, MatExpansionModule,
+  MatDialogModule
 } from '@angular/material';
 import {MatListModule} from '@angular/material/list';
 import { ConnectionComponent } from './connection/connection.component';
@@ -34,6 +35,7 @@ import { StudentWishListComponent } from './student/student-wish-list/student-wi
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {AuthInterceptor} from '../services/connection/auth.interceptor';
 import { TeacherHomeComponent } from './teacher/teacher-home/teacher-home.component';
+import { StudentOverviewDialogComponent } from './student/student-overview-dialog/student-overview-dialog.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { TeacherHomeComponent } from './teacher/teacher-home/teacher-home.compon
     StudentWishFormComponent,
     HomeComponent,
     StudentWishListComponent,
-    TeacherHomeComponent
+    TeacherHomeComponent,
+    StudentOverviewDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -77,6 +80,7 @@ import { TeacherHomeComponent } from './teacher/teacher-home/teacher-home.compon
     HttpClientModule,
     DragDropModule,
     MatExpansionModule,
+    MatDialogModule
   ],
   providers: [StudentService,
     {
@@ -84,6 +88,7 @@ import { TeacherHomeComponent } from './teacher/teacher-home/teacher-home.compon
       useClass: AuthInterceptor,
       multi: true
     }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [StudentOverviewDialogComponent]
 })
 export class AppModule { }
