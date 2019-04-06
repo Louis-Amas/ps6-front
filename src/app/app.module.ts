@@ -19,7 +19,8 @@ import {
   MatProgressBarModule,
   MatTableModule,
   MatTabsModule,
-  MatDividerModule, MatExpansionModule
+  MatDividerModule, MatExpansionModule,
+  MatDialogModule
 } from '@angular/material';
 import {MatListModule} from '@angular/material/list';
 import { ConnectionComponent } from './connection/connection.component';
@@ -38,6 +39,7 @@ import { TeacherHomeComponent } from './teacher/teacher-home/teacher-home.compon
 import { TeacherFileInProcessComponent } from './teacher/teacher-home/teacher-file-in-process/teacher-file-in-process.component';
 import { FilterBarComponent } from './teacher/teacher-home/filter-bar/filter-bar.component';
 import { TeacherFileProcessedComponent } from './teacher/teacher-home/teacher-file-processed/teacher-file-processed.component';
+import { StudentOverviewDialogComponent } from './student/student-overview-dialog/student-overview-dialog.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,8 @@ import { TeacherFileProcessedComponent } from './teacher/teacher-home/teacher-fi
     TeacherHomeComponent,
     TeacherFileInProcessComponent,
     FilterBarComponent,
-    TeacherFileProcessedComponent
+    TeacherFileProcessedComponent,
+    StudentOverviewDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -86,6 +89,7 @@ import { TeacherFileProcessedComponent } from './teacher/teacher-home/teacher-fi
     DragDropModule,
     MatExpansionModule,
     FormsModule,
+    MatDialogModule
   ],
   providers: [StudentService,
     {
@@ -93,6 +97,7 @@ import { TeacherFileProcessedComponent } from './teacher/teacher-home/teacher-fi
       useClass: AuthInterceptor,
       multi: true
     }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [StudentOverviewDialogComponent]
 })
 export class AppModule { }

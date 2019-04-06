@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>ATTENTION</h1>
+<div mat-dialog-content>
+  <p>Vous êtes sur le point de transmettre votre dossier aux professeurs ainsi qu'aux membres du BRI.</p>
+  <p>Êtes vous sûr d'avoir bien vérifié vos informations personnelles ainsi que vos documents à joindre ?</p>
+  <p>Avez vous vérifié vos voeux ainsi que leur ordre ?</p>
+</div>
+<button mat-button color="primary" (click)="onNoClick()">Retour</button>
+<button mat-button color="warn" [mat-dialog-close]="">Transmettre</button>

@@ -1,9 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Wish} from '../../../models/wish';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {StudentService} from '../../../services/student/student.service';
 import {Student} from '../../../models/student';
-import {forEach} from '@angular/router/src/utils/collection';
+import {MatDialog} from '@angular/material';
+import {StudentOverviewDialogComponent} from '../student-overview-dialog/student-overview-dialog.component';
 
 @Component({
   selector: 'app-student-wish-list',
@@ -17,7 +18,7 @@ export class StudentWishListComponent implements OnInit {
 
   wishes: Wish[] = [];
 
-  constructor(public studentService: StudentService) {
+  constructor(public studentService: StudentService, public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -50,5 +51,17 @@ export class StudentWishListComponent implements OnInit {
     this.studentService.deleteWishOfOneStudent(this.student._id, wish.university._id).subscribe(wishes => {
       this.wishes = wishes;
     });
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(StudentOverviewDialogComponent, {
+      height: '400px',
+      width: '800px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`); // Pizza!
+    });
+
   }
 }
