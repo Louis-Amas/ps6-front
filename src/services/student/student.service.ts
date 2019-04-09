@@ -36,6 +36,10 @@ export class StudentService {
     return this.http.get<User>(this.studentUrl + '/' + id);
   }
 
+  getUserById(id: string): Observable<User> {
+    return this.http.get<User>(this.studentUrl + '/' + id);
+  }
+
   getWishesOfOneStudent(studentId: string) {
     return this.http.get<Wish[]>(this.studentUrl + '/student/' + studentId + '/wishes');
   }
@@ -69,23 +73,26 @@ export class StudentService {
       firstName: student.firstName,
       lastName: student.lastName,
       email: student.email,
-      /* phoneNumber: student.phoneNumber,
-      major: student.major,
-      year: student.year */});
+      phoneNumber: student.phoneNumber,
+      studentInfo: {
+        major: student.major,
+        year: student.year
+      }
+      });
 
   }
-  refactorStudent(student: Student) {
+  /*refactorStudent(student: Student) {
     student.phoneNumber = this.testFormValue(student.phoneNumber);
     student.major = this.testFormValue(student.major);
     student.year = this.testFormValue(student.year);
-  }
-
+  }*/
+/*
   testFormValue(value: string) {
     if (value === undefined) {
       return '';
     }
     return value;
-  }
+  }*/
 
   addWish(coursesId: string[], univId: string, studentId: string) {
     return this.http.post(this.studentUrl + '/student/' + studentId + '/wishes', {

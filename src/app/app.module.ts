@@ -36,6 +36,7 @@ import { StudentWishListComponent } from './student/student-wish-list/student-wi
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {AuthInterceptor} from '../services/connection/auth.interceptor';
 import { TeacherHomeComponent } from './teacher/teacher-home/teacher-home.component';
+import { FormComponent } from './form/form.component';
 import { TeacherFileInProcessComponent } from './teacher/teacher-home/teacher-file-in-process/teacher-file-in-process.component';
 import { FilterBarComponent } from './teacher/teacher-home/filter-bar/filter-bar.component';
 import { TeacherFileProcessedComponent } from './teacher/teacher-home/teacher-file-processed/teacher-file-processed.component';
@@ -55,6 +56,8 @@ import { StudentOverviewDialogComponent } from './student/student-overview-dialo
     StudentWishFormComponent,
     HomeComponent,
     StudentWishListComponent,
+    TeacherHomeComponent,
+    FormComponent,
     TeacherHomeComponent,
     TeacherFileInProcessComponent,
     FilterBarComponent,

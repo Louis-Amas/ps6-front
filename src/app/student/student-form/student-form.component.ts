@@ -3,6 +3,7 @@ import { StudentService } from '../../../services/student/student.service';
 import {ActivatedRoute} from '@angular/router';
 import {Student} from '../../../models/student';
 import {FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {User} from '../../../models/user';
 
 @Component({
   selector: 'app-student-form',
@@ -26,45 +27,38 @@ export class StudentFormComponent implements OnInit {
   ];
 
   public studentForm: FormGroup;
+  public user: User;
 
   constructor(public formBuilder: FormBuilder, public studentService: StudentService, private route: ActivatedRoute) {
     this.studentForm = this.formBuilder.group({
-      _id: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      firstName: ['', [Validators.required]],
-      phoneNumber: ['', [Validators.required]],
-      email: ['', [Validators.required]],
       major: ['', [Validators.required]],
       year: ['', [Validators.required]]
     });
-    this.initializeStudentForm();
 
   }
 
   ngOnInit() {
+   // this.initializeStudentForm();
   }
 
   initializeStudentForm() {
-    const studentId = this.route.snapshot.paramMap.get('id');
-    this.studentService.getStudentById(studentId)
-      .subscribe(student => {
-        this.studentService.refactorStudent(student);
-        this.studentForm.setValue({
-          _id: studentId,
-          lastName: student.lastName,
-          firstName: student.firstName,
-          phoneNumber: student.phoneNumber,
-          email: student.email,
-          major: student.major,
-          year: student.year
+    this.studentForm.setValue({
+          major: this.user.studentInfo.major,
+          year: this.user.studentInfo.year,
         });
-      });
-
 }
 
   saveChanges() {
     const student: Student = this.studentForm.getRawValue() as Student;
-    this.studentService.updateStudent(student);
+    this.user.studentInfo.major = student.major;
+    this.user.studentInfo.year = student.year;
+    console.log(this.user);
+    this.studentService.updateStudent(this.user);
+  }
+
+  updateUser(user1: User) {
+    this.user = user1;
+    this.initializeStudentForm();
   }
 
 }
