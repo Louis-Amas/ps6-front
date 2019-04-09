@@ -52,8 +52,7 @@ export class StudentFormComponent implements OnInit {
     const student: Student = this.studentForm.getRawValue() as Student;
     this.user.studentInfo.major = student.major;
     this.user.studentInfo.year = student.year;
-    console.log(this.user);
-    this.studentService.updateStudent(this.user);
+    this.studentService.updateStudent(this.user).subscribe(user => console.log(user));
   }
 
   updateUser(user1: User) {
