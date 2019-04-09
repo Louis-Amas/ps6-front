@@ -4,6 +4,7 @@ import {Student} from '../../models/student';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Wish} from '../../models/wish';
+import {User} from '../../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,10 @@ export class StudentService {
 
   getStudentById(id: string): Observable<Student> {
     return this.http.get<Student>(this.studentUrl + '/' + id);
+  }
+
+  getUserById(id: string): Observable<User> {
+    return this.http.get<User>(this.studentUrl + '/' + id);
   }
 
   getWishesOfOneStudent(studentId: string) {
@@ -68,23 +73,26 @@ export class StudentService {
       firstName: student.firstName,
       lastName: student.lastName,
       email: student.email,
-      /* phoneNumber: student.phoneNumber,
-      major: student.major,
-      year: student.year */});
+      phoneNumber: student.phoneNumber,
+      studentInfo: {
+        major: student.major,
+        year: student.year
+      }
+      });
 
   }
-  refactorStudent(student: Student) {
+  /*refactorStudent(student: Student) {
     student.phoneNumber = this.testFormValue(student.phoneNumber);
     student.major = this.testFormValue(student.major);
     student.year = this.testFormValue(student.year);
-  }
-
+  }*/
+/*
   testFormValue(value: string) {
     if (value === undefined) {
       return '';
     }
     return value;
-  }
+  }*/
 
   addWish(coursesId: string[], univId: string, studentId: string) {
     return this.http.post(this.studentUrl + '/student/' + studentId + '/wishes', {
