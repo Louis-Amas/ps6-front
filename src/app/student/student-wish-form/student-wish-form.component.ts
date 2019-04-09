@@ -18,7 +18,7 @@ export class StudentWishFormComponent implements OnInit {
   student: Student;
   countries: string[];
   public universitiesList: University[];
-  public universitiesChangedList: University[];
+  public universitiesChangedList: University[] = [];
 
   country: string;
 
@@ -44,7 +44,6 @@ export class StudentWishFormComponent implements OnInit {
     this.universityService.countries$.subscribe((countries) => this.countries = countries);
     this.coursesSelected = [];
     this.nbECTS = 0;
-
   }
 
 
@@ -54,16 +53,18 @@ export class StudentWishFormComponent implements OnInit {
   }
 
 
-  getUniversityByCountryAndMajor(event, country: string, concernedDepartment: string) {
-    if (event.source.selected === true) {
-      this.universitiesChangedList = this.universitiesList.filter(univ => univ.country === country &&
-        concernedDepartment === univ.concernedDepartement);
-    }
+  getUniversityByMajor(concernedDepartment: string) {
+    this.universityService.getByMajor(concernedDepartment).subscribe(univ =>
+      this.universitiesChangedList = univ);
   }
 
   getStudent() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.studentService.getStudentById(id).subscribe(s => this.student = s);
+    this.studentService.getStudentById(id).subscribe(s => {
+      this.student = s;
+      this.getUniversityByMajor(this.student.studentInfo.major);
+      }
+    );
   }
 
   validateForm() {

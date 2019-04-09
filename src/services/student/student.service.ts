@@ -4,6 +4,7 @@ import {Student} from '../../models/student';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Wish} from '../../models/wish';
+import {User} from '../../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,7 @@ export class StudentService {
   }
 
   getStudentById(id: string): Observable<Student> {
-    return this.http.get<Student>(this.studentUrl + '/' + id);
+    return this.http.get<User>(this.studentUrl + '/' + id);
   }
 
   getWishesOfOneStudent(studentId: string) {

@@ -39,4 +39,8 @@ export class UniversityService {
     });
   }
 
+  getByMajor(concernedDepartment: string) {
+    return this.http.get<University[]>(this.universityUrl + '/concernedDepartment/' + concernedDepartment);
+  }
+
 }
