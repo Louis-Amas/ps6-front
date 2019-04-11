@@ -1,19 +1,7 @@
+
+<app-student-header></app-student-header>
+
 <div *ngIf="student != undefined">
-  <i class="material-icons md-48" routerLink="form">
-    perm_identity
-  </i>
-
-  <mat-card class="student-card" routerLink="wishcreation">
-    <mat-card-header>
-      <mat-card-title> <h4>ERASMUS</h4></mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <p>
-        Formulez vos vœux
-      </p>
-    </mat-card-content>
-  </mat-card>
-
   <app-student-wish-list [student]="student"></app-student-wish-list>
 </div>
 
