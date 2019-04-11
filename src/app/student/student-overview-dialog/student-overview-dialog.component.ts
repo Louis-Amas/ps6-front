@@ -24,9 +24,9 @@ export class StudentOverviewDialogComponent implements OnInit {
   }
 
   updateStudentState() {
-    console.log(this.studentId);
-    this.studentService.updateStudentState(this.studentId).subscribe();
-    this.dialogRef.close('transmitted');
+    this.studentService.updateStudentState(this.studentId).subscribe(stu => {
+      this.dialogRef.close(stu);
+    });
 
   }
 }
