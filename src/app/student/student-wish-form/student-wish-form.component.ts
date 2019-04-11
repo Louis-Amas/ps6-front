@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Student} from '../../../models/student';
 import {UniversityService} from '../../../services/university/university.service';
 import {University} from '../../../models/university';
 import {ActivatedRoute} from '@angular/router';
@@ -7,6 +6,7 @@ import {StudentService} from '../../../services/student/student.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Course} from '../../../models/course';
 import {CourseService} from '../../../services/course/course.service';
+import {User} from '../../../models/user';
 
 @Component({
   selector: 'app-student-wish-form',
@@ -15,7 +15,7 @@ import {CourseService} from '../../../services/course/course.service';
 })
 export class StudentWishFormComponent implements OnInit {
 
-  student: Student;
+  student: User;
   countries: string[];
   public universitiesList: University[];
   public universitiesChangedList: University[] = [];
@@ -75,20 +75,20 @@ export class StudentWishFormComponent implements OnInit {
   }
 
   getCoursesByUniv(id: string, semester: number) {
-    this.courseService.getCoursesByUniversity(id, semester).subscribe(courses => {
+    this.courseService.getCoursesByUniversity(id, semester, this.student.studentInfo.major).subscribe(courses => {
       this.courses = courses;
     });
   }
 
   addCourse(event, course: Course) {
     if (event.checked === true) {
-      this.coursesSelected.push(course);
-      this.nbECTS += course.ECTS_count;
-    }
+        this.coursesSelected.push(course);
+        this.nbECTS += course.ECTS_count;
+      }
     if (event.checked === false) {
-      this.coursesSelected.splice(0, this.coursesSelected.indexOf(course));
-      this.nbECTS -= course.ECTS_count;
-    }
+        this.coursesSelected.splice(0, this.coursesSelected.indexOf(course));
+        this.nbECTS -= course.ECTS_count;
+      }
   }
 
   validateWish() {

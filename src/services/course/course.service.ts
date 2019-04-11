@@ -22,14 +22,16 @@ export class CourseService {
    * Observable which contains the list of the tickets.
    * Naming convention: Add '$' at the end of the variable name to highlight it as an Observable.
    */
-  public courses$: Subject<Course[]> = new Subject();
+
+  // public courses$: Subject<Course[]> = new Subject();
 
 
   constructor(private http: HttpClient) {
 
   }
 
-  getCoursesByUniversity(univId: string, semester: number) {
-    return this.http.get<Course[]>(this.universityUrl + '/' + univId + '/courses/semester/' + semester);
+  getCoursesByUniversity(univId: string, semester: number, major: string) {
+    return this.http.get<Course[]>(this.universityUrl + '/' + univId + '/courses?semester='
+      + semester + '&major=' + major);
   }
 }

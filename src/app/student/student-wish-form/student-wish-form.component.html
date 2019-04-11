@@ -58,13 +58,18 @@
       <mat-card-title>Liste de voeux</mat-card-title>
       <mat-card-content>
        <mat-list>
-          <mat-list-item *ngFor="let course of courses">
+         <mat-list-item *ngFor="let course of courses">
             <mat-checkbox
               (change)="addCourse($event, course)">
               <a href="{{course.link_to_courses}}">{{course.name}}</a> - ECTS : {{course.ECTS_count}}
             </mat-checkbox>
           </mat-list-item>
         </mat-list>
+        <!--<mat-selection-list #cours (selectionChange)="addCourse($event, cours.selectedOptions)"  >
+          <mat-list-option *ngFor="let course of courses">
+            <a href="{{course.link_to_courses}}">{{course.name}}</a> - ECTS : {{course.ECTS_count}}
+          </mat-list-option>
+        </mat-selection-list> -->
       </mat-card-content>
     </mat-card>
     <br>
