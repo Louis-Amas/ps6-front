@@ -54,7 +54,7 @@ export class StudentService {
     return this.http.delete<Wish[]>(this.studentUrl + '/student/' + studentId + '/wishes/' + univId);
   }
 
-  updateStudent(student: Student) {
+  updateStudent(user: User) {
     /* const id: string = studentForm.value._id;
      const index: number = this.studentList.findIndex((stud) => stud._id === id.toString());
      const tmp: Student[] = this.studentList.slice(index, index + 1);
@@ -68,15 +68,15 @@ export class StudentService {
      student.year = student1.year;
      this.studentList.push(student);
      console.log(this.studentList[0]); */
-    const id: string = student._id;
-    this.http.put(this.studentUrl + '/' + id, {
-      firstName: student.firstName,
-      lastName: student.lastName,
-      email: student.email,
-      phoneNumber: student.phoneNumber,
+    const id: string = user._id;
+    return this.http.put<User>(this.studentUrl + '/' + id, {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      phoneNumber: user.phoneNumber,
       studentInfo: {
-        major: student.major,
-        year: student.year
+        major: user.studentInfo.major,
+        year: user.studentInfo.year
       }
       });
 
