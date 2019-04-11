@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {MatCardModule} from '@angular/material/card';
@@ -41,6 +40,7 @@ import { TeacherFileInProcessComponent } from './teacher/teacher-home/teacher-fi
 import { FilterBarComponent } from './teacher/teacher-home/filter-bar/filter-bar.component';
 import { TeacherFileProcessedComponent } from './teacher/teacher-home/teacher-file-processed/teacher-file-processed.component';
 import { StudentOverviewDialogComponent } from './student/student-overview-dialog/student-overview-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -92,7 +92,7 @@ import { StudentOverviewDialogComponent } from './student/student-overview-dialo
     DragDropModule,
     MatExpansionModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   providers: [StudentService,
     {

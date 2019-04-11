@@ -11,4 +11,5 @@ export interface Student {
   wishes?: Wish[];
   major?: string;
   year?: string;
+  stateValidation?: string;
 }

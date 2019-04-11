@@ -100,4 +100,10 @@ export class StudentService {
       courses: coursesId,
     });
   }
+
+  updateStudentState(studentId: string) {
+    return this.http.put(this.studentUrl + '/student/' + studentId, {
+      stateValidation: 'waitTeacher',
+    });
+  }
 }

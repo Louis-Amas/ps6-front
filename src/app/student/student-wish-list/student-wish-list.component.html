@@ -27,7 +27,7 @@
         </mat-expansion-panel>
     </mat-accordion>
     <br>
-    <button mat-button color="primary" class="validate" (click)="openDialog()">Transmettre son dossier</button>
+    <button *ngIf="this.student.studentInfo.stateValidation =='waitStudent'" mat-button color="primary" class="validate" (click)="openDialog()">Transmettre son dossier</button>
   </div>
 </div>
 

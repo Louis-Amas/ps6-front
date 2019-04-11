@@ -60,10 +60,11 @@ export class StudentWishListComponent implements OnInit {
     const dialogRef = this.dialog.open(StudentOverviewDialogComponent, {
       height: '400px',
       width: '800px',
+      data: this.student._id,
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`); // Pizza!
+      console.log(`Dialog result: ${result}`);
     });
 
   }
