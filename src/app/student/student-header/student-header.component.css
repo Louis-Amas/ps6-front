@@ -1,0 +1,51 @@
+div {
+  display: block;
+}
+
+.material-icons.md-48 {
+  margin-top: 10px;
+  margin-left: 5px;
+  font-size: 48px;
+  float: left;
+}
+
+.container{
+  padding-top: 60px;
+  text-align: center;
+}
+
+.student-header{
+  background-color: #00aeef;
+  color: #fff;
+  overflow-y: auto;
+}
+
+.header-headline{
+  margin: 15px 0;
+  padding-top: 15px;
+}
+
+.header-button{
+  text-align: center;
+  margin: 60px 0;
+}
+
+.createWish{
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+  background-color: #fff;
+  color: rgba(0,0,0,.87);
+}
+
+h1 {
+  font-size: 56px;
+  font-weight: 300;
+  line-height: 56px;
+  margin: 15px 5px;
+}
+
+h2{
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 28px;
+  margin: 15px 0 25px;
+}

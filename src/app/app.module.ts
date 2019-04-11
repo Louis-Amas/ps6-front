@@ -19,7 +19,7 @@ import {
   MatTableModule,
   MatTabsModule,
   MatDividerModule, MatExpansionModule,
-  MatDialogModule
+  MatDialogModule, MatSidenavModule
 } from '@angular/material';
 import {MatListModule} from '@angular/material/list';
 import { ConnectionComponent } from './connection/connection.component';
@@ -40,7 +40,7 @@ import { TeacherFileInProcessComponent } from './teacher/teacher-home/teacher-fi
 import { FilterBarComponent } from './teacher/teacher-home/filter-bar/filter-bar.component';
 import { TeacherFileProcessedComponent } from './teacher/teacher-home/teacher-file-processed/teacher-file-processed.component';
 import { StudentOverviewDialogComponent } from './student/student-overview-dialog/student-overview-dialog.component';
-
+import { StudentHeaderComponent } from './student/student-header/student-header.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +62,8 @@ import { StudentOverviewDialogComponent } from './student/student-overview-dialo
     TeacherFileInProcessComponent,
     FilterBarComponent,
     TeacherFileProcessedComponent,
-    StudentOverviewDialogComponent
+    StudentOverviewDialogComponent,
+    StudentHeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -93,6 +94,7 @@ import { StudentOverviewDialogComponent } from './student/student-overview-dialo
     MatExpansionModule,
     FormsModule,
     MatDialogModule,
+    MatSidenavModule,
   ],
   providers: [StudentService,
     {
