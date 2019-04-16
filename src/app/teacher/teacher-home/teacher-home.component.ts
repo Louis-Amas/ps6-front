@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {TeacherService} from '../../../services/teacher/teacher.service';
+import {Teacher} from '../../../models/teacher';
+import {User} from '../../../models/user';
 
 @Component({
   selector: 'app-teacher-home',
@@ -7,9 +11,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TeacherHomeComponent implements OnInit {
 
-  constructor() { }
+  public teacher: User;
+
+  constructor(private route: ActivatedRoute, public teacherService: TeacherService) { }
 
   ngOnInit() {
+    this.getTeacher();
   }
 
+  getTeacher() {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.teacherService.getTeacherById(id).subscribe(t => {
+        this.teacher = t;
+      }
+    );
+  }
 }

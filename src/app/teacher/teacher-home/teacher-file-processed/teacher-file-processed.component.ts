@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {User} from '../../../../models/user';
 
 @Component({
   selector: 'app-teacher-file-processed',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./teacher-file-processed.component.css']
 })
 export class TeacherFileProcessedComponent implements OnInit {
+
+  @Input() teacher: User;
 
   constructor() { }
 
