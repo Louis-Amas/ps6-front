@@ -1,5 +1,6 @@
-import {Wish} from './wish';
 import {Student} from './student';
+import {Teacher} from './teacher';
+
 
 enum Role {
   STUDENT = 'student',
@@ -17,4 +18,5 @@ export interface User {
   createAd?: Date;
   role?: Role;
   studentInfo?: Student;
+  teacherInfo?: Teacher;
 }

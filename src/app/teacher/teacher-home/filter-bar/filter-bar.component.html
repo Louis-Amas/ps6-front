@@ -8,9 +8,9 @@
     </mat-form-field>
     <mat-form-field class="destination">
       <mat-label>Destination</mat-label>
-      <mat-select [(ngModel)]="selectedValue" name="destination">
-        <mat-option *ngFor="let food of foods" [value]="food.value">
-          {{food.viewValue}} <!-- a changer -->
+      <mat-select (selectionChange)="onUniversitySelected($event)" [(ngModel)]="university" name="destination">
+        <mat-option *ngFor="let univ of universities" [value]="univ._id">
+          {{univ.country}} - {{univ.name}}
         </mat-option>
       </mat-select>
     </mat-form-field>
