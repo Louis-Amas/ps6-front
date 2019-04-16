@@ -2,9 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Wish} from '../../../models/wish';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {StudentService} from '../../../services/student/student.service';
-import {Student} from '../../../models/student';
 import {MatDialog} from '@angular/material';
 import {StudentOverviewDialogComponent} from '../student-overview-dialog/student-overview-dialog.component';
+import {User} from '../../../models/user';
 
 @Component({
   selector: 'app-student-wish-list',
@@ -14,11 +14,14 @@ import {StudentOverviewDialogComponent} from '../student-overview-dialog/student
 export class StudentWishListComponent implements OnInit {
 
   @Input()
-    student: Student;
+    student: User;
 
   wishes: Wish[] = [];
+  msg: string;
+  sendMsg: boolean;
 
   constructor(public studentService: StudentService, public dialog: MatDialog) {
+    this.sendMsg = false;
   }
 
   ngOnInit() {
@@ -28,15 +31,21 @@ export class StudentWishListComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    const univId = this.wishes.filter(x => {
-      return x.position === (event.previousIndex + 1);
-    })[0].university._id;
+    if (this.student.studentInfo.stateValidation === 'waitStudent') {
+      this.sendMsg = false;
+      const univId = this.wishes.filter(x => {
+        return x.position === (event.previousIndex + 1);
+      })[0].university._id;
 
-    this.studentService.putWishPositionOfOneStudent(this.student._id, univId, event.currentIndex + 1).
-    subscribe( wishes => {
-      this.wishes = wishes;
-    });
-    moveItemInArray(this.wishes, event.previousIndex, event.currentIndex);
+      this.studentService.putWishPositionOfOneStudent(this.student._id, univId, event.currentIndex + 1).
+      subscribe( wishes => {
+        this.wishes = wishes;
+      });
+      moveItemInArray(this.wishes, event.previousIndex, event.currentIndex);
+    } else {
+      this.msg = 'Vous avez transmit vos voeux, vous ne pouvez plus les modifier';
+      this.sendMsg = true;
+    }
   }
 
   getCourseOfWish(wish: Wish) {
@@ -58,7 +67,7 @@ export class StudentWishListComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(StudentOverviewDialogComponent, {
-      height: '400px',
+      height: '370px',
       width: '800px',
       data: this.student._id,
     });

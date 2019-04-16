@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Student} from '../../../models/student';
 import {ActivatedRoute} from '@angular/router';
+import {User} from '../../../models/user';
 import {StudentService} from '../../../services/student/student.service';
 
 @Component({
@@ -10,7 +10,7 @@ import {StudentService} from '../../../services/student/student.service';
 })
 export class StudentHomeComponent implements OnInit {
 
-  public student: Student;
+  public student: User;
 
   constructor(private route: ActivatedRoute,
               private studentService: StudentService) { }
@@ -21,7 +21,7 @@ export class StudentHomeComponent implements OnInit {
 
   getStudent() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.studentService.getStudentById(id).subscribe( student => {
+    this.studentService.getUserById(id).subscribe( student => {
       this.student = student;
     });
   }

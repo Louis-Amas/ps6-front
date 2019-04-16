@@ -63,7 +63,7 @@ import { StudentHeaderComponent } from './student/student-header/student-header.
     FilterBarComponent,
     TeacherFileProcessedComponent,
     StudentOverviewDialogComponent,
-    StudentHeaderComponent
+    StudentHeaderComponent,
   ],
   imports: [
     BrowserModule,

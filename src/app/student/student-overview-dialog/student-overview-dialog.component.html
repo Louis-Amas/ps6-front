@@ -4,5 +4,8 @@
   <p>Êtes vous sûr d'avoir bien vérifié vos informations personnelles ainsi que vos documents à joindre ?</p>
   <p>Avez vous vérifié vos voeux ainsi que leur ordre ?</p>
 </div>
-<button mat-button color="primary" (click)="onNoClick()">Retour</button>
-<button mat-button color="warn" (click)="updateStudentState()">Transmettre</button>
+<mat-toolbar>
+  <button mat-button color="primary" (click)="onNoClick()">Retour</button>
+    <span class="tmp"></span>
+  <button mat-button color="warn" (click)="updateStudentState()">Transmettre</button>
+</mat-toolbar>
