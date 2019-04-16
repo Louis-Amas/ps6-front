@@ -1,6 +1,7 @@
 <div *ngIf="wishes != undefined" class="container">
-  <div *ngIf="wishes.length > 0">
-    <span>Triez vos voeux</span>
+  <mat-card *ngIf="wishes.length > 0">
+    <mat-card-title *ngIf="student.studentInfo.stateValidation =='waitStudent'">Triez vos voeux</mat-card-title>
+    <mat-card-title *ngIf="student.studentInfo.stateValidation !='waitStudent'">Vos voeux ont été transmis</mat-card-title>
     <mat-accordion cdkDropList class="wish-list" (cdkDropListDropped)="drop($event)">
         <mat-expansion-panel *ngFor="let wish of wishes" cdkDrag>
 
@@ -20,14 +21,27 @@
             </mat-list-item>
           </mat-list>
 
-          <mat-action-row>
+          <mat-action-row  *ngIf="student.studentInfo.stateValidation =='waitStudent'">
             <button mat-button color="warn" (click)="deleteWish(wish)">Supprimer</button>
           </mat-action-row>
 
         </mat-expansion-panel>
     </mat-accordion>
     <br>
-    <button *ngIf="this.student.studentInfo.stateValidation =='waitStudent'" mat-button color="primary" class="validate" (click)="openDialog()">Transmettre son dossier</button>
+    <button *ngIf="student.studentInfo.stateValidation =='waitStudent'" mat-button color="primary" class="validate" (click)="openDialog()">Transmettre son dossier</button>
+  </mat-card>
+  <div *ngIf="wishes.length == 0">
+    <mat-card>
+      <mat-card-title>
+        Vous n'avez pas encore choisit de voeu
+      </mat-card-title>
+      <mat-card-content>
+        Faites un maximum de voeu afin d'optimiser vos chances d'être pris en échange ERASMUS
+      </mat-card-content>
+      <mat-card-footer>
+        <button mat-button routerLink="wishcreation" color="primary" class="validate">Commencez dès maintenant</button>
+      </mat-card-footer>
+    </mat-card>
   </div>
 </div>
 

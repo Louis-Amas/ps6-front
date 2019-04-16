@@ -17,14 +17,12 @@ export class StudentService {
    */
 
   private studentUrl = 'http://127.0.0.1:9428/api/users';
-  private studentUrl2 = 'http://127.0.0.1:9428/api';
   public studentList: Student[] = STUDENTS_MOCKED;
   /**
    * Observable which contains the list of the tickets.
    * Naming convention: Add '$' at the end of the variable name to highlight it as an Observable.
    */
   public students$: BehaviorSubject<Student[]> = new BehaviorSubject(this.studentList);
-  private header$: BehaviorSubject<string> = new BehaviorSubject('');
 
   constructor(private http: HttpClient) {
   }
@@ -102,7 +100,7 @@ export class StudentService {
   }
 
   updateStudentState(studentId: string) {
-    return this.http.put(this.studentUrl + '/student/' + studentId, {
+    return this.http.put<User>(this.studentUrl + '/student/' + studentId, {
       stateValidation: 'waitTeacher',
     });
   }
