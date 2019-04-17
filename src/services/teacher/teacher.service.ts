@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {User} from '../../models/user';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {Student} from '../../models/student';
-import {Wish} from "../../models/wish";
 
 @Injectable({
   providedIn: 'root'
@@ -38,8 +36,22 @@ export class TeacherService {
     return this.http.get<User[]>(this.teacherUrl2 + '/' + id + '/students');
   }
 
-  filterStudent(id: string, idUniv: string, filterStu: User[]) {
-    return filterStu.filter(stu => stu.studentInfo.wishes.find( wish =>
-    wish.university === idUniv));
+  filterStudent(id: string, filterStu: User[], idUniv: string, search: string) {
+    if (idUniv !== undefined && search !== undefined) {
+      return filterStu.filter(stu => stu.studentInfo.wishes.find(wish =>
+        wish.university === idUniv) && (stu.lastName.toLowerCase().includes(search) || stu.firstName.toLowerCase().includes(search)));
+    } else {
+        if (idUniv !== undefined) {
+          return filterStu.filter(stu => stu.studentInfo.wishes.find(wish =>
+            wish.university === idUniv));
+        } else {
+          if (search !== undefined) {
+            return filterStu.filter(stu => stu.firstName.toLowerCase().includes(search) || stu.lastName.toLowerCase().includes(search));
+          } else {
+            return filterStu;
+        }
+      }
+    }
+
   }
 }

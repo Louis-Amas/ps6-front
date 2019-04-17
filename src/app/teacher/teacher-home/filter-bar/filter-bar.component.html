@@ -1,28 +1,30 @@
 <mat-card>
   <mat-card-content>
-    <mat-form-field class="search-bar">
-      <input matInput type="text" placeholder="Rechercher un étudiant" [(ngModel)]="value">
-      <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-        <mat-icon>close</mat-icon>
-      </button>
-    </mat-form-field>
-    <mat-form-field class="destination">
-      <mat-label>Destination</mat-label>
-      <mat-select (selectionChange)="onUniversitySelected($event)" name="destination">
-        <mat-option>None</mat-option>
-        <mat-option *ngFor="let univ of universities" [value]="univ._id">
-          {{univ.country}} - {{univ.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field class="specialty">
-      <mat-label>Filière de dernière année</mat-label>
-      <mat-select [(ngModel)]="selectedValue" name="specialty">
-        <mat-option *ngFor="let food of foods" [value]="food.value">
-          {{food.viewValue}} <!-- a changer -->
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <form class="wish-form" [formGroup]="filterForm">
+      <mat-form-field class="search-bar">
+        <input matInput (keyup.enter)="onNameSelected($event)" (keyup.backspace)="onNameSelected($event)" type="text" placeholder="Rechercher un étudiant"  [formControlName]="'search'" [value]="">
+        <button *ngIf="nameValue" matSuffix mat-icon-button aria-label="Clear" (click)="nameValue=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field class="destination">
+        <mat-label>Destination</mat-label>
+        <mat-select (selectionChange)="onUniversitySelected($event)" name="destination">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let univ of universities" [value]="univ._id">
+            {{univ.country}} - {{univ.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="specialty">
+        <mat-label>Filière de dernière année</mat-label>
+        <mat-select name="specialty">
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{food.viewValue}} <!-- a changer -->
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
   </mat-card-content>
 </mat-card>
 

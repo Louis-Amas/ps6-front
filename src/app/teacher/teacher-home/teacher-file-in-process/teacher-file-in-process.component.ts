@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {User} from '../../../../models/user';
 import {TeacherService} from '../../../../services/teacher/teacher.service';
 import {ActivatedRoute} from '@angular/router';
-import {University} from '../../../../models/university';
 
 @Component({
   selector: 'app-teacher-file-in-process',
@@ -16,6 +15,7 @@ export class TeacherFileInProcessComponent implements OnInit {
   studentsConcerned: User[] = [];
   studentsFilter: User[] = [];
   university: string;
+  searchBar: string;
 
   constructor(private route: ActivatedRoute, public teacherService: TeacherService) {
   }
@@ -33,11 +33,20 @@ export class TeacherFileInProcessComponent implements OnInit {
   }
 
   updateUniversity(univ: string) {
-    this.university = univ;
+    if (univ !== undefined) {
+      this.university = univ;
+    }
+    this.filterStudent();
+  }
+
+  updateName(name: string) {
+    if (name !== undefined) {
+      this.searchBar = name;
+    }
     this.filterStudent();
   }
 
   filterStudent() {
-    this.studentsFilter = this.teacherService.filterStudent(this.teacher._id, this.university, this.studentsConcerned);
+    this.studentsFilter = this.teacherService.filterStudent(this.teacher._id, this.studentsConcerned, this.university, this.searchBar);
   }
 }
