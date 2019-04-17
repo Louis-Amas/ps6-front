@@ -3,12 +3,28 @@
 <mat-card>
   <mat-card-title>Liste de voeux</mat-card-title>
   <mat-card-content>
-    <mat-list>
-      <mat-list-item *ngFor="let student of studentsFilter">
-       {{student.lastName}} - {{student.firstName}}
-      </mat-list-item>
-      <mat-divider></mat-divider>
-    </mat-list>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let student of studentsFilter">
+
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{student.lastName}} {{student.firstName}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-list>
+          <mat-list-item *ngFor="let wish of student.studentInfo.wishes">
+            {{wish.university.country}} - {{wish.university.name}}
+            <mat-divider></mat-divider>
+          </mat-list-item>
+        </mat-list>
+
+        <mat-action-row>
+          <button mat-button routerLink="student/{{student._id}}" color="primary">Voir cet étudiant</button>
+        </mat-action-row>
+
+      </mat-expansion-panel>
+    </mat-accordion>
   </mat-card-content>
 </mat-card>
 
