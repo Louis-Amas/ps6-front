@@ -8,7 +8,8 @@
     </mat-form-field>
     <mat-form-field class="destination">
       <mat-label>Destination</mat-label>
-      <mat-select (selectionChange)="onUniversitySelected($event)" [(ngModel)]="university" name="destination">
+      <mat-select (selectionChange)="onUniversitySelected($event)" name="destination">
+        <mat-option>None</mat-option>
         <mat-option *ngFor="let univ of universities" [value]="univ._id">
           {{univ.country}} - {{univ.name}}
         </mat-option>

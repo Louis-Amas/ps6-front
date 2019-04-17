@@ -14,6 +14,7 @@ export class TeacherFileInProcessComponent implements OnInit {
   @Input() teacher: User;
 
   studentsConcerned: User[] = [];
+  studentsFilter: User[] = [];
   university: string;
 
   constructor(private route: ActivatedRoute, public teacherService: TeacherService) {
@@ -25,15 +26,18 @@ export class TeacherFileInProcessComponent implements OnInit {
 
 
   getConcernedStudent() {
-    this.teacherService.getConcernedStudent(this.teacher._id).subscribe( t => this.studentsConcerned = t);
+    this.teacherService.getConcernedStudent(this.teacher._id).subscribe(t => {
+      this.studentsConcerned = t;
+      this.studentsFilter = t;
+    });
   }
 
   updateUniversity(univ: string) {
     this.university = univ;
+    this.filterStudent();
   }
 
   filterStudent() {
-
+    this.studentsFilter = this.teacherService.filterStudent(this.teacher._id, this.university, this.studentsConcerned);
   }
-
 }

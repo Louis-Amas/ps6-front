@@ -4,7 +4,7 @@
   <mat-card-title>Liste de voeux</mat-card-title>
   <mat-card-content>
     <mat-list>
-      <mat-list-item *ngFor="let student of studentsConcerned">
+      <mat-list-item *ngFor="let student of studentsFilter">
        {{student.lastName}} - {{student.firstName}}
       </mat-list-item>
       <mat-divider></mat-divider>

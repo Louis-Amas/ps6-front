@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {User} from '../../models/user';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Student} from '../../models/student';
+import {Wish} from "../../models/wish";
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class TeacherService {
   private teacherUrl = 'http://127.0.0.1:9428/api/users';
   private teacherUrl2 = 'http://127.0.0.1:9428/api/users/teacher';
   public studentList: User[] = [];
+
 
   public students$: BehaviorSubject<User[]> = new BehaviorSubject(this.studentList);
 
@@ -36,7 +38,8 @@ export class TeacherService {
     return this.http.get<User[]>(this.teacherUrl2 + '/' + id + '/students');
   }
 
-  filterStudent() {
-    console.log();
+  filterStudent(id: string, idUniv: string, filterStu: User[]) {
+    return filterStu.filter(stu => stu.studentInfo.wishes.find( wish =>
+    wish.university === idUniv));
   }
 }

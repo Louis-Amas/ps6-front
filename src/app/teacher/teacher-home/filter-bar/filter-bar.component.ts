@@ -13,7 +13,10 @@ export class FilterBarComponent implements OnInit {
   @Input() teacher: User;
 
   @Output()
-  universityEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
+  universityEvent: EventEmitter<string> = new EventEmitter<string>();
+
+  @Output()
+  nameEvent: EventEmitter<string> = new EventEmitter<string>();
 
   universities: University[] = [];
 
@@ -25,7 +28,10 @@ export class FilterBarComponent implements OnInit {
 
   onUniversitySelected($event) {
     const country = $event.value;
-    this.universityEvent.emit(country.toString());
+    if (country !== undefined) {
+      this.universityEvent.emit(country.toString());
+    }
+
   }
 
   getUniversity() {
