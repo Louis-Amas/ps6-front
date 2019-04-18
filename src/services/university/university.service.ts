@@ -43,4 +43,10 @@ export class UniversityService {
     return this.http.get<University[]>(this.universityUrl + '/concernedDepartment/' + concernedDepartment);
   }
 
+  filterUniversity(search: string, univList: University[]) {
+    if (search !== undefined) {
+      return univList.filter(univ => univ.name.toLowerCase().includes(search) || univ.country.toLowerCase().includes(search));
+    }
+  }
+
 }
