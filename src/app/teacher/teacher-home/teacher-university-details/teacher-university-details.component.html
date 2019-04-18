@@ -1,0 +1,42 @@
+<button mat-button routerLink="../../">Retour</button>
+<br>
+
+<mat-card *ngIf="university !== undefined">
+
+  <mat-card-title>
+    {{university.name}}
+  </mat-card-title>
+
+  <mat-card-content>
+    <mat-list>
+    <mat-list-item>Pays : {{university.country}}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>Lien vers l'école : {{university.url_to_website}}</mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
+
+
+
+<br>
+<mat-card *ngIf="university != undefined">
+  <mat-card-title>
+    Cours de l'école
+  </mat-card-title>
+  <mat-card-content>
+    <mat-list-item *ngFor="let course of university.courses">
+      <mat-card class="course">
+        <mat-list>
+          <mat-list-item>Nom du cours : {{course.name}}</mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>Lien vers le cours : {{course.link_to_courses}}</mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>Nombre d'ECTS acquis : {{course.ECTS_count}}</mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>Semestre concerné : {{course.semester}}</mat-list-item>
+        </mat-list>
+      </mat-card>
+      <br>
+    </mat-list-item>
+  </mat-card-content>
+</mat-card>

@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {University} from '../../models/university';
-import {UNIVERSITY_MOCKED} from '../../mocks/university.mock';
-import {Course} from '../../models/course';
 import {Student} from '../../models/student';
 
 
@@ -47,6 +45,10 @@ export class UniversityService {
     if (search !== undefined) {
       return univList.filter(univ => univ.name.toLowerCase().includes(search) || univ.country.toLowerCase().includes(search));
     }
+  }
+
+  getUniversityById(id: string) {
+    return this.http.get<University>(this.universityUrl + '/' + id);
   }
 
 }

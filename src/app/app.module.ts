@@ -42,6 +42,8 @@ import { TeacherFileProcessedComponent } from './teacher/teacher-home/teacher-fi
 import { StudentOverviewDialogComponent } from './student/student-overview-dialog/student-overview-dialog.component';
 import { StudentHeaderComponent } from './student/student-header/student-header.component';
 import { TeacherStudentDetailsComponent } from './teacher/teacher-student-details/teacher-student-details.component';
+import {TeacherListUniversitiesComponent} from './teacher/teacher-home/teacher-list-universities/teacher-list-universities.component';
+import {TeacherUniversityDetailsComponent} from './teacher/teacher-home/teacher-university-details/teacher-university-details.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +68,8 @@ import { TeacherStudentDetailsComponent } from './teacher/teacher-student-detail
     StudentOverviewDialogComponent,
     StudentHeaderComponent,
     TeacherStudentDetailsComponent,
+    TeacherListUniversitiesComponent,
+    TeacherUniversityDetailsComponent,
   ],
   imports: [
     BrowserModule,
