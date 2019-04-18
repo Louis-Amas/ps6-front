@@ -33,9 +33,7 @@ export class TeacherFileInProcessComponent implements OnInit {
   }
 
   updateUniversity(univ: string) {
-    if (univ !== undefined) {
-      this.university = univ;
-    }
+    this.university = univ;
     this.filterStudent();
   }
 

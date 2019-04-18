@@ -39,11 +39,11 @@ export class TeacherService {
   filterStudent(id: string, filterStu: User[], idUniv: string, search: string) {
     if (idUniv !== undefined && search !== undefined) {
       return filterStu.filter(stu => stu.studentInfo.wishes.find(wish =>
-        wish.university === idUniv) && (stu.lastName.toLowerCase().includes(search) || stu.firstName.toLowerCase().includes(search)));
+        wish.university._id === idUniv) && (stu.lastName.toLowerCase().includes(search) || stu.firstName.toLowerCase().includes(search)));
     } else {
         if (idUniv !== undefined) {
           return filterStu.filter(stu => stu.studentInfo.wishes.find(wish =>
-            wish.university === idUniv));
+            wish.university._id === idUniv));
         } else {
           if (search !== undefined) {
             return filterStu.filter(stu => stu.firstName.toLowerCase().includes(search) || stu.lastName.toLowerCase().includes(search));
