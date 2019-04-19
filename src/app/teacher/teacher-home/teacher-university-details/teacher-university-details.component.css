@@ -4,5 +4,11 @@
 }
 
 .course{
-  background-color: #fafafa;
+  margin-top: 1%;
+}
+
+.add-button {
+  margin-top: 1%;
+  float: right;
+  margin-right: 10%;
 }

@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-content>
     <mat-form-field class="search-bar">
-      <input matInput (keyup.enter)="onSearch($event)" (keyup.backspace)="onSearch($event)" type="text" placeholder="Rechercher une université" [value]="">
+      <input matInput (keyup.enter)="onSearch($event)" (keypress)="onSearch($event)" (keyup.backspace)="onSearch($event)" type="text" placeholder="Rechercher une université" [value]="">
     </mat-form-field>
   </mat-card-content>
 </mat-card>
@@ -13,10 +13,9 @@
   </mat-card-title>
 
   <mat-card-content>
-    <mat-list>
-      <mat-list-item *ngFor="let univ of universityFilter">
+    <mat-list *ngFor="let univ of universityFilter">
+      <mat-list-item routerLink="university/{{univ._id}}">
         {{univ.name}} - {{univ.country}}
-        <button mat-button routerLink="university/{{univ._id}}">Plus de détails</button>
         <mat-divider></mat-divider>
       </mat-list-item>
     </mat-list>

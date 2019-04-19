@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {University} from '../../models/university';
 import {Student} from '../../models/student';
+import {Course} from '../../models/course';
 
 
 @Injectable({
@@ -16,7 +17,6 @@ export class UniversityService {
    */
 
   private universityUrl = 'http://localhost:9428/api/university';
-  private coursesUrl = 'http://localhost:9428/api/courses';
   public university: University;
   public student: Student;
   /**
@@ -49,6 +49,10 @@ export class UniversityService {
 
   getUniversityById(id: string) {
     return this.http.get<University>(this.universityUrl + '/' + id);
+  }
+
+  deleteCourse(course: Course, id: string) {
+    return this.http.delete<Course[]>(this.universityUrl + '/' + id + '/courses/' + course._id);
   }
 
 }

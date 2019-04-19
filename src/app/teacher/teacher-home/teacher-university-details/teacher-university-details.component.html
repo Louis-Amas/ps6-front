@@ -17,26 +17,35 @@
 </mat-card>
 
 
-
 <br>
-<mat-card *ngIf="university != undefined">
+<mat-card class="course" *ngIf="university != undefined">
   <mat-card-title>
     Cours de l'école
   </mat-card-title>
   <mat-card-content>
-    <mat-list-item *ngFor="let course of university.courses">
-      <mat-card class="course">
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let course of university.courses">
+
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{course.name}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
         <mat-list>
-          <mat-list-item>Nom du cours : {{course.name}}</mat-list-item>
-          <mat-divider></mat-divider>
           <mat-list-item>Lien vers le cours : {{course.link_to_courses}}</mat-list-item>
-          <mat-divider></mat-divider>
           <mat-list-item>Nombre d'ECTS acquis : {{course.ECTS_count}}</mat-list-item>
-          <mat-divider></mat-divider>
           <mat-list-item>Semestre concerné : {{course.semester}}</mat-list-item>
+          <mat-list-item>Description du cours : à renseigner</mat-list-item>
         </mat-list>
-      </mat-card>
-      <br>
-    </mat-list-item>
+
+        <mat-action-row>
+          <button mat-button color="primary" (click)="deleteCourse(course)">Supprimer ce cours</button>
+        </mat-action-row>
+
+      </mat-expansion-panel>
+    </mat-accordion>
   </mat-card-content>
 </mat-card>
+
+<button class="add-button" mat-button color="primary"> Ajouter un cours</button>

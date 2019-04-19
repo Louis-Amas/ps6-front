@@ -9,11 +9,6 @@
   width: 15%;
 }
 
-.mat-button{
-  float: right;
+.mat-list-item:hover {
+  background-color: #00aeef;
 }
-
-.mat-list-item {
-  display: flex;
-}
-

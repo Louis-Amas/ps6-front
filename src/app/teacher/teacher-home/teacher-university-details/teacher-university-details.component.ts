@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {UniversityService} from '../../../../services/university/university.service';
 import {University} from '../../../../models/university';
+import {Course} from '../../../../models/course';
 
 @Component({
   selector: 'app-teacher-university-details',
@@ -24,6 +25,11 @@ export class TeacherUniversityDetailsComponent implements OnInit {
         this.university = univ;
       }
     );
+  }
+
+  deleteCourse(course: Course) {
+    this.universityService.deleteCourse(course, this.university._id).subscribe();
+    this.getCurrentUniversity();
   }
 
 
