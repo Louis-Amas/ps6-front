@@ -1,0 +1,23 @@
+div{
+  display: block;
+}
+
+.mat-card {
+  width:90%;
+  margin: auto;
+}
+
+.mat-toolbar{
+  background-color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.tmp {
+  flex: 1 1 auto;
+}
+
+.card-button{
+  padding-top: 0;
+  padding-bottom: 0;
+}

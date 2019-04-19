@@ -1,1 +1,62 @@
 <button mat-button routerLink="../../">Retour</button>
+<div *ngIf="currentStudent != undefined && teacher != undefined">
+
+  <mat-card class="card-button">
+      <mat-toolbar>
+        <button mat-button color="warn">Refuser le dossier</button>
+        <span class="tmp"></span>
+        <button mat-button (click)="validateStudent()" color="primary">Valider le dossier</button>
+      </mat-toolbar>
+  </mat-card>
+
+  <br>
+
+  <mat-card>
+    <mat-card-title>
+      Information de l'étudiant
+    </mat-card-title>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item>Nom : {{currentStudent.lastName}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Prénom : {{currentStudent.firstName}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Email : {{currentStudent.email}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Filière actuelle : {{currentStudent.studentInfo.major}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Spécialité de dernière année : {{""}}</mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+
+  <br>
+
+  <mat-card>
+    <mat-card-title>
+      Liste de voeux
+    </mat-card-title>
+    <mat-card-content>
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let wish of wishes">
+
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Voeu n°{{wish.position}}
+            </mat-panel-title>
+            <mat-panel-description>
+              <a href="{{wish.university.url_to_website}}">{{wish.university.name}}</a>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <mat-list>
+            <mat-list-item *ngFor="let course of studentService.getCourseOfWish(wish)">
+              <a href="{{course.link_to_courses}}">{{course.name}}</a>
+              <mat-divider></mat-divider>
+            </mat-list-item>
+          </mat-list>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+  </mat-card>
+</div>

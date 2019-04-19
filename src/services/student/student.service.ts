@@ -99,9 +99,20 @@ export class StudentService {
     });
   }
 
-  updateStudentState(studentId: string) {
+  updateStudentState(studentId: string, state: string) {
     return this.http.put<User>(this.studentUrl + '/student/' + studentId, {
-      stateValidation: 'waitTeacher',
+      stateValidation: state,
+    });
+  }
+
+  getCourseOfWish(wish: Wish) {
+    const idCourses = wish.courses;
+    return  wish.university.courses.filter( course => {
+      if (course !== undefined) {
+        if (idCourses.find(x => x === course._id)) {
+          return course;
+        }
+      }
     });
   }
 }

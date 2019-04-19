@@ -1,7 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
-import {Student} from '../../../models/student';
-import {User} from '../../../models/user';
 import {ActivatedRoute} from '@angular/router';
 import {StudentService} from '../../../services/student/student.service';
 
@@ -24,7 +22,7 @@ export class StudentOverviewDialogComponent implements OnInit {
   }
 
   updateStudentState() {
-    this.studentService.updateStudentState(this.studentId).subscribe(stu => {
+    this.studentService.updateStudentState(this.studentId, 'waitTeacher').subscribe(stu => {
       this.dialogRef.close(stu);
     });
 
