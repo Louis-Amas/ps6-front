@@ -45,12 +45,15 @@ export class ConnectionService {
     localStorage.setItem('token', credientials);
     this.http.get<User>(this.url)
       .subscribe(res => {
-        switch (res.role) {
+        switch (res.role as string) {
           case 'student':
             this.isStudent = true;
             break;
           case 'teacher':
             this.isTeacher = true;
+            break;
+          case 'bri':
+            this.isBRI = true;
             break;
         }
         this.user = res;

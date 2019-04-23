@@ -8,6 +8,7 @@ import {StudentWishFormComponent} from './student/student-wish-form/student-wish
 import {TeacherHomeComponent} from './teacher/teacher-home/teacher-home.component';
 import {TeacherStudentDetailsComponent} from './teacher/teacher-student-details/teacher-student-details.component';
 import {TeacherUniversityDetailsComponent} from './teacher/teacher-home/teacher-university-details/teacher-university-details.component';
+import {BriHomeComponent} from './bri/bri-home/bri-home.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path: 'student/:id/wishcreation', component: StudentWishFormComponent},
   {path: 'teacher/:id', component: TeacherHomeComponent},
   {path: 'teacher/:id/student/:stuId', component: TeacherStudentDetailsComponent},
-  {path: 'teacher/:id/university/:univId', component: TeacherUniversityDetailsComponent}
+  {path: 'teacher/:id/university/:univId', component: TeacherUniversityDetailsComponent},
+  {path: 'bri/:id', component: BriHomeComponent}
 ];
 
 @NgModule({

@@ -40,6 +40,10 @@ export class ConnectionComponent implements OnInit {
         if (this.connection.isTeacher) {
           this.router.navigate([`teacher/${this.connection.user._id}`]);
         }
+        if (this.connection.isBRI) {
+          console.log(this.connection.user._id);
+          this.router.navigate([`bri/${this.connection.user._id}`]);
+        }
       } else if (this.connection.isError) {
           this.messageError = 'Identifiants incorrects';
       }
