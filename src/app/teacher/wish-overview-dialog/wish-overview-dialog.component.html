@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>REFUS DE DOSSIER : {{data.student.firstName}} {{data.student.lastName}}</h1>
+<div mat-dialog-content>
+  <mat-card>
+    <mat-card-title>Cochez les voeux dérangeant</mat-card-title>
+    <mat-card-content>
+      <mat-selection-list #wishes (selectionChange)="updateWishSelected($event)">
+        <mat-list-option *ngFor="let wish of data.student.studentInfo.wishes" [value]="wish">
+          Voeu n°{{wish.position}} - {{wish.university.name}}
+        </mat-list-option>
+      </mat-selection-list>
+    </mat-card-content>
+  </mat-card>
+  <br>
+  <form class="message" [formGroup]="messageForm">
+    <mat-form-field class="message-posted">
+      <textarea matInput [formControlName]="'contents'" placeholder="Laissez un message"></textarea>
+    </mat-form-field>
+  </form>
+</div>
+<mat-toolbar>
+  <button mat-button color="primary" (click)="back()">Retour</button>
+  <span class="tmp"></span>
+  <button mat-button color="warn" (click)="refuseFile()">Transmettre</button>
+</mat-toolbar>
+

@@ -45,6 +45,7 @@ import { TeacherStudentDetailsComponent } from './teacher/teacher-student-detail
 import {TeacherListUniversitiesComponent} from './teacher/teacher-home/teacher-list-universities/teacher-list-universities.component';
 import {TeacherUniversityDetailsComponent} from './teacher/teacher-home/teacher-university-details/teacher-university-details.component';
 import { TeacherOverviewDialogComponent } from './teacher/teacher-overview-dialog/teacher-overview-dialog.component';
+import { WishOverviewDialogComponent } from './teacher/wish-overview-dialog/wish-overview-dialog.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { TeacherOverviewDialogComponent } from './teacher/teacher-overview-dialo
     TeacherStudentDetailsComponent,
     TeacherListUniversitiesComponent,
     TeacherUniversityDetailsComponent,
+    WishOverviewDialogComponent,
     TeacherOverviewDialogComponent,
   ],
   imports: [
@@ -111,6 +113,6 @@ import { TeacherOverviewDialogComponent } from './teacher/teacher-overview-dialo
       multi: true
     }],
   bootstrap: [AppComponent],
-  entryComponents: [StudentOverviewDialogComponent, TeacherOverviewDialogComponent]
+  entryComponents: [StudentOverviewDialogComponent, TeacherOverviewDialogComponent, WishOverviewDialogComponent]
 })
 export class AppModule { }

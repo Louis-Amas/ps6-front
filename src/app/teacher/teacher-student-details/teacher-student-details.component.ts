@@ -4,6 +4,8 @@ import {TeacherService} from '../../../services/teacher/teacher.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {User} from '../../../models/user';
 import {Wish} from '../../../models/wish';
+import {MatDialog} from '@angular/material';
+import {WishOverviewDialogComponent} from '../wish-overview-dialog/wish-overview-dialog.component';
 
 @Component({
   selector: 'app-teacher-student-page',
@@ -17,18 +19,18 @@ export class TeacherStudentDetailsComponent implements OnInit {
   public wishes: Wish[];
 
   constructor(public studentService: StudentService, public teacherService: TeacherService,
-              public route: ActivatedRoute, public router: Router) { }
+              public route: ActivatedRoute, public router: Router, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.getStudent();
     this.getTeacher();
-    this.getStudentWishes();
   }
 
   getStudent() {
     const id = this.route.snapshot.paramMap.get('stuId');
     this.studentService.getUserById(id).subscribe( student => {
       this.currentStudent = student;
+      this.getStudentWishes();
     });
   }
 
@@ -43,12 +45,31 @@ export class TeacherStudentDetailsComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('stuId');
     this.studentService.getWishesOfOneStudent(id).subscribe( wishes => {
       this.wishes = wishes;
+      this.currentStudent.studentInfo.wishes = wishes;
     });
   }
 
   validateStudent() {
     this.studentService.updateStudentState(this.currentStudent._id, 'waitBriVerif').subscribe(() => {
       this.router.navigate([`/teacher/` + this.teacher._id]);
+    });
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(WishOverviewDialogComponent, {
+      height: '500px',
+      width: '800px',
+      data: {
+              student: this.currentStudent,
+              teacher : this.teacher }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.studentService.updateStudentState(this.currentStudent._id, 'waitStudent').subscribe(() => {
+          this.router.navigate([`/teacher/` + this.teacher._id]);
+        });
+      }
     });
   }
 }
