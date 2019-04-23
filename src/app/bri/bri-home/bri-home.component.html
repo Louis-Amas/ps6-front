@@ -1,0 +1,5 @@
+<mat-tab-group *ngIf="bri !=undefined">
+  <mat-tab label="Vue globale"> <app-bri-overview [bri]="bri"> </app-bri-overview> </mat-tab>
+  <mat-tab label="Dossiers à traiter"> <app-bri-file-in-process [bri]="bri"> </app-bri-file-in-process> </mat-tab>
+</mat-tab-group>
+

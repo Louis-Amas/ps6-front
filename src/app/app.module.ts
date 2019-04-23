@@ -46,6 +46,9 @@ import {TeacherListUniversitiesComponent} from './teacher/teacher-home/teacher-l
 import {TeacherUniversityDetailsComponent} from './teacher/teacher-home/teacher-university-details/teacher-university-details.component';
 import { TeacherOverviewDialogComponent } from './teacher/teacher-overview-dialog/teacher-overview-dialog.component';
 import { WishOverviewDialogComponent } from './teacher/wish-overview-dialog/wish-overview-dialog.component';
+import { BriHomeComponent } from './bri/bri-home/bri-home.component';
+import { BriFileInProcessComponent } from './bri/bri-home/bri-file-in-process/bri-file-in-process.component';
+import { BriOverviewComponent } from './bri/bri-home/bri-overview/bri-overview.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +77,9 @@ import { WishOverviewDialogComponent } from './teacher/wish-overview-dialog/wish
     TeacherUniversityDetailsComponent,
     WishOverviewDialogComponent,
     TeacherOverviewDialogComponent,
+    BriHomeComponent,
+    BriFileInProcessComponent,
+    BriOverviewComponent,
   ],
   imports: [
     BrowserModule,
