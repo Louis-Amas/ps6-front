@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {User} from '../../../../models/user';
+import {TeacherService} from '../../../../services/teacher/teacher.service';
 
 @Component({
   selector: 'app-teacher-file-processed',
@@ -10,9 +11,38 @@ export class TeacherFileProcessedComponent implements OnInit {
 
   @Input() teacher: User;
 
-  constructor() { }
+  studentsConcerned: User[] = [];
+  studentsFilter: User[] = [];
+  university: string;
+  searchBar: string;
+
+  constructor(public teacherService: TeacherService) { }
 
   ngOnInit() {
+    this.getConcernedStudent();
+  }
+
+  getConcernedStudent() {
+    this.teacherService.getStudentByState(this.teacher._id).subscribe(t => {
+      this.studentsConcerned = t;
+      this.studentsFilter = t;
+    });
+  }
+
+  updateUniversity(univ: string) {
+    this.university = univ;
+    this.filterStudent();
+  }
+
+  updateName(name: string) {
+    if (name !== undefined) {
+      this.searchBar = name;
+    }
+    this.filterStudent();
+  }
+
+  filterStudent() {
+    this.studentsFilter = this.teacherService.filterStudent(this.teacher._id, this.studentsConcerned, this.university, this.searchBar);
   }
 
 }

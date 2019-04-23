@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {User} from '../../../../models/user';
 import {TeacherService} from '../../../../services/teacher/teacher.service';
-import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-teacher-file-in-process',
@@ -17,7 +16,7 @@ export class TeacherFileInProcessComponent implements OnInit {
   university: string;
   searchBar: string;
 
-  constructor(private route: ActivatedRoute, public teacherService: TeacherService) {
+  constructor(public teacherService: TeacherService) {
   }
 
   ngOnInit() {

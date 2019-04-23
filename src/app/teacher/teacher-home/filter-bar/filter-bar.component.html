@@ -2,7 +2,7 @@
   <mat-card-content>
     <form class="wish-form" [formGroup]="filterForm">
       <mat-form-field class="search-bar">
-        <input matInput (keyup.enter)="onNameSelected($event)" (keyup.backspace)="onNameSelected($event)" type="text" placeholder="Rechercher un étudiant"  [formControlName]="'search'" [value]="">
+        <input matInput (keyup.enter)="onNameSelected($event)" (keyup.backspace)="onNameSelected($event)" (keypress)="onNameSelected($event)" type="text" placeholder="Rechercher un étudiant"  [formControlName]="'search'" [value]="">
         <button *ngIf="nameValue" matSuffix mat-icon-button aria-label="Clear" (click)="nameValue=''">
           <mat-icon>close</mat-icon>
         </button>
