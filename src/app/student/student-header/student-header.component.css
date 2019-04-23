@@ -2,16 +2,22 @@ div {
   display: block;
 }
 
-.material-icons.md-48 {
+.material-icons {
   margin-top: 10px;
   margin-left: 5px;
+  margin-right: 5px;
   font-size: 48px;
   float: left;
+  cursor: pointer;
 }
 
 .container{
-  padding-top: 60px;
+  padding-top: 30px;
   text-align: center;
+}
+
+.space{
+  flex: 1 1 auto;
 }
 
 .student-header{
@@ -34,6 +40,11 @@ div {
   box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
   background-color: #fff;
   color: rgba(0,0,0,.87);
+}
+
+.mat-toolbar{
+  background-color: #00aeef;
+  color: white;
 }
 
 h1 {
