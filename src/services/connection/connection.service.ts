@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {BehaviorSubject} from 'rxjs';
 import {User} from '../../models/user';
 
 
@@ -29,7 +29,7 @@ export class ConnectionService {
   public connection$: BehaviorSubject<boolean> = new BehaviorSubject(this.isConnected);
 
   constructor(private http: HttpClient) {
-    this.isConnected = false;
+    this.isConnected = localStorage.getItem('token') !== null;
     this.isBRI = false;
     this.isStudent = false;
     this.isTeacher = false;
@@ -60,11 +60,19 @@ export class ConnectionService {
         this.isConnected = true;
         this.isError = false;
         this.connection$.next(this.isConnected);
-      }, err => {
+      }, () => {
         this.isConnected = false;
         this.isError = true;
         this.connection$.next(this.isConnected);
+        localStorage.removeItem('token');
       });
+  }
+
+  clearToken() {
+    localStorage.removeItem('token');
+    this.isConnected = false;
+    this.connection$.next(this.isConnected);
+    console.log('la');
   }
 
   disconnect() {
