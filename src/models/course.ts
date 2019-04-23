@@ -5,4 +5,5 @@ export interface Course {
   semester?: number;
   ECTS_count?: number;
   link_to_courses?: string;
+  description?: string;
 }

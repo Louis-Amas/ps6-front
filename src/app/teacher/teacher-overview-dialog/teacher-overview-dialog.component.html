@@ -1,0 +1,34 @@
+<div mat-dialog-content>
+  <p>Vous avez la possibilité d'ajouter un cours à cette université.</p>
+</div>
+<br>
+<form class="add-form" [formGroup]="courseForm">
+  <mat-form-field>
+    <input matInput placeholder="Nom du cours" [formControlName]="'name'">
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <mat-label>Semestre d'échange </mat-label>
+    <mat-select [formControlName]="'semester'">
+      <mat-option value="7">Semestre 7</mat-option>
+      <mat-option value="8">Semestre 8</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="Nombre d'ECTS" [formControlName]="'ECTS'">
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="Lien vers le cours" [formControlName]="'link'">
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <textarea matInput placeholder="Leave a comment" [formControlName]="'comment'"></textarea>
+  </mat-form-field>
+</form>
+
+<mat-toolbar>
+  <button mat-button color="warn" (click)="onNoClick()">Retour</button>
+  <button mat-button color="primary" (click)="addCourse()">Ajouter ce cours</button>
+</mat-toolbar>

@@ -33,10 +33,10 @@
         </mat-expansion-panel-header>
 
         <mat-list>
-          <mat-list-item>Lien vers le cours : {{course.link_to_courses}}</mat-list-item>
+          <mat-list-item>Lien vers le cours : {{course.link_to_courses}} </mat-list-item>
           <mat-list-item>Nombre d'ECTS acquis : {{course.ECTS_count}}</mat-list-item>
           <mat-list-item>Semestre concerné : {{course.semester}}</mat-list-item>
-          <mat-list-item>Description du cours : à renseigner</mat-list-item>
+          <mat-list-item>Description du cours : {{course.description}}</mat-list-item>
         </mat-list>
 
         <mat-action-row>
@@ -47,5 +47,7 @@
     </mat-accordion>
   </mat-card-content>
 </mat-card>
+<br>
 
-<button class="add-button" mat-button color="primary"> Ajouter un cours</button>
+<button class="add-button" mat-button color="primary" (click)="openDialog()"> Ajouter un cours</button>
+

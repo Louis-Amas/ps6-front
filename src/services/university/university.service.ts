@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {University} from '../../models/university';
 import {Student} from '../../models/student';
 import {Course} from '../../models/course';
+import {User} from '../../models/user';
 
 
 @Injectable({
@@ -54,5 +55,18 @@ export class UniversityService {
   deleteCourse(course: Course, id: string) {
     return this.http.delete<Course[]>(this.universityUrl + '/' + id + '/courses/' + course._id);
   }
+
+  addCourse(id: string, nameUser: string, semesterConcerned: number, linkTo: string,
+            ECTS: number, teacher: User, descriptionUser: string ) {
+    return this.http.post<University>(this.universityUrl + '/' + id + '/courses', {
+      name: nameUser,
+      semester: semesterConcerned,
+      link_to_courses: linkTo,
+      ECTS_count: ECTS,
+      major: teacher.teacherInfo.responsible,
+      description: descriptionUser,
+    });
+  }
+
 
 }
