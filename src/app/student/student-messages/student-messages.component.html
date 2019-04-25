@@ -1,0 +1,20 @@
+<button mat-button routerLink="..">Retour</button>
+<div *ngIf="student != undefined" class="container">
+  <mat-card>
+    <mat-card-title>
+      Vos messages
+    </mat-card-title>
+    <mat-card-content>
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let msg of student.receivedMessage" >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{msg.receivedFrom.lastName}} {{msg.receivedFrom.firstName}}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <span class="content">{{msg.content}}</span>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+  </mat-card>
+</div>
