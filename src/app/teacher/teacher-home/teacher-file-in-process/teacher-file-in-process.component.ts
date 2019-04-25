@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {User} from '../../../../models/user';
 import {TeacherService} from '../../../../services/teacher/teacher.service';
+import {StudentService} from '../../../../services/student/student.service';
 
 @Component({
   selector: 'app-teacher-file-in-process',
@@ -16,7 +17,7 @@ export class TeacherFileInProcessComponent implements OnInit {
   university: string;
   searchBar: string;
 
-  constructor(public teacherService: TeacherService) {
+  constructor(public teacherService: TeacherService, public studentService: StudentService) {
   }
 
   ngOnInit() {
@@ -25,7 +26,7 @@ export class TeacherFileInProcessComponent implements OnInit {
 
 
   getConcernedStudent() {
-    this.teacherService.getConcernedStudent(this.teacher._id).subscribe(t => {
+    this.studentService.getStudentByStatus('waitTeacher').subscribe(t => {
       this.studentsConcerned = t;
       this.studentsFilter = t;
     });

@@ -115,4 +115,8 @@ export class StudentService {
       }
     });
   }
+
+  getStudentByStatus(state: string) {
+    return this.http.get<User[]>(this.studentUrl + '/student/status/' + state);
+  }
 }
