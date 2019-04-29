@@ -116,7 +116,7 @@ export class StudentService {
     });
   }
 
-  getStudentByStatus(state: string) {
+  getStudentsByStatus(state: string) {
     return this.http.get<User[]>(this.studentUrl + '/student/status/' + state);
   }
 }

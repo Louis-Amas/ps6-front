@@ -24,7 +24,7 @@ export class TeacherFileProcessedComponent implements OnInit {
   }
 
   getConcernedStudent() {
-    this.studentService.getStudentByStatus('waitBriVerif').subscribe(t => {
+    this.studentService.getStudentsByStatus('waitBriVerif').subscribe(t => {
       this.studentsConcerned = t;
       this.studentsFilter = t;
     });
