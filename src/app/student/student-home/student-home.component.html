@@ -2,6 +2,6 @@
 
 <div *ngIf="student != undefined">
   <app-student-header [student]="student" ></app-student-header>
-  <app-student-wish-list [student]="student"></app-student-wish-list>
+  <app-student-wish-list [student]="student" (studentOut)="student = $event"></app-student-wish-list>
 </div>
 

@@ -4,10 +4,10 @@
       settings
     </i>
     <span class="space"></span>
-    <i class="material-icons" *ngIf="student.studentInfo.wishes.length > 0" matBadge="{{student.studentInfo.wishes.length}}" matBadgePosition="before" matBadgeColor="warn" routerLink="message">
+    <i class="material-icons" *ngIf="student.receivedMessage.length > 0" matBadge="{{student.receivedMessage.length}}" matBadgePosition="before" matBadgeColor="warn" routerLink="message">
       local_post_office
     </i>
-    <i class="material-icons" *ngIf="student.studentInfo.wishes.length == 0" routerLink="message">
+    <i class="material-icons" *ngIf="student.receivedMessage.length == 0" routerLink="message">
       local_post_office
     </i>
   </mat-toolbar>
