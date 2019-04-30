@@ -19,7 +19,8 @@ import {
   MatTableModule,
   MatTabsModule,
   MatDividerModule, MatExpansionModule,
-  MatDialogModule, MatSidenavModule
+  MatDialogModule, MatSidenavModule,
+  MatSortModule
 } from '@angular/material';
 import {MatListModule} from '@angular/material/list';
 import { ConnectionComponent } from './connection/connection.component';
@@ -49,6 +50,7 @@ import { WishOverviewDialogComponent } from './teacher/wish-overview-dialog/wish
 import { BriHomeComponent } from './bri/bri-home/bri-home.component';
 import { BriFileInProcessComponent } from './bri/bri-home/bri-file-in-process/bri-file-in-process.component';
 import { BriOverviewComponent } from './bri/bri-home/bri-overview/bri-overview.component';
+import { StudentMessagesComponent } from './student/student-messages/student-messages.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +79,7 @@ import { BriOverviewComponent } from './bri/bri-home/bri-overview/bri-overview.c
     TeacherUniversityDetailsComponent,
     WishOverviewDialogComponent,
     TeacherOverviewDialogComponent,
+    StudentMessagesComponent,
     BriHomeComponent,
     BriFileInProcessComponent,
     BriOverviewComponent,
@@ -111,6 +114,7 @@ import { BriOverviewComponent } from './bri/bri-home/bri-overview/bri-overview.c
     FormsModule,
     MatDialogModule,
     MatSidenavModule,
+    MatSortModule
   ],
   providers: [StudentService,
     {

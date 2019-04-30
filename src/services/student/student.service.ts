@@ -30,6 +30,9 @@ export class StudentService {
     return this.studentList.find((stud) => stud._id === id );
   }
 
+  getAllStudents() {
+    return this.http.get<User[]>(this.studentUrl);
+  }
   getStudentById(id: string): Observable<Student> {
     return this.http.get<User>(this.studentUrl + '/' + id);
   }
