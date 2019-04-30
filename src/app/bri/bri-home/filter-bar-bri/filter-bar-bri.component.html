@@ -1,0 +1,35 @@
+<mat-card>
+  <mat-card-content>
+    <form class="wish-form" [formGroup]="filterForm">
+      <mat-form-field class="search-bar">
+        <input matInput (keyup.enter)="onNameSelected($event)" (keyup.backspace)="onNameSelected($event)" (keypress)="onNameSelected($event)" type="text" placeholder="Rechercher un étudiant"  [formControlName]="'search'" [value]="">
+        <button *ngIf="nameValue" matSuffix mat-icon-button aria-label="Clear" (click)="nameValue=''">
+          <mat-icon>close</mat-icon>
+        </button>
+
+      </mat-form-field>
+      <mat-form-field class="destination">
+        <mat-label>Destination</mat-label>
+        <mat-select (selectionChange)="onUniversitySelected($event)" name="destination">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let univ of universities" [value]="univ._id">
+            {{univ.country}} - {{univ.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="filiere">
+        <mat-label>Filière</mat-label>
+        <mat-select (selectionChange)="onMajorSelected($event)" name="destination">
+          <mat-option>None</mat-option>
+          <mat-option value="SI">SI</mat-option>
+          <mat-option value="MAM">MAM</mat-option>
+          <mat-option value="GB">GB</mat-option>
+          <mat-option value="GE">GE</mat-option>
+          <mat-option value="ELEC">ELEC</mat-option>
+          <mat-option value="BAT">BAT</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+</mat-card>
