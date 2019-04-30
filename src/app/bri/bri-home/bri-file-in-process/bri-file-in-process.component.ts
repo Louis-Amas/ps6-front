@@ -28,7 +28,6 @@ export class BriFileInProcessComponent implements OnInit {
   constructor(public studentService: StudentService, public briService: BriService) { }
 
   ngOnInit() {
-    console.log(this.dataSource.sort);
     this.dataSource.sort = this.sort;
     this.getStudentsByState();
   }
@@ -42,7 +41,6 @@ export class BriFileInProcessComponent implements OnInit {
   }
 
   orderList(event) {
-    console.log(event);
     const column = event.active;
     if (event.direction === 'asc') {
       this.studentsFilter.sort((a, b) => {

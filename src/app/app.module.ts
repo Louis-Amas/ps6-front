@@ -52,6 +52,7 @@ import { BriFileInProcessComponent } from './bri/bri-home/bri-file-in-process/br
 import { BriOverviewComponent } from './bri/bri-home/bri-overview/bri-overview.component';
 import { FilterBarBriComponent } from './bri/bri-home/filter-bar-bri/filter-bar-bri.component';
 import { StudentMessagesComponent } from './student/student-messages/student-messages.component';
+import { StudentDetailsComponent } from './bri/bri-home/student-details/student-details.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { StudentMessagesComponent } from './student/student-messages/student-mes
     BriFileInProcessComponent,
     BriOverviewComponent,
     FilterBarBriComponent,
+    StudentDetailsComponent,
   ],
   imports: [
     BrowserModule,

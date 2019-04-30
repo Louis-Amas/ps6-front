@@ -10,6 +10,7 @@ import {TeacherStudentDetailsComponent} from './teacher/teacher-student-details/
 import {TeacherUniversityDetailsComponent} from './teacher/teacher-home/teacher-university-details/teacher-university-details.component';
 import {StudentMessagesComponent} from './student/student-messages/student-messages.component';
 import {BriHomeComponent} from './bri/bri-home/bri-home.component';
+import {StudentDetailsComponent} from './bri/bri-home/student-details/student-details.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -22,7 +23,8 @@ const routes: Routes = [
   {path: 'teacher/:id/student/:stuId', component: TeacherStudentDetailsComponent},
   {path: 'student/:id/message', component: StudentMessagesComponent},
   {path: 'teacher/:id/university/:univId', component: TeacherUniversityDetailsComponent},
-  {path: 'bri/:id', component: BriHomeComponent}
+  {path: 'bri/:id', component: BriHomeComponent},
+  {path: 'bri/:id/student/:stuId', component: StudentDetailsComponent}
 ];
 
 @NgModule({
