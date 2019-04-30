@@ -9,7 +9,7 @@
         <mat-expansion-panel *ngFor="let msg of student.receivedMessage" >
           <mat-expansion-panel-header>
             <mat-panel-title>
-              {{msg.receivedFrom.lastName}} {{msg.receivedFrom.firstName}}
+              {{msg.receivedFrom.firstName}} {{msg.receivedFrom.lastName}}
             </mat-panel-title>
           </mat-expansion-panel-header>
           <span class="content">{{msg.content}}</span>

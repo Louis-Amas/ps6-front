@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Wish} from '../../../models/wish';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {StudentService} from '../../../services/student/student.service';
@@ -16,6 +16,8 @@ export class StudentWishListComponent implements OnInit {
   @Input()
     student: User;
 
+  @Output()
+    studentOut: EventEmitter<User> = new EventEmitter<User>();
   wishes: Wish[] = [];
   msg: string;
   sendMsg: boolean;
@@ -75,6 +77,7 @@ export class StudentWishListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
         this.student = result;
+        this.studentOut.emit(this.student);
       }
     });
 
