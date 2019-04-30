@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {User} from '../../../../models/user';
 import {TeacherService} from '../../../../services/teacher/teacher.service';
+import {StudentService} from '../../../../services/student/student.service';
 
 @Component({
   selector: 'app-teacher-file-processed',
@@ -16,14 +17,14 @@ export class TeacherFileProcessedComponent implements OnInit {
   university: string;
   searchBar: string;
 
-  constructor(public teacherService: TeacherService) { }
+  constructor(public studentService: StudentService, public teacherService: TeacherService) { }
 
   ngOnInit() {
     this.getConcernedStudent();
   }
 
   getConcernedStudent() {
-    this.teacherService.getStudentByState(this.teacher._id).subscribe(t => {
+    this.studentService.getStudentByStatus('waitBriVerif').subscribe(t => {
       this.studentsConcerned = t;
       this.studentsFilter = t;
     });

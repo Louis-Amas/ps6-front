@@ -32,14 +32,6 @@ export class TeacherService {
     return this.http.get<User>(this.teacherUrl + '/' + id);
   }
 
-  getConcernedStudent(id: string) {
-    return this.http.get<User[]>(this.teacherUrl2 + '/' + id + '/students');
-  }
-
-  getStudentByState(id: string) {
-    return this.http.get<User[]>(this.teacherUrl2 + '/' + id + '/students/?findBy=' + 'waitBriVerif');
-  }
-
   filterStudent(id: string, filterStu: User[], idUniv: string, search: string) {
     if (idUniv !== undefined && search !== undefined) {
       return filterStu.filter(stu => stu.studentInfo.wishes.find(wish =>
