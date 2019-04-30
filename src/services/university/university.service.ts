@@ -31,6 +31,9 @@ export class UniversityService {
     this.getUniversities();
   }
 
+  getUniversitiesObeservable() {
+    return this.http.get<University[]>(this.universityUrl);
+  }
   getUniversities() {
     return this.http.get<University[]>(this.universityUrl).subscribe((universities) => {
       this.universities$.next(universities.map(value => value));

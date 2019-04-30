@@ -1,4 +1,5 @@
 import {Course} from './course';
+import {User} from './user';
 
 export interface University {
   _id?: string;
@@ -7,4 +8,5 @@ export interface University {
   concernedDepartement?: string;
   courses?: Course[];
   url_to_website?: string;
+  rankings: User[];
 }

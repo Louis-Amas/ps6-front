@@ -1,0 +1,10 @@
+<mat-card>
+  <mat-card-title>Vos rendez-vous</mat-card-title>
+  <mat-card-content>
+    <mat-form-field class="appointment-form">
+      <input matInput [matDatepicker]="picker" placeholder="Choisissez une date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker [dateClass]="dateUsed" #picker></mat-datepicker>
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { STUDENTS_MOCKED } from '../../mocks/student.mock';
 import {Student} from '../../models/student';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
@@ -17,18 +16,14 @@ export class StudentService {
    */
 
   private studentUrl = 'http://127.0.0.1:9428/api/users';
-  public studentList: Student[] = STUDENTS_MOCKED;
   /**
    * Observable which contains the list of the tickets.
    * Naming convention: Add '$' at the end of the variable name to highlight it as an Observable.
    */
-  public students$: BehaviorSubject<Student[]> = new BehaviorSubject(this.studentList);
 
   constructor(private http: HttpClient) {
   }
-  public findStudent(id: string) {
-    return this.studentList.find((stud) => stud._id === id );
-  }
+
 
   getAllStudents() {
     return this.http.get<User[]>(this.studentUrl);

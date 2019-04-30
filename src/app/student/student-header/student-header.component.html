@@ -4,7 +4,10 @@
       settings
     </i>
     <span class="space"></span>
-    <i class="material-icons" routerLink="message">
+    <i class="material-icons" *ngIf="student.receivedMessage.length > 0" matBadge="{{student.receivedMessage.length}}" matBadgePosition="before" matBadgeColor="warn" routerLink="message">
+      local_post_office
+    </i>
+    <i class="material-icons" *ngIf="student.receivedMessage.length == 0" routerLink="message">
       local_post_office
     </i>
   </mat-toolbar>
@@ -13,7 +16,7 @@
       <h1>Etudiant</h1>
       <h2>Erasmus c'est par ici</h2>
     </div>
-    <div class="header-button">
+    <div class="header-button" *ngIf="student.studentInfo.stateValidation == 'waitStudent' ">
       <button routerLink="wishcreation" mat-button class="createWish">Formuler un voeu</button>
     </div>
   </div>
