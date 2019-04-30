@@ -12,4 +12,12 @@ export interface Student {
   major?: string;
   year?: string;
   stateValidation?: string;
+  notes?: [
+    {
+      year: number,
+      schoolLevel: string,
+      school: string,
+      note: number
+    }
+    ];
 }

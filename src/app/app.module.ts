@@ -19,7 +19,8 @@ import {
   MatTableModule,
   MatTabsModule,
   MatDividerModule, MatExpansionModule,
-  MatDialogModule, MatSidenavModule
+  MatDialogModule, MatSidenavModule,
+  MatSortModule
 } from '@angular/material';
 import {MatListModule} from '@angular/material/list';
 import { ConnectionComponent } from './connection/connection.component';
@@ -111,6 +112,7 @@ import { BriOverviewComponent } from './bri/bri-home/bri-overview/bri-overview.c
     FormsModule,
     MatDialogModule,
     MatSidenavModule,
+    MatSortModule
   ],
   providers: [StudentService,
     {

@@ -19,7 +19,15 @@ export const STUDENTS_MOCKED: Student[] = [
       }
     ],
     year: '3',
-    phoneNumber: '06 06 06 06 06'
+    phoneNumber: '06 06 06 06 06',
+    notes: [
+      {
+        year: 2016,
+        schoolLevel: 'bac+2',
+        school: 'IUT Aix-En-Provence',
+        note: 20
+      }
+    ],
   },
   {
     _id : '2',
