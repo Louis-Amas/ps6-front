@@ -19,7 +19,7 @@ import {
   MatTableModule,
   MatTabsModule,
   MatDividerModule, MatExpansionModule,
-  MatDialogModule, MatSidenavModule,
+  MatDialogModule, MatSidenavModule, MatBadgeModule,
   MatSortModule
 } from '@angular/material';
 import {MatListModule} from '@angular/material/list';
@@ -114,6 +114,7 @@ import { StudentMessagesComponent } from './student/student-messages/student-mes
     FormsModule,
     MatDialogModule,
     MatSidenavModule,
+    MatBadgeModule,
     MatSortModule
   ],
   providers: [StudentService,

@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>REFUS DE DOSSIER : {{data.student.firstName}} {{data.student.lastName}}</h1>
 <div mat-dialog-content>
   <mat-card>
-    <mat-card-title>Cochez les voeux dérangeant</mat-card-title>
+    <mat-card-title>Cochez les voeux dérangeants</mat-card-title>
     <mat-card-content>
       <mat-selection-list #wishes (selectionChange)="updateWishSelected($event)">
         <mat-list-option *ngFor="let wish of data.student.studentInfo.wishes" [value]="wish">

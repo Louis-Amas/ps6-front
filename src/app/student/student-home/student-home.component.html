@@ -1,7 +1,7 @@
 
-<app-student-header></app-student-header>
 
 <div *ngIf="student != undefined">
+  <app-student-header [student]="student" ></app-student-header>
   <app-student-wish-list [student]="student"></app-student-wish-list>
 </div>
 
