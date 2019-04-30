@@ -20,7 +20,7 @@ import {
   MatTabsModule,
   MatDividerModule, MatExpansionModule,
   MatDialogModule, MatSidenavModule, MatBadgeModule,
-  MatSortModule
+  MatSortModule, MatDatepickerModule, MatNativeDateModule
 } from '@angular/material';
 import {MatListModule} from '@angular/material/list';
 import { ConnectionComponent } from './connection/connection.component';
@@ -51,6 +51,7 @@ import { BriHomeComponent } from './bri/bri-home/bri-home.component';
 import { BriFileInProcessComponent } from './bri/bri-home/bri-file-in-process/bri-file-in-process.component';
 import { BriOverviewComponent } from './bri/bri-home/bri-overview/bri-overview.component';
 import { StudentMessagesComponent } from './student/student-messages/student-messages.component';
+import { BriAppointmentComponent } from './bri/bri-home/bri-appointment/bri-appointment.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import { StudentMessagesComponent } from './student/student-messages/student-mes
     BriHomeComponent,
     BriFileInProcessComponent,
     BriOverviewComponent,
+    BriAppointmentComponent,
   ],
   imports: [
     BrowserModule,
@@ -115,7 +117,9 @@ import { StudentMessagesComponent } from './student/student-messages/student-mes
     MatDialogModule,
     MatSidenavModule,
     MatBadgeModule,
-    MatSortModule
+    MatSortModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [StudentService,
     {
