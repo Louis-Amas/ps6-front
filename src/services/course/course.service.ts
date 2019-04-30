@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {University} from '../../models/university';
-import {UNIVERSITY_MOCKED} from '../../mocks/university.mock';
 import {Course} from '../../models/course';
 import {Student} from '../../models/student';
 

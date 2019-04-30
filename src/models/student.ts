@@ -18,6 +18,5 @@ export interface Student {
       schoolLevel: string,
       school: string,
       note: number
-    }
-    ];
+    }];
 }
