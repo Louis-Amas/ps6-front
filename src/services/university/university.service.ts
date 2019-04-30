@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
+import {Subject} from 'rxjs';
 import {University} from '../../models/university';
 import {Student} from '../../models/student';
 import {Course} from '../../models/course';
@@ -31,7 +31,7 @@ export class UniversityService {
     this.getUniversities();
   }
 
-  getUniversitiesObeservable() {
+  getUniversitiesObservable() {
     return this.http.get<University[]>(this.universityUrl);
   }
   getUniversities() {
@@ -39,10 +39,6 @@ export class UniversityService {
       this.universities$.next(universities.map(value => value));
       this.countries$.next(universities.map(value => value.country));
     });
-  }
-
-  getUniversities2() {
-    return this.http.get<University[]>(this.universityUrl);
   }
 
   getByMajor(concernedDepartment: string) {

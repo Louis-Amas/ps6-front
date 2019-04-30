@@ -35,14 +35,14 @@ export class BriOverviewComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
-    this.studentService.getStudentByStatus('waitValidate')
+    this.studentService.getStudentsByStatus('waitValidate')
       .subscribe(students => {
         this.notRankedStudent = students;
         this.dataSource = new MatTableDataSource<User>(students);
       });
 
     this.universityService
-      .getUniversitiesObeservable()
+      .getUniversitiesObservable()
       .subscribe((universities) => this.universities = universities);
 
   }

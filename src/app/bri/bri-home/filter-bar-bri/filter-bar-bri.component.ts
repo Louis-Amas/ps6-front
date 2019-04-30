@@ -65,7 +65,7 @@ export class FilterBarBriComponent implements OnInit {
   }
 
   getUniversities() {
-    this.universityService.getUniversities2().subscribe(univ =>
+    this.universityService.getUniversitiesObservable().subscribe(univ =>
         this.universities = univ);
   }
 
