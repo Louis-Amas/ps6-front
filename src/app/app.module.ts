@@ -50,6 +50,7 @@ import { WishOverviewDialogComponent } from './teacher/wish-overview-dialog/wish
 import { BriHomeComponent } from './bri/bri-home/bri-home.component';
 import { BriFileInProcessComponent } from './bri/bri-home/bri-file-in-process/bri-file-in-process.component';
 import { BriOverviewComponent } from './bri/bri-home/bri-overview/bri-overview.component';
+import { FilterBarBriComponent } from './bri/bri-home/filter-bar-bri/filter-bar-bri.component';
 import { StudentMessagesComponent } from './student/student-messages/student-messages.component';
 
 @NgModule({
@@ -83,6 +84,7 @@ import { StudentMessagesComponent } from './student/student-messages/student-mes
     BriHomeComponent,
     BriFileInProcessComponent,
     BriOverviewComponent,
+    FilterBarBriComponent,
   ],
   imports: [
     BrowserModule,
