@@ -36,7 +36,6 @@ export class FormComponent implements OnInit {
     this.studentService.getUserById(userId)
       .subscribe(user => {
         this.user = user;
-        console.log(this.user);
         this.form.setValue({
           _id: userId,
           firstName: user.firstName,
@@ -46,6 +45,14 @@ export class FormComponent implements OnInit {
         });
         this.currentUser.emit(this.user);
       });
+  }
+
+  updateUser() {
+    this.user.firstName = this.form.value.firstName;
+    this.user.lastName = this.form.value.lastName;
+    this.user.phoneNumber = this.form.value.phoneNumber;
+    this.user.email = this.form.value.email;
+    this.currentUser.emit(this.user);
   }
 
 }

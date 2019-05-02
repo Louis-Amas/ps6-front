@@ -41,6 +41,12 @@ export class UniversityService {
     });
   }
 
+  updateRankingPosition(univId, studentId, newPosition) {
+    return this.http.put<University>(this.universityUrl + '/' + univId + '/student/' + studentId, {
+      position: newPosition
+    });
+  }
+
   getByMajor(concernedDepartment: string) {
     return this.http.get<University[]>(this.universityUrl + '/concernedDepartment/' + concernedDepartment);
   }
