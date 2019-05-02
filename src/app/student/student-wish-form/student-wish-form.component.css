@@ -37,11 +37,11 @@ width: 50%;
   margin: auto;
 }
 
-.univ {
-  margin:auto;
-  text-align: center;
-}
-
 #form {
   width: 90%;
+}
+
+p {
+  font-family: Arial;
+  text-align: center;
 }

@@ -48,8 +48,8 @@
 <br>
 <br>
 <br>
-  <div class="univ" *ngIf="university!=null">
-   Vous avez choisi l'université {{university.name}}
+  <div *ngIf="university!=null">
+    <p> Vous avez choisi l'université {{university.name}} </p>
   </div>
 <br>
 
@@ -87,7 +87,11 @@
     </mat-card>
 
     <br>
-    <button routerLink=".." *ngIf="nbECTS>=30" mat-button class="button-validate" (click)="validateWish()">Valider ce voeu</button>
+    <div *ngIf="nbECTS>40">
+    <p>Vous avez sélectionné un nombre d'ECTS supérieur à celui exigé : {{nbECTS}}. Veuillez modifier les cours sélectionnés afin de
+      pouvoir valider votre voeu.</p>
+    </div>
+    <button routerLink=".." *ngIf="nbECTS>=30 && nbECTS<=40" mat-button class="button-validate" (click)="validateWish()">Valider ce voeu</button>
   </div>
 
 
