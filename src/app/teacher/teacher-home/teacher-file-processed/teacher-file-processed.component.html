@@ -1,14 +1,14 @@
 <app-filter-bar [teacher]="teacher" (universityEvent)="updateUniversity($event)" (nameEvent)="updateName($event)">  </app-filter-bar>
 <br>
 <mat-card>
-  <mat-card-title>Liste de voeux</mat-card-title>
+  <mat-card-title>Liste d'étudiants traités</mat-card-title>
   <mat-card-content>
     <mat-accordion>
       <mat-expansion-panel *ngFor="let student of studentsFilter">
 
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{student.lastName}} {{student.firstName}}
+            {{student.firstName}} {{student.lastName}}
           </mat-panel-title>
         </mat-expansion-panel-header>
 
