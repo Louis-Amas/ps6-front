@@ -1,13 +1,17 @@
+
+<button mat-button routerLink="..">Retour</button>
+
+
 <app-form (currentUser)="updateUser($event)"></app-form>
 
 
 <div class="form-container">
 
-  <form class ='student-form' [formGroup]="studentForm">
+  <form class ='student-form' [formGroup]="studentForm" id="form">
 
     <mat-form-field>
       <mat-select placeholder="Filière" [formControlName]="'major'">
-          <mat-option *ngFor="let major of MAJOR_LIST" [value]="major">{{major}}</mat-option>
+        <mat-option *ngFor="let major of MAJOR_LIST" [value]="major">{{major}}</mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -16,15 +20,41 @@
         <mat-option *ngFor="let year of YEAR_LIST" [value]="year" >{{year}}</mat-option>
       </mat-select>
     </mat-form-field>
-    <br>
-    <br>
-    <br>
-    <div>
-      <button mat-button (click)="saveChanges()"> Sauvegarder les modification </button>
-    </div>
+
   </form>
-
-
-
-
 </div>
+<br>
+<br>
+
+<form class ='attachment-form' [formGroup]="attachmentForm" id="form2">
+  <div class = "upload-container">
+    <span>Relevés de notes depuis l’entrée dans l’enseignement supérieur (PDF) :
+    </span>
+    <br>
+    <input type="file" id="transcriptPicker"
+           form="form"
+           accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf,.zip"
+           [formControlName]="'transcript'"
+           (change)="fileChange($event)">
+    <br>
+    <br>
+    <span>Lettre de motivation - Destinée à la commission de sélection de la composante,
+      elle présentera l’ensemble de votre projet et justifiera l’ordre de votre choix
+      (il peut vous être demandé une lettre de motivation dans la langue où seront dispensés les enseignements)
+    </span>
+    <br>
+    <input type="file" id="coveringLetterPicker"
+           accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf"
+           [formControlName]="'coveringLetter'"
+           (change)="fileChange($event)"
+    >
+
+  </div>
+
+  <div class = "form-container">
+    <button mat-button (click)="saveChanges()"> Sauvegarder les modification </button>
+  </div>
+</form>
+
+
+
