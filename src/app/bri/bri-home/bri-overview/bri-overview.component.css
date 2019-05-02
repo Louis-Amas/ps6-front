@@ -1,0 +1,4 @@
+.grid-form-university {
+  display: inline-grid;
+  grid-template-columns: auto auto
+}
