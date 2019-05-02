@@ -1,0 +1,17 @@
+.search-bar {
+  float: left;
+  margin-left: 5%;
+}
+
+.destination {
+  float: left;
+  margin-right: 10%;
+  margin-left: 10%;
+}
+
+.mat-card {
+  margin-top: 1%;
+  width:90%;
+  margin-left: auto;
+  margin-right: auto;
+}

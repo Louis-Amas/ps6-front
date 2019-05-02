@@ -3,19 +3,19 @@
   <form class ='student-form' [formGroup]="form">
 
     <mat-form-field>
-      <input matInput placeholder="Nom" value ="{{form.value['lastName']}}" [formControlName]="'lastName'">
+      <input matInput placeholder="Nom" value ="{{form.value['lastName']}}" [formControlName]="'lastName'" (ngModelChange)="updateUser()">
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Prénom" value ="{{form.value['firstName']}}" [formControlName]="'firstName'">
+      <input matInput placeholder="Prénom" value ="{{form.value.firstName}}" [formControlName]="'firstName'" (ngModelChange)="updateUser()">
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Adresse mail" value ="{{form.value['email']}}" [formControlName]="'email'">
+      <input class = 'mail' matInput placeholder="Adresse mail" value ="{{form.value['email']}}" readonly>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Téléphone" value ="{{form.value['phoneNumber']}}" [formControlName]="'phoneNumber'">
+      <input matInput placeholder="Téléphone" value ="{{form.value['phoneNumber']}}" [formControlName]="'phoneNumber'" (ngModelChange)="updateUser()">
     </mat-form-field>
 
   </form>

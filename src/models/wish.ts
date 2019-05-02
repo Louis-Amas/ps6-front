@@ -5,5 +5,5 @@ export interface Wish {
   id?: number;
   position?: number;
   university?: University;
-  courses?: string[];
+  courses?: Course[];
 }

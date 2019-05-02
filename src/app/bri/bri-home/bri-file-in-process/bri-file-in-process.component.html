@@ -1,21 +1,41 @@
-<p>
-  bri-file-in-process works!
-</p>
+<app-filter-bar-bri [bri]="bri" (universityEvent)="updateUniversity($event)" (nameEvent)="updateName($event)" (majorEvent)="updateMajor($event)"></app-filter-bar-bri>
 
-<table mat-table [dataSource]="dataSource" matSort (matSortChange)="test($event)" class="mat-elevation-z8">
+<br>
+<table mat-table [dataSource]="dataSource" matSort (matSortChange)="orderList($event)" class="mat-elevation-z8">
 
-  <!-- Position Column -->
-  <ng-container matColumnDef="firstName"s>
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> firstName. </th>
+  <ng-container matColumnDef="firstName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Prénom </th>
     <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
   </ng-container>
 
-  <!-- Name Column -->
   <ng-container matColumnDef="lastName">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> lastName </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
     <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
   </ng-container>
 
+  <ng-container matColumnDef="major">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Filière </th>
+    <td mat-cell *matCellDef="let element"> {{element.studentInfo.major}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="numberWish">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre de voeux </th>
+    <td mat-cell *matCellDef="let element"> {{element.studentInfo.wishes.length}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="details">
+    <th mat-header-cell *matHeaderCellDef> Détails </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button color="primary" routerLink="student/{{element._id}}" >
+        <i class="material-icons">
+          reorder
+        </i>
+      </button>
+    </td>
+  </ng-container>
+
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+  </tr>
+
 </table>

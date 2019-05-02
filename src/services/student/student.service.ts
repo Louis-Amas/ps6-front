@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import {Student} from '../../models/student';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Wish} from '../../models/wish';
 import {User} from '../../models/user';
+import {Attachment} from '../../models/attachment';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,7 @@ export class StudentService {
     return this.http.get<User[]>(this.studentUrl);
   }
   getStudentById(id: string): Observable<Student> {
-    return this.http.get<User>(this.studentUrl + '/' + id);
+    return this.http.get<Student>(this.studentUrl + '/' + id);
   }
 
   getUserById(id: string): Observable<User> {
@@ -72,9 +73,10 @@ export class StudentService {
       phoneNumber: user.phoneNumber,
       studentInfo: {
         major: user.studentInfo.major,
-        year: user.studentInfo.year
+        year: user.studentInfo.year,
+        attachments: user.studentInfo.attachments,
       }
-      });
+    });
 
   }
   /*refactorStudent(student: Student) {
@@ -82,13 +84,13 @@ export class StudentService {
     student.major = this.testFormValue(student.major);
     student.year = this.testFormValue(student.year);
   }*/
-/*
-  testFormValue(value: string) {
-    if (value === undefined) {
-      return '';
-    }
-    return value;
-  }*/
+  /*
+    testFormValue(value: string) {
+      if (value === undefined) {
+        return '';
+      }
+      return value;
+    }*/
 
   addWish(coursesId: string[], univId: string, studentId: string) {
     return this.http.post(this.studentUrl + '/student/' + studentId + '/wishes', {
@@ -114,7 +116,25 @@ export class StudentService {
     });
   }
 
-  getStudentByStatus(state: string) {
+  uploadFile(file: string, studentId: string) {
+    const body = {filename: file};
+
+    return this.http.put(this.studentUrl + '/student/' + studentId + '/attachments', body, {
+      responseType : 'blob',
+      headers: new HttpHeaders().append('Content-Type', 'application/json')
+    });
+  }
+
+  updateStudentAttachments(name: string, data: string, studentId: string) {
+  }
+
+  findStudentAttachment(student: Student) {
+    const studentId: string =  student._id;
+    return this.http.get<Attachment[]>(this.studentUrl + '/student/' + studentId + '/attachments');
+  }
+
+
+  getStudentsByStatus(state: string) {
     return this.http.get<User[]>(this.studentUrl + '/student/status/' + state);
   }
 }

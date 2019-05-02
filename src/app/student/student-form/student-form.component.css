@@ -8,3 +8,26 @@
 .form-container > * {
   width: 30%;
 }
+
+.upload-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.upload-container > * {
+  width: 100%;
+}
+
+.upload-container > span {
+  width: 40%;
+  color: #666666;
+  font-family: "Arial", Arial, sans-serif;
+  font-weight: lighter;
+}
+
+.upload-container > input {
+  font-size: 2vh;
+  color: #0046FF;
+}

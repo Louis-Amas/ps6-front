@@ -1,4 +1,5 @@
 import {Wish} from './wish';
+import {Attachment} from './attachment';
 
 export interface Student {
   _id?: string;
@@ -12,6 +13,7 @@ export interface Student {
   major?: string;
   year?: string;
   stateValidation?: string;
+  attachments: any[];
   notes?: [
     {
       year: number,
