@@ -17,7 +17,7 @@ export class StudentDetailsComponent implements OnInit {
   public wishes: Wish[];
 
   constructor(public studentService: StudentService, public briService: BriService,
-              public route: ActivatedRoute) { }
+              public route: ActivatedRoute, public router: Router) { }
 
   ngOnInit() {
     this.getStudent();
@@ -40,13 +40,15 @@ export class StudentDetailsComponent implements OnInit {
     });
   }
 
-  /*
-  getStudentWishes() {
-    const id = this.route.snapshot.paramMap.get('stuId');
-    this.studentService.getWishesOfOneStudent(id).subscribe( wishes => {
-      this.wishes = wishes;
-      this.currentStudent.studentInfo.wishes = wishes;
+  acceptStudent() {
+    this.studentService.updateStudentState(this.currentStudent._id, 'waitValidate').subscribe(() => {
+      this.router.navigate([`/bri/` + this.bri._id]);
     });
-  } */
+  }
+
+  refuseStudent() {
+    this.studentService.updateStudentState(this.currentStudent._id, 'waitStudent').subscribe();
+  }
+
 
 }

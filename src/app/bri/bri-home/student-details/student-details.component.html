@@ -53,9 +53,9 @@
 
   <mat-card class="card-button">
     <mat-toolbar>
-      <button mat-button color="warn">Refuser le dossier</button>
+      <button mat-button color="warn" (click)="refuseStudent()">Refuser le dossier</button>
       <span class="tmp"></span>
-      <button mat-button color="primary">Valider le dossier</button>
+      <button mat-button color="primary" (click)="acceptStudent()">Valider le dossier</button>
     </mat-toolbar>
   </mat-card>
 </div>
