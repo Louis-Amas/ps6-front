@@ -45,3 +45,7 @@ p {
   font-family: Arial;
   text-align: center;
 }
+.mat-table {
+  width: 80%;
+  margin: auto;
+}

@@ -23,7 +23,7 @@
       <form class="wish-form" [formGroup]="wishForm">
         <mat-form-field>
           <mat-label>Semestre d'échange </mat-label>
-          <mat-select [formControlName]="'semester'" [(ngModel)]="semester">
+          <mat-select [formControlName]="'semester'">
             <mat-option value="7">Semestre 7</mat-option>
             <mat-option value="8">Semestre 8</mat-option>
           </mat-select>
@@ -33,7 +33,7 @@
         <br>
         <mat-form-field>
           <mat-label>Université</mat-label>
-          <mat-select [formControlName]="'university'" [(ngModel)]="university">
+          <mat-select [formControlName]="'university'">
             <mat-option *ngFor="let univ of universitiesChangedList" [value]="univ.name">
               {{univ.country}} - {{univ.name}}
             </mat-option>
@@ -49,29 +49,46 @@
 <br>
 <br>
   <div *ngIf="university!=null">
-    <p> Vous avez choisi l'université {{university.name}} </p>
+    <p> Vous avez choisi l'université <a href="{{university.url_to_website}}">{{university.name}}</a> </p>
   </div>
 <br>
 
   <div class="wish" *ngIf="university!=null && courses !=undefined">
-    <mat-card>
-      <mat-card-title>Liste des cours</mat-card-title>
-      <mat-card-content>
-       <mat-list>
-         <mat-list-item *ngFor="let course of courses">
-            <mat-checkbox
-              (change)="addCourse($event, course)">
-              <a href="{{course.link_to_courses}}">{{course.name}}</a> - ECTS : {{course.ECTS_count}}
-            </mat-checkbox>
-          </mat-list-item>
-        </mat-list>
-        <!--<mat-selection-list #cours (selectionChange)="addCourse($event, cours.selectedOptions)"  >
-          <mat-list-option *ngFor="let course of courses">
-            <a href="{{course.link_to_courses}}">{{course.name}}</a> - ECTS : {{course.ECTS_count}}
-          </mat-list-option>
-        </mat-selection-list> -->
-      </mat-card-content>
-    </mat-card>
+
+    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="orderList($event)" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="checked">
+        <th mat-header-cell *matHeaderCellDef> Sélection </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox (change)="addCourse($event,element)"></mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom du cours </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ECTS">
+        <th mat-header-cell *matHeaderCellDef> Nombre d'ECTS </th>
+        <td mat-cell *matCellDef="let element"> {{element.ECTS_count}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="semester">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Semestre concerné </th>
+        <td mat-cell *matCellDef="let element"> {{element.semester}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Description du cours </th>
+        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+      </tr>
+    </table>
+
     <br>
     <br>
 

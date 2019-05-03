@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {UniversityService} from '../../../services/university/university.service';
 import {University} from '../../../models/university';
 import {ActivatedRoute} from '@angular/router';
@@ -7,6 +7,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {Course} from '../../../models/course';
 import {CourseService} from '../../../services/course/course.service';
 import {User} from '../../../models/user';
+import {MatSort, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-student-wish-form',
@@ -14,6 +15,11 @@ import {User} from '../../../models/user';
   styleUrls: ['./student-wish-form.component.css']
 })
 export class StudentWishFormComponent implements OnInit {
+
+  private displayedColumns: string[] = ['checked', 'name', 'ECTS', 'semester', 'description'];
+  dataSource = new MatTableDataSource();
+
+  @ViewChild(MatSort) sort: MatSort;
 
   student: User;
   countries: string[];
@@ -48,6 +54,7 @@ export class StudentWishFormComponent implements OnInit {
 
 
   ngOnInit() {
+    this.dataSource.sort = this.sort;
     this.getStudent();
     this.universityService.getUniversities();
   }
@@ -77,6 +84,7 @@ export class StudentWishFormComponent implements OnInit {
   getCoursesByUniv(id: string, semester: number) {
     this.courseService.getCoursesByUniversity(id, semester, this.student.studentInfo.major).subscribe(courses => {
       this.courses = courses;
+      this.dataSource = new MatTableDataSource<User>(this.courses);
     });
   }
 
@@ -95,6 +103,40 @@ export class StudentWishFormComponent implements OnInit {
     const coursesId = [];
     this.coursesSelected.forEach(course => coursesId.push(course._id));
     this.studentService.addWish(coursesId, this.university._id, this.student._id).subscribe();
+  }
+
+  orderList(event) {
+    const column = event.active;
+    if (event.direction === 'asc') {
+      this.courses.sort((a, b) => {
+        if (a[column] > b[column]) {
+          return 1;
+        } else {
+          if (a[column] < b[column]) {
+            return -1;
+          } else {
+            if (a[column] === b[column]) {
+              return 0;
+            }
+          }
+        }
+      });
+    } else {
+      this.courses.sort((a, b) => {
+        if (a[column] < b[column]) {
+          return 1;
+        } else {
+          if (a[column] > b[column]) {
+            return -1;
+          } else {
+            if (a[column] === b[column]) {
+              return 0;
+            }
+          }
+        }
+      });
+    }
+    this.dataSource = new MatTableDataSource<User>(this.courses);
   }
 
 

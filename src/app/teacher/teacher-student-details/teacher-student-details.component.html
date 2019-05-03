@@ -40,7 +40,8 @@
 
           <mat-list>
             <mat-list-item *ngFor="let course of studentService.getCourseOfWish(wish)">
-              <a href="{{course.link_to_courses}}">{{course.name}}</a>
+              <a href="{{course.link_to_courses}}" title="{{course.description}}">{{course.name}}</a> &nbsp;- Nombre d'ECTS : {{course.ECTS_count}}
+              - Semestre concerné : Semestre {{course.semester}}
               <mat-divider></mat-divider>
             </mat-list-item>
           </mat-list>
