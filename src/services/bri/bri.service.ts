@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {User} from '../../models/user';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {Observable} from 'rxjs';
+import {Bri} from '../../models/bri';
 
 @Injectable({
   providedIn: 'root'
@@ -52,4 +53,13 @@ export class BriService {
       }
   }
 
+  findTimeSlotByDate(date: Date, bri: Bri) {
+    return bri.appointment.filter(a => {
+      const curDate = new Date(a.timeSlot.departureTime);
+      if (curDate.getDate() === date.getDate() && curDate.getMonth() === date.getMonth()
+          && curDate.getFullYear() === date.getFullYear()) {
+        return true;
+      }
+    })[0];
+  }
 }

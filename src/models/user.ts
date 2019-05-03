@@ -1,6 +1,7 @@
 import {Student} from './student';
 import {Teacher} from './teacher';
 import {Message} from './message';
+import {Bri} from './bri';
 
 
 enum Role {
@@ -20,6 +21,7 @@ export interface User {
   role?: Role;
   studentInfo?: Student;
   teacherInfo?: Teacher;
+  briInfo?: Bri;
   sendedMessage?: Message[];
   receivedMessage?: Message[];
 }
