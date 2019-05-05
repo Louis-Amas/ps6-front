@@ -54,6 +54,8 @@ import { FilterBarBriComponent } from './bri/bri-home/filter-bar-bri/filter-bar-
 import { StudentMessagesComponent } from './student/student-messages/student-messages.component';
 import { BriAppointmentComponent } from './bri/bri-home/bri-appointment/bri-appointment.component';
 import { StudentDetailsComponent } from './bri/bri-home/student-details/student-details.component';
+// tslint:disable-next-line:max-line-length
+import { BriAppointmentCreationDialogComponent} from './bri/bri-home/bri-appointment-creation-dialog/bri-appointment-creation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +91,7 @@ import { StudentDetailsComponent } from './bri/bri-home/student-details/student-
     FilterBarBriComponent,
     StudentDetailsComponent,
     BriAppointmentComponent,
+    BriAppointmentCreationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -132,6 +135,6 @@ import { StudentDetailsComponent } from './bri/bri-home/student-details/student-
       multi: true
     }],
   bootstrap: [AppComponent],
-  entryComponents: [StudentOverviewDialogComponent, TeacherOverviewDialogComponent, WishOverviewDialogComponent]
+  entryComponents: [StudentOverviewDialogComponent, TeacherOverviewDialogComponent, WishOverviewDialogComponent, BriAppointmentCreationDialogComponent]
 })
 export class AppModule { }
