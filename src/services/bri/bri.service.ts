@@ -29,6 +29,13 @@ export class BriService {
     return this.http.get<User>(this.briUrl + '/' + id);
   }
 
+  addTimeSlot(userId: string, dateDep: Date, dateEnd: Date) {
+    return this.http.post<User>(this.briUrl + '/bri/' + userId + '/timeSlot', {
+      departureTime: dateDep,
+      endTime: dateEnd
+    });
+  }
+
   filterStudent(id: string, filterStu: User[], idUniv: string, search: string, major: string) {
     if (idUniv !== undefined && search !== undefined && major !== undefined) {
       return filterStu.filter(stu => stu.studentInfo.wishes.find(wish =>

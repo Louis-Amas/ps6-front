@@ -1,7 +1,8 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {Bri} from '../../../../models/bri';
-import {MatDatepickerInputEvent, MatTableDataSource} from '@angular/material';
+import {MatDatepickerInputEvent, MatDialog, MatTableDataSource} from '@angular/material';
 import {BriService} from '../../../../services/bri/bri.service';
+import {BriAppointmentCreationDialogComponent} from '../bri-appointment-creation-dialog/bri-appointment-creation-dialog.component';
+import {User} from '../../../../models/user';
 
 @Component({
   selector: 'app-bri-appointment',
@@ -11,13 +12,13 @@ import {BriService} from '../../../../services/bri/bri.service';
 })
 export class BriAppointmentComponent implements OnInit {
 
-  @Input() bri: Bri;
+  @Input() bri: User;
 
   private displayedColumns: string[] = ['firstName', 'lastName', 'major', 'timeSlot', 'details'];
   private drawTable: boolean;
   dataSource = new MatTableDataSource();
 
-  constructor(private briService: BriService) { }
+  constructor(private briService: BriService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.drawTable = false;
@@ -25,7 +26,7 @@ export class BriAppointmentComponent implements OnInit {
 
   dateUsed = (d: Date) => {
     let res = false;
-    this.bri.appointment.forEach( t => {
+    this.bri.briInfo.appointment.forEach( t => {
       const curDate = new Date(t.timeSlot.departureTime);
       if (d.getMonth() === curDate.getMonth() && d.getDate() === curDate.getDate()) {
         res = true;
@@ -35,7 +36,7 @@ export class BriAppointmentComponent implements OnInit {
   }
 
   getDateChoose(event: MatDatepickerInputEvent<Date>) {
-      const appointment = this.briService.findTimeSlotByDate(event.value, this.bri);
+      const appointment = this.briService.findTimeSlotByDate(event.value, this.bri.briInfo);
       if (appointment !== undefined) {
         const available = appointment.available;
         // convert to date
@@ -48,5 +49,19 @@ export class BriAppointmentComponent implements OnInit {
       } else {
         this.drawTable = false;
       }
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(BriAppointmentCreationDialogComponent, {
+      height: '430px',
+      width: '700px',
+      data: this.bri
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.bri = result;
+      }
+    });
   }
 }
