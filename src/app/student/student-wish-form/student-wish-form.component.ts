@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {UniversityService} from '../../../services/university/university.service';
 import {University} from '../../../models/university';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {StudentService} from '../../../services/student/student.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Course} from '../../../models/course';
@@ -36,11 +36,13 @@ export class StudentWishFormComponent implements OnInit {
 
   nbECTS: number;
 
+  error: boolean;
+
   public wishForm: FormGroup;
 
   constructor(public formBuilder: FormBuilder, private route: ActivatedRoute,
               private studentService: StudentService, public universityService: UniversityService,
-              public courseService: CourseService, public dialog: MatDialog) {
+              public courseService: CourseService, public dialog: MatDialog, public router: Router) {
 
     this.wishForm = this.formBuilder.group({
       semester: [''],
@@ -58,6 +60,7 @@ export class StudentWishFormComponent implements OnInit {
     this.getStudent();
     this.universityService.getUniversities();
     this.nbECTS = 0;
+    this.error = false;
   }
 
 
@@ -80,6 +83,7 @@ export class StudentWishFormComponent implements OnInit {
     this.university = this.universitiesList.find(x => x.name === name);
     const semester = this.wishForm.get('semester').value;
     this.getCoursesByUniv(this.university._id, semester);
+    this.error = false;
   }
 
   getCoursesByUniv(id: string, semester: number) {
@@ -104,7 +108,11 @@ export class StudentWishFormComponent implements OnInit {
     const coursesId = [];
     this.nbECTS = 0;
     this.coursesSelected.forEach(course => coursesId.push(course._id));
-    this.studentService.addWish(coursesId, this.university._id, this.student._id).subscribe();
+    this.studentService.addWish(coursesId, this.university._id, this.student._id).subscribe(() => {
+      this.router.navigate([`student/${this.student._id}`]);
+    }, (err) => {
+      this.error = true;
+    });
   }
 
   orderList(event) {

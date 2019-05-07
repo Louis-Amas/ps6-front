@@ -54,3 +54,7 @@ p {
 .courseToSelect {
   margin-right: auto;
 }
+
+.message-error {
+  color: red;
+}

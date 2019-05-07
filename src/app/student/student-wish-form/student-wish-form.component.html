@@ -112,7 +112,9 @@
     <p>Vous avez sélectionné un nombre d'ECTS supérieur à celui exigé : {{nbECTS}}. Veuillez modifier les cours sélectionnés afin de
       pouvoir valider votre voeu.</p>
     </div>
-    <button routerLink=".." *ngIf="nbECTS>=30 && nbECTS<=40" mat-button class="button-validate" (click)="validateWish()">Valider ce voeu</button>
+    <button *ngIf="nbECTS>=30 && nbECTS<=40" mat-button class="button-validate" (click)="validateWish()">Valider ce voeu</button>
+    <p *ngIf="error == true" class="message-error"> Vous avez déjà effectué un voeu dans cette université. Veuillez changer d'université
+      afin de pouvoir de nouveau effectuer un voeu.</p>
   </div>
 
 
