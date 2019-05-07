@@ -14,6 +14,7 @@ export interface Student {
   year?: string;
   stateValidation?: string;
   attachments: any[];
+  bestWishRank: number;
   notes?: [
     {
       year: number,

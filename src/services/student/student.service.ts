@@ -5,6 +5,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {Wish} from '../../models/wish';
 import {User} from '../../models/user';
 import {Attachment} from '../../models/attachment';
+import {Course} from '../../models/course';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,10 @@ export class StudentService {
 
   getUserById(id: string): Observable<User> {
     return this.http.get<User>(this.studentUrl + '/' + id);
+  }
+
+  getAllStudentsWithUniversityInWishes(univId) {
+    return this.http.get<User[]>(this.studentUrl + '/student/wishes/university/' + univId);
   }
 
   getWishesOfOneStudent(studentId: string) {
@@ -137,4 +142,13 @@ export class StudentService {
   getStudentsByStatus(state: string) {
     return this.http.get<User[]>(this.studentUrl + '/student/status/' + state);
   }
+
+  updateWish(id: string, univ: string, courses: Course[]) {
+    const res = [];
+    courses.forEach( c => res.push(c._id));
+    return this.http.put<Student>(this.studentUrl + '/student/' + id + '/wishes/' + univ, {
+      courses: res
+    });
+  }
 }
+
