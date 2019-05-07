@@ -20,7 +20,7 @@ import {
   MatTabsModule,
   MatDividerModule, MatExpansionModule,
   MatDialogModule, MatSidenavModule, MatBadgeModule,
-  MatSortModule, MatDatepickerModule, MatNativeDateModule
+  MatSortModule, MatDatepickerModule, MatNativeDateModule, MatStepperModule
 } from '@angular/material';
 import {MatListModule} from '@angular/material/list';
 import { ConnectionComponent } from './connection/connection.component';
@@ -131,7 +131,8 @@ import { UpdateWishOverviewDialogComponent } from './student/student-wish-list/u
     MatBadgeModule,
     MatSortModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatStepperModule
   ],
   providers: [StudentService,
     {

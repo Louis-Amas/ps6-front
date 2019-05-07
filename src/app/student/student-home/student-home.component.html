@@ -2,6 +2,21 @@
 
 <div *ngIf="student != undefined">
   <app-student-header [student]="student" ></app-student-header>
+  <mat-card class="stepper-card">
+    <mat-horizontal-stepper linear [selectedIndex]="pos" class="stepper">
+      <mat-step [completed]="studentState" [stepControl]="firstFormGroup" [editable]="false">
+        <ng-template matStepLabel>Formulez vos voeux</ng-template>
+      </mat-step>
+      <mat-step [completed]="teacherState" [stepControl]="secondFormGroup" [editable]="false">
+        <ng-template matStepLabel>Transmis</ng-template>
+      </mat-step>
+      <mat-step [completed]="briState" [stepControl]="thirdFormGroup" [editable]="false">
+        <ng-template matStepLabel>En cours de validation</ng-template>
+      </mat-step>
+      <mat-step [completed]="validate" [stepControl]="fourthFormGroup" [editable]="false">
+        <ng-template matStepLabel>Prise de rendez-vous</ng-template>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </mat-card>
   <app-student-wish-list [student]="student" (studentOut)="student = $event"></app-student-wish-list>
 </div>
-
