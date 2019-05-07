@@ -20,6 +20,7 @@ export class BriOverviewComponent implements OnInit {
   public universityForm: FormGroup;
 
   private universities: University[];
+  private displayedColumns: ['note', 'year', 'schoolLevel', 'school'];
   private rankedStudents: User[];
   private unRankedStudents: User[];
 
