@@ -45,7 +45,7 @@ import { StudentHeaderComponent } from './student/student-header/student-header.
 import { TeacherStudentDetailsComponent } from './teacher/teacher-student-details/teacher-student-details.component';
 import {TeacherListUniversitiesComponent} from './teacher/teacher-home/teacher-list-universities/teacher-list-universities.component';
 import {TeacherUniversityDetailsComponent} from './teacher/teacher-home/teacher-university-details/teacher-university-details.component';
-import { TeacherOverviewDialogComponent } from './teacher/teacher-overview-dialog/teacher-overview-dialog.component';
+import { AddCourseOverviewDialogComponent } from './commons/add-course-overview-dialog/add-course-overview-dialog';
 import { WishOverviewDialogComponent } from './teacher/wish-overview-dialog/wish-overview-dialog.component';
 import { BriHomeComponent } from './bri/bri-home/bri-home.component';
 import { BriFileInProcessComponent } from './bri/bri-home/bri-file-in-process/bri-file-in-process.component';
@@ -85,7 +85,7 @@ import { UpdateWishOverviewDialogComponent } from './student/student-wish-list/u
     TeacherListUniversitiesComponent,
     TeacherUniversityDetailsComponent,
     WishOverviewDialogComponent,
-    TeacherOverviewDialogComponent,
+    AddCourseOverviewDialogComponent,
     StudentMessagesComponent,
     BriHomeComponent,
     BriFileInProcessComponent,
@@ -138,7 +138,7 @@ import { UpdateWishOverviewDialogComponent } from './student/student-wish-list/u
       multi: true
     }],
   bootstrap: [AppComponent],
-  entryComponents: [StudentOverviewDialogComponent, TeacherOverviewDialogComponent, WishOverviewDialogComponent,
+  entryComponents: [StudentOverviewDialogComponent, AddCourseOverviewDialogComponent, WishOverviewDialogComponent,
     BriAppointmentCreationDialogComponent, UpdateWishOverviewDialogComponent]
 })
 export class AppModule { }

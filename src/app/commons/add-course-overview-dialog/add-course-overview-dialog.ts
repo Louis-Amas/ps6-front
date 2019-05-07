@@ -3,19 +3,17 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {ActivatedRoute} from '@angular/router';
 import {UniversityService} from '../../../services/university/university.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {User} from '../../../models/user';
 
 @Component({
   selector: 'app-teacher-overview-dialog',
-  templateUrl: './teacher-overview-dialog.component.html',
-  styleUrls: ['./teacher-overview-dialog.component.css']
+  templateUrl: './add-course-overview-dialog.html',
+  styleUrls: ['./add-course-overview-dialog.css']
 })
-export class TeacherOverviewDialogComponent implements OnInit {
+export class AddCourseOverviewDialogComponent implements OnInit {
 
   public courseForm: FormGroup;
-  public teacher: User;
 
-  constructor(public dialogRef: MatDialogRef<TeacherOverviewDialogComponent>, private route: ActivatedRoute,
+  constructor(public dialogRef: MatDialogRef<AddCourseOverviewDialogComponent>, private route: ActivatedRoute,
               private universityService: UniversityService,
               @Inject(MAT_DIALOG_DATA) public data: any, public formBuilder: FormBuilder) {
 
@@ -41,10 +39,12 @@ export class TeacherOverviewDialogComponent implements OnInit {
     const ECTS = this.courseForm.get('ECTS').value;
     const link = this.courseForm.get('link').value;
     const description = this.courseForm.get('comment').value;
-    this.universityService.addCourse(this.data.univ._id, name, semester, link, ECTS, this.data.teacher, description).subscribe( univ =>
-      this.data.univ = univ
+    this.universityService.addCourse(this.data.univ._id, name, semester, link, ECTS, this.data.user,
+      description).subscribe( univ => {
+        this.data.univ = univ;
+        this.dialogRef.close(this.data.univ);
+      }
     );
-    this.dialogRef.close();
   }
 
 
