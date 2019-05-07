@@ -27,6 +27,12 @@ export class TeacherFileProcessedComponent implements OnInit {
     this.studentService.getStudentsByStatus('waitBriVerif').subscribe(t => {
       this.studentsConcerned = t;
       this.studentsFilter = t;
+      this.studentService.getStudentsByStatus('waitValidate').subscribe(stu => {
+        stu.forEach( s => this.studentsFilter.push(s));
+        this.studentService.getStudentsByStatus('validate').subscribe(st => {
+          st.forEach(stud => this.studentsFilter.push(stud));
+        });
+      });
     });
   }
 
