@@ -38,6 +38,10 @@ export class StudentService {
     return this.http.get<User>(this.studentUrl + '/' + id);
   }
 
+  getAllStudentsWithUniversityInWishes(univId) {
+    return this.http.get<User[]>(this.studentUrl + '/student/wishes/university/' + univId);
+  }
+
   getWishesOfOneStudent(studentId: string) {
     return this.http.get<Wish[]>(this.studentUrl + '/student/' + studentId + '/wishes');
   }

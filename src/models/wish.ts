@@ -6,4 +6,5 @@ export interface Wish {
   position?: number;
   university?: University;
   courses?: Course[];
+  rank: number;
 }

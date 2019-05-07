@@ -1,35 +1,114 @@
 <app-bri-appointment [bri]="bri"></app-bri-appointment>
 <mat-card>
-<mat-card-title>Choisir la destination</mat-card-title>
-<form [formGroup]="universityForm" class="grid-form-university">
-<mat-form-field>
-  <mat-label>Université</mat-label>
-  <mat-select class="grid-form-university-item" [formControlName]="'university'">
-    <mat-option *ngFor="let univ of universities" [value]="univ">
-      {{univ.country}} - {{univ.name}}
-    </mat-option>
-  </mat-select>
-  <button class="button-university-form" mat-button (click)="chooseUniversity()">Choisir l'université</button>
-
-</mat-form-field>
-</form>
+  <mat-card-title>Choisir la destination</mat-card-title>
+  <div [formGroup]="universityForm" class="grid-form-university">
+    <mat-form-field>
+      <mat-label>Université</mat-label>
+      <mat-select [formControlName]="'university'">
+        <mat-option *ngFor="let univ of universities" [value]="univ">
+          {{univ.country}} - {{univ.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-button (click)="chooseUniversity()" color="primary">Choisir l'université
+    </button>
+  </div>
 </mat-card>
 
-<div class="container">
+<div cdkDropListGroup class="container">
   <mat-card>
-    <mat-card-title>Classements des étudiants</mat-card-title>
-    <mat-accordion *ngIf="rankedStudent !== undefined"
-                   cdkDropList
-                   (cdkDropListDropped)="drop($event)">
-      <mat-expansion-panel *ngFor="let elem of rankedStudent; let i = index" cdkDrag>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{i}} {{ elem.email }}
-            <!--N° {{ elem[0] }} {{ elem[1] }}-->
-        </mat-panel-title>
-      </mat-expansion-panel-header>
+    <mat-card-title>
+      Étudiants à classer
+    </mat-card-title>
+
+    <mat-accordion>
+      <mat-expansion-panel [disabled]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="grid-student-to-rank-title">
+            <p>Email</p>
+            <mat-divider [vertical]="true"></mat-divider>
+            <p>Prénom</p>
+            <mat-divider [vertical]="true"></mat-divider>
+            <p>Meilleur rang</p>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
       </mat-expansion-panel>
+      <div cdkDropList
+           id="unRankedList"
+           class="dynamic_list"
+           [cdkDropListData]="unRankedStudents"
+           [cdkDropListConnectedTo]="['rankedList']"
+           (cdkDropListDropped)="dropFromListUnRanked($event)">
+        <mat-expansion-panel *ngFor="let elem of unRankedStudents; let i = index" cdkDrag>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <div class="grid-student-to-rank-title">
+                <p>
+                  {{ elem.email }}
+                </p>
+                <mat-divider [vertical]="true"></mat-divider>
+                <p>
+                  {{ elem.firstName }}
+                </p>
+                <mat-divider [vertical]="true"></mat-divider>
+                <p>
+                  {{ elem.studentInfo.bestWishRank + 1 }}
+                </p>
+              </div>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+      </div>
     </mat-accordion>
   </mat-card>
+
+  <mat-card>
+    <mat-card-title>Classements des étudiants</mat-card-title>
+    <mat-accordion>
+
+      <mat-expansion-panel [disabled]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="grid-student-ranking-title">
+            <p>Rang</p>
+            <mat-divider [vertical]="true"></mat-divider>
+            <p>Email</p>
+            <mat-divider [vertical]="true"></mat-divider>
+            <p>Prénom</p>
+            <mat-divider [vertical]="true"></mat-divider>
+            <p>Meilleur rang</p>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
+      <div cdkDropList
+           class="dynamic_list"
+           [cdkDropListData]="rankedStudents"
+           [cdkDropListConnectedTo]="['unRankedList']"
+           (cdkDropListDropped)="drop($event)">
+        <mat-expansion-panel *ngFor="let elem of rankedStudents; let i = index" cdkDrag>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <div class="grid-student-ranking-title">
+                <p class="index">{{ i + 1 }}</p>
+                <mat-divider [vertical]="true"></mat-divider>
+                <p>
+                  {{ elem.email }}
+                </p>
+                <mat-divider [vertical]="true"></mat-divider>
+                <p>
+                  {{ elem.firstName }}
+                </p>
+                <mat-divider [vertical]="true"></mat-divider>
+                <p>
+                  {{ elem.studentInfo.bestWishRank + 1 }}
+                </p>
+              </div>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+      </div>
+    </mat-accordion>
+
+  </mat-card>
+
 </div>
 
