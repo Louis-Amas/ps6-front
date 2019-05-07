@@ -4,7 +4,7 @@ import {UniversityService} from '../../../../services/university/university.serv
 import {University} from '../../../../models/university';
 import {Course} from '../../../../models/course';
 import {MatDialog} from '@angular/material';
-import {TeacherOverviewDialogComponent} from '../../teacher-overview-dialog/teacher-overview-dialog.component';
+import {AddCourseOverviewDialogComponent} from '../../../commons/add-course-overview-dialog/add-course-overview-dialog';
 import {User} from '../../../../models/user';
 import {TeacherService} from '../../../../services/teacher/teacher.service';
 
@@ -40,12 +40,12 @@ export class TeacherUniversityDetailsComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(TeacherOverviewDialogComponent, {
+    const dialogRef = this.dialog.open(AddCourseOverviewDialogComponent, {
       height: '500px',
       width: '800px',
       data: {
         univ: this.university,
-        teacher: this.teacher,
+        user: this.teacher,
       },
     });
 

@@ -78,16 +78,28 @@ export class UniversityService {
   }
 
   addCourse(id: string, nameUser: string, semesterConcerned: number, linkTo: string,
-            ECTS: number, teacher: User, descriptionUser: string ) {
-    return this.http.post<University>(this.universityUrl + '/' + id + '/courses', {
-      name: nameUser,
-      semester: semesterConcerned,
-      link_to_courses: linkTo,
-      ECTS_count: ECTS,
-      major: teacher.teacherInfo.responsible,
-      description: descriptionUser,
-    });
+            ECTS: number, user: User, descriptionUser: string ) {
+
+    if (user.role === 'teacher') {
+      return this.http.post<University>(this.universityUrl + '/' + id + '/courses', {
+        name: nameUser,
+        semester: semesterConcerned,
+        link_to_courses: linkTo,
+        ECTS_count: ECTS,
+        major: user.teacherInfo.responsible,
+        description: descriptionUser,
+      });
+    } else {
+      if (user.role === 'student') {
+        return this.http.post<University>(this.universityUrl + '/' + id + '/courses', {
+          name: nameUser,
+          semester: semesterConcerned,
+          link_to_courses: linkTo,
+          ECTS_count: ECTS,
+          major: user.studentInfo.major,
+          description: descriptionUser,
+        });
+      }
+    }
   }
-
-
 }

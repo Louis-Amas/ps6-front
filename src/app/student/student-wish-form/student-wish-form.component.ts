@@ -7,7 +7,8 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {Course} from '../../../models/course';
 import {CourseService} from '../../../services/course/course.service';
 import {User} from '../../../models/user';
-import {MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatSort, MatTableDataSource} from '@angular/material';
+import {AddCourseOverviewDialogComponent} from '../../commons/add-course-overview-dialog/add-course-overview-dialog';
 
 @Component({
   selector: 'app-student-wish-form',
@@ -39,7 +40,7 @@ export class StudentWishFormComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder, private route: ActivatedRoute,
               private studentService: StudentService, public universityService: UniversityService,
-              public courseService: CourseService) {
+              public courseService: CourseService, public dialog: MatDialog) {
 
     this.wishForm = this.formBuilder.group({
       semester: [''],
@@ -137,6 +138,26 @@ export class StudentWishFormComponent implements OnInit {
       });
     }
     this.dataSource = new MatTableDataSource<User>(this.courses);
+  }
+
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddCourseOverviewDialogComponent, {
+      height: '500px',
+      width: '800px',
+      data: {
+        univ: this.university,
+        user: this.student,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.university = result;
+        this.dataSource = new MatTableDataSource<User>(this.university.courses);
+      }
+    });
+
   }
 
 }
