@@ -1,0 +1,26 @@
+.tmp{
+  flex: 1 1 auto;
+  text-align: center;
+  width: 200px;
+  height: auto;
+}
+
+.tmp img{
+  width: 200px;
+  height: auto;
+}
+
+.footer{
+}
+
+.mat-toolbar{
+  height: auto;
+  background: #00aeef;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.logo img{
+  width: 96px;
+  height: 48px;
+}

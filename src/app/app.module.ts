@@ -56,6 +56,7 @@ import { BriAppointmentComponent } from './bri/bri-home/bri-appointment/bri-appo
 import { StudentDetailsComponent } from './bri/bri-home/student-details/student-details.component';
 // tslint:disable-next-line:max-line-length
 import { BriAppointmentCreationDialogComponent} from './bri/bri-home/bri-appointment-creation-dialog/bri-appointment-creation-dialog.component';
+import { FooterComponent } from './footer/footer.component';
 // tslint:disable-next-line:max-line-length
 import { UpdateWishOverviewDialogComponent } from './student/student-wish-list/update-wish-overview-dialog/update-wish-overview-dialog.component';
 
@@ -95,6 +96,7 @@ import { UpdateWishOverviewDialogComponent } from './student/student-wish-list/u
     BriAppointmentComponent,
     BriAppointmentCreationDialogComponent,
     UpdateWishOverviewDialogComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

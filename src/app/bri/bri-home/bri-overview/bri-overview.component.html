@@ -57,6 +57,36 @@
               </div>
             </mat-panel-title>
           </mat-expansion-panel-header>
+          <div class="grid-student-overview">
+            <h1>Notes</h1>
+            <table class="mat-table">
+              <tr class="mat-header-row">
+                <th class="mat-cell">Année</th>
+                <th class="mat-cell">Niveau après le bac</th>
+                <th class="mat-cell">École</th>
+                <th class="mat-cell">Note</th>
+              </tr>
+              <tr *ngFor="let note of elem.studentInfo.notes">
+                <th class="mat-cell">{{note.year}}</th>
+                <th class="mat-cell">{{note.schoolLevel}}</th>
+                <th class="mat-cell">{{note.school}}</th>
+                <th class="mat-cell">{{note.note}}</th>
+              </tr>
+            </table>
+            <h2>Voeu(x)</h2>
+            <table class="mat-table">
+              <tr class="mat-header-row">
+                <th class="mat-cell">Rang</th>
+                <th class="mat-cell">Université</th>
+                <th class="mat-cell">Classement</th>
+              </tr>
+              <tr *ngFor="let wish of elem.studentInfo.wishes; let i = index">
+                <th class="mat-cell">{{i + 1}}</th>
+                <th class="mat-cell">{{wish.university.name}}</th>
+                <th class="mat-cell">{{wish.rank}}</th>
+              </tr>
+            </table>
+          </div>
         </mat-expansion-panel>
       </div>
     </mat-accordion>
@@ -104,6 +134,36 @@
               </div>
             </mat-panel-title>
           </mat-expansion-panel-header>
+          <div class="grid-student-overview">
+            <h1>Notes</h1>
+            <table class="mat-table">
+              <tr class="mat-header-row">
+                <th class="mat-cell">Année</th>
+                <th class="mat-cell">Niveau après le bac</th>
+                <th class="mat-cell">École</th>
+                <th class="mat-cell">Note</th>
+              </tr>
+              <tr *ngFor="let note of elem.studentInfo.notes">
+                  <th class="mat-cell">{{note.year}}</th>
+                  <th class="mat-cell">{{note.schoolLevel}}</th>
+                  <th class="mat-cell">{{note.school}}</th>
+                  <th class="mat-cell">{{note.note}}</th>
+              </tr>
+            </table>
+            <h2>Voeu(x)</h2>
+            <table class="mat-table">
+              <tr class="mat-header-row">
+                <th class="mat-cell">Rang</th>
+                <th class="mat-cell">Université</th>
+                <th class="mat-cell">Classement</th>
+              </tr>
+              <tr *ngFor="let wish of elem.studentInfo.wishes; let i = index">
+                <th class="mat-cell">{{i + 1}}</th>
+                <th class="mat-cell">{{wish.university.name}}</th>
+                <th class="mat-cell">{{wish.rank}}</th>
+              </tr>
+            </table>
+          </div>
         </mat-expansion-panel>
       </div>
     </mat-accordion>

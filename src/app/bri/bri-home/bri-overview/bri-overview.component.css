@@ -19,5 +19,5 @@
 .grid-student-to-rank-title {
   display: grid;
   grid-template-columns: 120px 10px 120px 10px 120px;
-  grid-column-gap: 10px;
+  grid-column-gap: 20px;
 }
