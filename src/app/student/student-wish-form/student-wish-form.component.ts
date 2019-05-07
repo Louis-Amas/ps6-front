@@ -57,6 +57,7 @@ export class StudentWishFormComponent implements OnInit {
     this.dataSource.sort = this.sort;
     this.getStudent();
     this.universityService.getUniversities();
+    this.nbECTS = 0;
   }
 
 
