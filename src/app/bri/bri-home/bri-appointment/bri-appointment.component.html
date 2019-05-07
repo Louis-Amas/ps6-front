@@ -3,7 +3,7 @@
   <mat-card-content>
     <div class="cardContent">
       <mat-form-field class="appointment-form">
-        <input matInput [matDatepicker]="picker" placeholder="Choisissez une date"
+        <input matInput class="inputDate" [matDatepicker]="picker" placeholder="Choisissez une date"
                (dateChange)="getDateChoose($event)">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker [dateClass]="dateUsed" #picker></mat-datepicker>
@@ -53,10 +53,18 @@
        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
      </table>
+     <mat-card *ngIf="!drawTable" class="details-card">
+       <mat-card-content>
+         <mat-list role="list">
+           <mat-list-item role="listitem">
+             <div id="cercle"></div> Date où vous avez défini vos disponibilités</mat-list-item>
+         </mat-list>
+       </mat-card-content>
+     </mat-card>
    </div>
  </mat-card-content>
   <mat-card-footer>
-    <button mat-button color="primary" class="createSlot" (click)="openDialog()">
+    <button mat-button class="createSlot" (click)="openDialog()">
       Créer un nouveau créneau
     </button>
   </mat-card-footer>

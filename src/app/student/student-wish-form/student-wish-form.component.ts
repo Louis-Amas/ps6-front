@@ -49,7 +49,6 @@ export class StudentWishFormComponent implements OnInit {
     this.universityService.universities$.subscribe((univ) => this.universitiesList = univ);
     this.universityService.countries$.subscribe((countries) => this.countries = countries);
     this.coursesSelected = [];
-    this.nbECTS = 0;
   }
 
 
@@ -94,13 +93,14 @@ export class StudentWishFormComponent implements OnInit {
         this.nbECTS += course.ECTS_count;
       }
     if (event.checked === false) {
-        this.coursesSelected.splice(0, this.coursesSelected.indexOf(course));
+        this.coursesSelected = this.coursesSelected.filter(c => c !== course);
         this.nbECTS -= course.ECTS_count;
       }
   }
 
   validateWish() {
     const coursesId = [];
+    this.nbECTS = 0;
     this.coursesSelected.forEach(course => coursesId.push(course._id));
     this.studentService.addWish(coursesId, this.university._id, this.student._id).subscribe();
   }
@@ -138,6 +138,5 @@ export class StudentWishFormComponent implements OnInit {
     }
     this.dataSource = new MatTableDataSource<User>(this.courses);
   }
-
 
 }
