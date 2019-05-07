@@ -28,4 +28,26 @@
   display: block;
   margin-right: auto;
   margin-left: auto;
+  background-color: #00aeef;
+  color: white;
+}
+
+.details-card{
+  width: auto;
+  text-align: center;
+}
+
+#cercle {
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+  margin-right: 10px;
+  background: #00aeef;
+}
+
+.mat-form-field{
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 17px;
+  width: 20%;
 }
