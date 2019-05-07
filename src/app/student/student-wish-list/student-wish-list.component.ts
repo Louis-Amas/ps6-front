@@ -5,6 +5,8 @@ import {StudentService} from '../../../services/student/student.service';
 import {MatDialog} from '@angular/material';
 import {StudentOverviewDialogComponent} from '../student-overview-dialog/student-overview-dialog.component';
 import {User} from '../../../models/user';
+import {UpdateWishOverviewDialogComponent} from './update-wish-overview-dialog/update-wish-overview-dialog.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-student-wish-list',
@@ -22,7 +24,7 @@ export class StudentWishListComponent implements OnInit {
   msg: string;
   sendMsg: boolean;
 
-  constructor(public studentService: StudentService, public dialog: MatDialog) {
+  constructor(public studentService: StudentService, public dialog: MatDialog, public dialogUpdate: MatDialog, public router: Router) {
     this.sendMsg = false;
   }
 
@@ -80,6 +82,24 @@ export class StudentWishListComponent implements OnInit {
         this.studentOut.emit(this.student);
       }
     });
-
   }
+
+
+  openDialogUpdate(wish): void {
+    const dialogRef = this.dialogUpdate.open(UpdateWishOverviewDialogComponent, {
+      height: '600px',
+      width: '1000px',
+      data: {
+        wishUpdate: wish,
+        student: this.student._id  }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.router.navigate([`/student/` + this.student._id]);
+        // this.student.studentInfo.wishes = result;
+      }
+    });
+  }
+
 }

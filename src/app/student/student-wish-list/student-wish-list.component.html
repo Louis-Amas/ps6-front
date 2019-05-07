@@ -16,12 +16,13 @@
 
           <mat-list>
             <mat-list-item *ngFor="let course of getCourseOfWish(wish)">
-              {{course.name}}
+              <a href="{{course.link_to_courses}}">{{course.name}}</a> &nbsp;- Nombre d'ECTS : {{course.ECTS_count}} - Semestre {{course.semester}}
               <mat-divider></mat-divider>
             </mat-list-item>
           </mat-list>
 
           <mat-action-row  *ngIf="student.studentInfo.stateValidation =='waitStudent'">
+            <button mat-button color="primary" (click)="openDialogUpdate(wish)">Modifier</button>
             <button mat-button color="warn" (click)="deleteWish(wish)">Supprimer</button>
           </mat-action-row>
 
