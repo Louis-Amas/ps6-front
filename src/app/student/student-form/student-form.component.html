@@ -2,12 +2,13 @@
 <button mat-button routerLink="..">Retour</button>
 
 
-<app-form (currentUser)="updateUser($event)"></app-form>
+<app-form [user]="userDetails" (currentUser)="updateUser($event)"></app-form>
 
 
 <div class="form-container">
 
   <form class ='student-form' [formGroup]="studentForm" id="form">
+
 
     <mat-form-field>
       <mat-select placeholder="Filière" [formControlName]="'major'">
@@ -23,6 +24,7 @@
 
   </form>
 </div>
+
 <br>
 <br>
 
@@ -31,11 +33,14 @@
     <span>Relevés de notes depuis l’entrée dans l’enseignement supérieur (PDF) :
     </span>
     <br>
-    <input type="file" id="transcriptPicker"
+    <input type="file" id="transcript"
            form="form"
            accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf,.zip"
-           [formControlName]="'transcript'"
            (change)="fileChange($event)">
+    <mat-form-field class="form-container2">
+      <input matInput type="text" [formControlName]="'transcript'" value="{{attachmentForm.value['transcript']}}" readonly>
+    </mat-form-field>
+
     <br>
     <br>
     <span>Lettre de motivation - Destinée à la commission de sélection de la composante,
@@ -43,10 +48,10 @@
       (il peut vous être demandé une lettre de motivation dans la langue où seront dispensés les enseignements)
     </span>
     <br>
-    <input type="file" id="coveringLetterPicker"
+    <input type="file" id="coveringLetter"
            accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf"
-           [formControlName]="'coveringLetter'"
            (change)="fileChange($event)"
+
     >
 
   </div>
@@ -54,7 +59,9 @@
   <div class = "form-container">
     <button mat-button (click)="saveChanges()"> Sauvegarder les modification </button>
   </div>
+
 </form>
 
+[formControlName]="'coveringLetter'"
 
 
