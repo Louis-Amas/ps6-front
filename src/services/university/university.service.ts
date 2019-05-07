@@ -41,6 +41,14 @@ export class UniversityService {
     });
   }
 
+
+  addStudentToRanking(univId, studentId, positon) {
+    return this.http.post<University>(this.universityUrl + '/' + univId + '/rankings', {
+      studentId: studentId,
+      position: positon
+    });
+  }
+
   updateRankingPosition(univId, studentId, newPosition) {
     return this.http.put<University>(this.universityUrl + '/' + univId + '/student/' + studentId, {
       position: newPosition
@@ -63,6 +71,10 @@ export class UniversityService {
 
   deleteCourse(course: Course, id: string) {
     return this.http.delete<Course[]>(this.universityUrl + '/' + id + '/courses/' + course._id);
+  }
+
+  deleteStudentFromRanking(univId: string, studentId: string) {
+    return this.http.delete<University>(this.universityUrl + '/' + univId + '/rankings/student/' + studentId);
   }
 
   addCourse(id: string, nameUser: string, semesterConcerned: number, linkTo: string,
