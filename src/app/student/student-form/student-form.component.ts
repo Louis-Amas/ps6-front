@@ -36,8 +36,9 @@ export class StudentFormComponent implements OnInit {
 
   public studentForm: FormGroup;
   public attachmentForm: FormGroup;
-  public user: User;
   public attachments: any[] = [];
+
+  public userDetails: User;
 
   constructor(public formBuilder: FormBuilder,
               public studentService: StudentService,
@@ -54,49 +55,64 @@ export class StudentFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.initializeStudentForm();
+    const userId = this.route.snapshot.paramMap.get('id');
+    this.studentService.getUserById(userId)
+      .subscribe(user => {
+        this.userDetails = user;
+      });
   }
 
   initializeStudentForm() {
-    this.studentForm.setValue({
-      major: this.user.studentInfo.major,
-      year: this.user.studentInfo.year,
-    });
-    this.attachmentForm.setValue({
-      transcript: '',
-      coveringLetter: '',
-    });
+
+    if (this.userDetails && this.userDetails.studentInfo) {
+      this.studentForm.setValue({
+        major: this.userDetails.studentInfo.major,
+        year: this.userDetails.studentInfo.year,
+      });
+      this.attachmentForm.setValue({
+        transcript: this.userDetails.studentInfo.attachments[0].name,
+        coveringLetter: '',
+      });
+    }
   }
 
   saveChanges() {
     const student: Student = this.studentForm.getRawValue();
+    this.userDetails.studentInfo.major = student.major;
+    this.userDetails.studentInfo.year = student.year;
+    this.userDetails.studentInfo.attachments = this.attachments;
+    this.attachmentForm.setValue({
+      transcript: this.userDetails.studentInfo.attachments[0].name,
+      coveringLetter: '',
+    });
     /*this.user = student;
     console.log(this.user);
     console.log(student);*/
-    this.user.studentInfo.major = student.major;
-    this.user.studentInfo.year = student.year;
-    this.user.studentInfo.attachments = this.attachments;
-    this.studentService.updateStudent(this.user).subscribe();
+    this.studentService.updateStudent(this.userDetails).subscribe(user => console.log(user));
   }
 
   updateUser(user1: User) {
-    this.user = user1;
-    console.log(user1);
+    this.userDetails.firstName = user1.firstName;
+    this.userDetails.lastName = user1.lastName;
+    this.userDetails.email = user1.email;
+    this.userDetails.phoneNumber = user1.phoneNumber;
     this.initializeStudentForm();
   }
 
   fileChange(event) {
-    console.log(event);
     const fileList: FileList = event.target.files;
     if (fileList.length > 0) {
       const file: File = fileList[0];
+      const name1: string = file.name;
       getBase64(file, (result) => {
         this.attachments.push(
           {
-            name: event.target.id,
+            name: name1,
+            type: event.target.id,
             data: result
           }
         );
+        console.log(event.target.id);
       });
     }
   }
