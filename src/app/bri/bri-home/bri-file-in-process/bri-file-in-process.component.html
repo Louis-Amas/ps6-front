@@ -3,6 +3,11 @@
 <br>
 <table mat-table [dataSource]="dataSource" matSort (matSortChange)="orderList($event)" class="mat-elevation-z8">
 
+  <ng-container matColumnDef="numStudent">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Numéro étudiant </th>
+    <td mat-cell *matCellDef="let element"> {{element.studentInfo.numStu}} </td>
+  </ng-container>
+
   <ng-container matColumnDef="firstName">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Prénom </th>
     <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>

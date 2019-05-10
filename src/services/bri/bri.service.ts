@@ -40,15 +40,16 @@ export class BriService {
     if (idUniv !== undefined && search !== undefined && major !== undefined) {
       return filterStu.filter(stu => stu.studentInfo.wishes.find(wish =>
         wish.university._id === idUniv) &&
-        (stu.lastName.toLowerCase().includes(search) || stu.firstName.toLowerCase().includes(search))
-        && stu.studentInfo.major === major);
+        (stu.lastName.toLowerCase().includes(search) || stu.firstName.toLowerCase().includes(search) ||
+          stu.studentInfo.numStu.toString().includes(search)) && stu.studentInfo.major === major);
     } else {
       if (idUniv !== undefined) {
         return filterStu.filter(stu => stu.studentInfo.wishes.find(wish =>
           wish.university._id === idUniv));
       } else {
         if (search !== undefined) {
-          return filterStu.filter(stu => stu.firstName.toLowerCase().includes(search) || stu.lastName.toLowerCase().includes(search));
+          return filterStu.filter(stu => stu.firstName.toLowerCase().includes(search) || stu.lastName.toLowerCase().includes(search) ||
+            stu.studentInfo.numStu.toString().includes(search));
         } else {
           if (major !== undefined) {
             return filterStu.filter(stu => stu.studentInfo.major === major);
