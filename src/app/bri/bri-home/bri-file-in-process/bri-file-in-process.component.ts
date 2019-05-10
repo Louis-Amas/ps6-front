@@ -80,16 +80,12 @@ export class BriFileInProcessComponent implements OnInit {
   }
 
   updateMajor(major: string) {
-    if (major !== undefined) {
-      this.major = major;
-    }
+    this.major = major;
     this.filterStudent();
   }
 
   updateName(name: string) {
-    if (name !== undefined) {
-      this.searchBar = name;
-    }
+    this.searchBar = name;
     this.filterStudent();
   }
 
