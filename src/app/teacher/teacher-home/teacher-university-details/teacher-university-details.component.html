@@ -11,7 +11,7 @@
     <mat-list>
     <mat-list-item>Pays : {{university.country}}</mat-list-item>
     <mat-divider></mat-divider>
-    <mat-list-item>Lien vers l'école : {{university.url_to_website}}</mat-list-item>
+    <mat-list-item>Lien vers l'école : &nbsp; <a href="{{university.url_to_website}}">{{university.name}}</a></mat-list-item>
     </mat-list>
   </mat-card-content>
 </mat-card>
@@ -23,31 +23,48 @@
     Cours de l'école
   </mat-card-title>
   <mat-card-content>
-    <mat-accordion>
-      <mat-expansion-panel *ngFor="let course of university.courses">
+    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="orderList($event)" class="mat-elevation-z8">
 
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{course.name}}
-          </mat-panel-title>
-        </mat-expansion-panel-header>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom du cours </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
 
-        <mat-list>
-          <mat-list-item>Lien vers le cours : {{course.link_to_courses}} </mat-list-item>
-          <mat-list-item>Nombre d'ECTS acquis : {{course.ECTS_count}}</mat-list-item>
-          <mat-list-item>Semestre concerné : {{course.semester}}</mat-list-item>
-          <mat-list-item>Description du cours : {{course.description}}</mat-list-item>
-        </mat-list>
+      <ng-container matColumnDef="ECTS">
+        <th mat-header-cell *matHeaderCellDef> ECTS </th>
+        <td mat-cell *matCellDef="let element"> {{element.ECTS_count}} </td>
+      </ng-container>
 
-        <mat-action-row>
-          <button mat-button color="warn" (click)="deleteCourse(course)">Supprimer ce cours</button>
-        </mat-action-row>
+      <ng-container matColumnDef="semester">
+        <th mat-header-cell *matHeaderCellDef> Semestre concerné </th>
+        <td mat-cell *matCellDef="let element"> {{element.semester}} </td>
+      </ng-container>
 
-      </mat-expansion-panel>
-    </mat-accordion>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef> Supprimer ce cours </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button color="primary" (click)="deleteCourse(element)" >
+            <i class="material-icons">
+              clear
+            </i>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+      </tr>
+
+    </table>
   </mat-card-content>
 </mat-card>
 <br>
 
 <button class="add-button" mat-button color="primary" (click)="openDialog()"> Ajouter un cours</button>
-
+<br>
+<br>

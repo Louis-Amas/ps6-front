@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {UniversityService} from '../../../../services/university/university.service';
 import {University} from '../../../../models/university';
 import {Course} from '../../../../models/course';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatSort, MatTableDataSource} from '@angular/material';
 import {AddCourseOverviewDialogComponent} from '../../../commons/add-course-overview-dialog/add-course-overview-dialog';
 import {User} from '../../../../models/user';
 import {TeacherService} from '../../../../services/teacher/teacher.service';
@@ -14,6 +14,11 @@ import {TeacherService} from '../../../../services/teacher/teacher.service';
   styleUrls: ['./teacher-university-details.component.css']
 })
 export class TeacherUniversityDetailsComponent implements OnInit {
+
+  private displayedColumns: string[] = ['name', 'ECTS', 'semester', 'description', 'delete'];
+  dataSource = new MatTableDataSource();
+
+  @ViewChild(MatSort) sort: MatSort;
 
   university: University;
   teacher: User;
@@ -30,6 +35,7 @@ export class TeacherUniversityDetailsComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('univId');
     this.universityService.getUniversityById(id).subscribe(univ => {
         this.university = univ;
+        this.dataSource = new MatTableDataSource<User>(this.university.courses);
       }
     );
   }
@@ -64,6 +70,40 @@ export class TeacherUniversityDetailsComponent implements OnInit {
         this.teacher = t;
       }
     );
+  }
+
+  orderList(event) {
+    const column = event.active;
+    if (event.direction === 'asc') {
+      this.university.courses.sort((a, b) => {
+        if (a[column] > b[column]) {
+          return 1;
+        } else {
+          if (a[column] < b[column]) {
+            return -1;
+          } else {
+            if (a[column] === b[column]) {
+              return 0;
+            }
+          }
+        }
+      });
+    } else {
+      this.university.courses.sort((a, b) => {
+        if (a[column] < b[column]) {
+          return 1;
+        } else {
+          if (a[column] > b[column]) {
+            return -1;
+          } else {
+            if (a[column] === b[column]) {
+              return 0;
+            }
+          }
+        }
+      });
+    }
+    this.dataSource = new MatTableDataSource<User>(this.university.courses);
   }
 
 }
