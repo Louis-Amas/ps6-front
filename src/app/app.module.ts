@@ -59,6 +59,8 @@ import { BriAppointmentCreationDialogComponent} from './bri/bri-home/bri-appoint
 import { FooterComponent } from './footer/footer.component';
 // tslint:disable-next-line:max-line-length
 import { UpdateWishOverviewDialogComponent } from './student/student-wish-list/update-wish-overview-dialog/update-wish-overview-dialog.component';
+import { StudentInfoComponent } from './commons/student-info/student-info.component';
+import { StudentInfoWishesComponent } from './commons/student-info-wishes/student-info-wishes.component';
 
 @NgModule({
   declarations: [
@@ -96,7 +98,9 @@ import { UpdateWishOverviewDialogComponent } from './student/student-wish-list/u
     BriAppointmentComponent,
     BriAppointmentCreationDialogComponent,
     UpdateWishOverviewDialogComponent,
-    FooterComponent
+    FooterComponent,
+    StudentInfoComponent,
+    StudentInfoWishesComponent
   ],
   imports: [
     BrowserModule,
