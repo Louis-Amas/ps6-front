@@ -61,6 +61,8 @@ import { FooterComponent } from './footer/footer.component';
 import { UpdateWishOverviewDialogComponent } from './student/student-wish-list/update-wish-overview-dialog/update-wish-overview-dialog.component';
 import { StudentAppointmentComponent } from './student/student-home/student-appointment/student-appointment.component';
 import { StudentAppointmentDialogComponent } from './student/student-home/student-appointment-dialog/student-appointment-dialog.component';
+import { StudentInfoComponent } from './commons/student-info/student-info.component';
+import { StudentInfoWishesComponent } from './commons/student-info-wishes/student-info-wishes.component';
 
 @NgModule({
   declarations: [
@@ -100,7 +102,10 @@ import { StudentAppointmentDialogComponent } from './student/student-home/studen
     UpdateWishOverviewDialogComponent,
     FooterComponent,
     StudentAppointmentComponent,
-    StudentAppointmentDialogComponent
+    StudentAppointmentDialogComponent,
+    FooterComponent,
+    StudentInfoComponent,
+    StudentInfoWishesComponent
   ],
   imports: [
     BrowserModule,

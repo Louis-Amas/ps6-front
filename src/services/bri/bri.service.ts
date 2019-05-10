@@ -50,24 +50,41 @@ export class BriService {
     if (idUniv !== undefined && search !== undefined && major !== undefined) {
       return filterStu.filter(stu => stu.studentInfo.wishes.find(wish =>
         wish.university._id === idUniv) &&
-        (stu.lastName.toLowerCase().includes(search) || stu.firstName.toLowerCase().includes(search))
-        && stu.studentInfo.major === major);
+        (stu.lastName.toLowerCase().includes(search) || stu.firstName.toLowerCase().includes(search) ||
+          stu.studentInfo.numStu.toString().includes(search)) && stu.studentInfo.major === major);
     } else {
-      if (idUniv !== undefined) {
+      if (idUniv !== undefined && major !== undefined) {
         return filterStu.filter(stu => stu.studentInfo.wishes.find(wish =>
-          wish.university._id === idUniv));
+          wish.university._id === idUniv) && stu.studentInfo.major === major);
       } else {
-        if (search !== undefined) {
-          return filterStu.filter(stu => stu.firstName.toLowerCase().includes(search) || stu.lastName.toLowerCase().includes(search));
+        if (search !== undefined && idUniv !== undefined) {
+          return filterStu.filter(stu => stu.firstName.toLowerCase().includes(search) || stu.lastName.toLowerCase().includes(search) ||
+            stu.studentInfo.numStu.toString().includes(search) && stu.studentInfo.wishes.find(wish => wish.university._id === idUniv));
         } else {
-          if (major !== undefined) {
-            return filterStu.filter(stu => stu.studentInfo.major === major);
+          if (major !== undefined && search !== undefined) {
+            return filterStu.filter(stu => stu.studentInfo.major === major &&
+              stu.firstName.toLowerCase().includes(search) || stu.lastName.toLowerCase().includes(search) ||
+              stu.studentInfo.numStu.toString().includes(search));
           } else {
-              return filterStu;
+            if (idUniv !== undefined) {
+              return filterStu.filter(stu => stu.studentInfo.wishes.find(wish =>
+                wish.university._id === idUniv));
+            } else {
+              if (search !== undefined) {
+                return filterStu.filter(stu => stu.firstName.toLowerCase().includes(search) ||
+                  stu.lastName.toLowerCase().includes(search) || stu.studentInfo.numStu.toString().includes(search));
+              } else {
+                if (major !== undefined) {
+                  return filterStu.filter(stu => stu.studentInfo.major === major);
+                } else {
+                  return filterStu;
+                }
+              }
             }
           }
         }
       }
+    }
   }
 
   findTimeSlotByDate(date: Date, bri: Bri) {

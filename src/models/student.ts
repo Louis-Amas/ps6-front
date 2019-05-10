@@ -8,6 +8,7 @@ export interface Student {
   email?: string;
   phoneNumber?: string;
   password?: string;
+  numStu?: number;
   lastConnection?: Date;
   wishes?: Wish[];
   major?: string;

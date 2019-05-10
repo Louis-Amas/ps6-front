@@ -1,21 +1,7 @@
 <div *ngIf="student!=undefined" class="form">
   <button mat-button routerLink="..">Retour</button>
 
-  <mat-card>
-    <mat-card-content>
-      <mat-list>
-        <mat-list-item>Nom : {{student.lastName}}</mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>Prénom : {{student.firstName}}</mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>Email : {{student.email}}</mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>Filière actuelle : {{student.studentInfo.major}}</mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>Spécialité de dernière année : {{student.firstName}}</mat-list-item>
-      </mat-list>
-    </mat-card-content>
-  </mat-card>
+  <app-student-info [currentStudent]="student"></app-student-info>
 
   <br>
   <mat-card id="form">
