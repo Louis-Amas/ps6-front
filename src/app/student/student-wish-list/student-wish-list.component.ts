@@ -79,7 +79,7 @@ export class StudentWishListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
         this.student = result;
-        this.studentOut.emit(this.student);
+        this.studentOut.emit(result);
       }
     });
   }

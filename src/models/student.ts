@@ -1,5 +1,5 @@
 import {Wish} from './wish';
-import {Attachment} from './attachment';
+import {TimeSlot} from './timeSlot';
 
 export interface Student {
   _id?: string;
@@ -22,4 +22,8 @@ export interface Student {
       school: string,
       note: number
     }];
+  appointment?: {
+    timeSlot?: TimeSlot;
+    bri?: string;
+  };
 }

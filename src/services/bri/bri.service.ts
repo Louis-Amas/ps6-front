@@ -36,6 +36,16 @@ export class BriService {
     });
   }
 
+  getAllAppointment() {
+    return this.http.get<User[]>(this.briUrl + '/bri/appointment');
+  }
+
+  studentReserveTimeSlot(briId: string, timeSlotId: string, studentId: string) {
+    return this.http.put<User>(this.briUrl + '/bri/' + briId + '/appointment/available/' + timeSlotId, {
+      reservedBy: studentId
+    });
+  }
+
   filterStudent(id: string, filterStu: User[], idUniv: string, search: string, major: string) {
     if (idUniv !== undefined && search !== undefined && major !== undefined) {
       return filterStu.filter(stu => stu.studentInfo.wishes.find(wish =>

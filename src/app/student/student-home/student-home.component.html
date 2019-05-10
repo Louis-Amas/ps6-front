@@ -1,5 +1,3 @@
-
-
 <div *ngIf="student != undefined">
   <app-student-header [student]="student" ></app-student-header>
   <mat-card class="stepper-card">
@@ -15,6 +13,7 @@
       </mat-step>
       <mat-step [completed]="validate" [stepControl]="fourthFormGroup" [editable]="false">
         <ng-template matStepLabel>Prise de rendez-vous</ng-template>
+        <app-student-appointment [student]="student"></app-student-appointment>
       </mat-step>
     </mat-horizontal-stepper>
   </mat-card>

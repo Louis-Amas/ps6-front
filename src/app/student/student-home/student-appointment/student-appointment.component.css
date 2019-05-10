@@ -1,0 +1,36 @@
+.appointment-form{
+  width: 100%;
+}
+
+.appointment {
+  background-color: #00aeef;
+  border-radius: 100%;
+}
+
+.cardContent{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.mat-table{
+  width: 70%;
+}
+
+.mat-form-field{
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 17px;
+}
+
+.open{
+  color: forestgreen;
+}
+
+.close {
+  color: #f44336;
+}
+
+p{
+  text-align: center;
+}
