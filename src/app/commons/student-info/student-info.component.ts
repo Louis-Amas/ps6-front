@@ -22,7 +22,7 @@ export class StudentInfoComponent implements OnInit {
     {
       major: 'MAM',
       specialty: ['Informatique et mathématiques appliquées à la finance et l\'assurance', 'Ingénierie numérique',
-      'Science des données']
+        'Science des données']
     },
     {
       major: 'ELEC',
@@ -31,7 +31,7 @@ export class StudentInfoComponent implements OnInit {
     {
       major: 'GB',
       specialty: ['Pharmacologie et Biotechnologie', 'Toxicologie et Sécurité en Santé et Environnement',
-      'Bioinformatique et Modélisation pour la Biologie']
+        'Bioinformatique et Modélisation pour la Biologie']
     },
     {
       major: 'GE',
