@@ -4,10 +4,6 @@
 
   <br>
 
-  <app-student-info-wishes [currentStudent]="currentStudent"></app-student-info-wishes>
-
-  <br>
-
   <mat-card class="card-button" *ngIf="currentStudent.studentInfo.stateValidation == 'waitBriVerif'">
     <mat-toolbar>
       <button mat-button color="warn" (click)="refuseStudent()">Refuser le dossier</button>

@@ -3,7 +3,17 @@
   margin: auto;
 }
 
-tmp {
+.tmp {
   flex: 1 1 auto;
+}
+
+.mat-toolbar {
+  background-color: white;
+  margin: 0;
+  padding: 0;
+}
+
+div {
+  display: block;
 }
 
