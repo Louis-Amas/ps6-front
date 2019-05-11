@@ -7,3 +7,15 @@ p {
   font-family: Arial;
   text-align: center;
 }
+
+.mat-form-field {
+  width: 60%;
+}
+
+.tmp {
+  flex: 1 1 auto;
+}
+
+.mat-toolbar {
+  background-color: white;
+}
