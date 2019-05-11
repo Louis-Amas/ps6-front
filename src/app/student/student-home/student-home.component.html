@@ -4,15 +4,29 @@
     <mat-horizontal-stepper linear [selectedIndex]="pos" class="stepper">
       <mat-step [completed]="studentState" [stepControl]="firstFormGroup" [editable]="false">
         <ng-template matStepLabel>Formulez vos voeux</ng-template>
+        <p>Vous pouvez formuler jusqu'à 5 voeux à condition que ceci soit dans des écoles partenaires différentes.
+        Pour chaque voeu, il vous faudra indiquer les cours que vous souhaitez suivre durant votre échange pour
+        atteindre un minimum de 30 ECTS. N'oubliez pas de renseigner les différents documents nécessaires dans vos paramètres <i class="material-icons" routerLink="form">
+            settings
+          </i>.</p>
       </mat-step>
       <mat-step [completed]="teacherState" [stepControl]="secondFormGroup" [editable]="false">
         <ng-template matStepLabel>Transmis</ng-template>
+        <p>Votre dossier a été transmis à votre professeur référent. Celui-ci validera ou non vos choix, si un de vos voeux n'est pas
+          valide, vous pourrez recevoir un message vous indiquant ce qu'il faut modifier sur la page messages. Pensez donc à vérifier
+        vos messages <i class="material-icons" routerLink="message">
+            local_post_office
+          </i>.</p>
       </mat-step>
       <mat-step [completed]="briState" [stepControl]="thirdFormGroup" [editable]="false">
         <ng-template matStepLabel>En cours de validation</ng-template>
+        <p>Votre dossier a été validé par votre professeur référent, il est désormais entre les mains du BRI qui va se charger de la
+          vérification de vos pièces justificatives.</p>
       </mat-step>
       <mat-step [completed]="validate" [stepControl]="fourthFormGroup" [editable]="false">
         <ng-template matStepLabel>Prise de rendez-vous</ng-template>
+        <p>Votre dossier a été validé par le BRI, vous pouvez désormais prendre RDV avec le BRI, selon les différents
+          créneaux proposés afin de donner en main propre les différents documents nécessaires.</p>
         <app-student-appointment [student]="student"></app-student-appointment>
       </mat-step>
     </mat-horizontal-stepper>
