@@ -1,17 +1,16 @@
 <app-bri-appointment [bri]="bri"></app-bri-appointment>
 <mat-card>
-  <mat-card-title>Choisir la destination</mat-card-title>
+
   <div [formGroup]="universityForm" class="grid-form-university">
+    <mat-card-title>Choisir la destination</mat-card-title>
     <mat-form-field>
       <mat-label>Université</mat-label>
-      <mat-select [formControlName]="'university'">
+      <mat-select (valueChange)="chooseUniversity($event)" [formControlName]="'university'">
         <mat-option *ngFor="let univ of universities" [value]="univ">
           {{univ.country}} - {{univ.name}}
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <button mat-button (click)="chooseUniversity()" color="primary">Choisir l'université
-    </button>
   </div>
 </mat-card>
 

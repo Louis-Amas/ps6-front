@@ -76,9 +76,10 @@ export class BriOverviewComponent implements OnInit {
       });
   }
 
-  chooseUniversity() {
+  chooseUniversity(event) {
+    const univ = event;
     this.resetList();
-    const univ = this.universityForm.getRawValue().university;
+
     this.currentUniv = univ;
     if (univ === '') { return; }
     this.universityService.getUniversityById(univ._id)
@@ -92,7 +93,6 @@ export class BriOverviewComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    console.log(event.previousContainer === event.container, 'laldaldladl');
     if (event.previousContainer === event.container) {
       // rankedStudent => rankedStudent
       const prev = this.rankedStudents[event.previousIndex];

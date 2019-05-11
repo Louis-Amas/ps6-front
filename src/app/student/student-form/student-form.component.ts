@@ -3,6 +3,7 @@ import {StudentService} from '../../../services/student/student.service';
 import {ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../../models/user';
+import {DomSanitizer} from '@angular/platform-browser';
 
 
 function getBase64(file, cb) {
@@ -56,7 +57,8 @@ export class StudentFormComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder,
               public studentService: StudentService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private sanitizer: DomSanitizer) {
     this.attachmentForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       value: [''],
@@ -77,11 +79,13 @@ export class StudentFormComponent implements OnInit {
     const userId = this.route.snapshot.paramMap.get('id');
     this.studentService.getUserById(userId).subscribe(user => {
         this.userDetails = user;
-        console.log(user);
         this.updateFileList();
     });
   }
 
+  sanitize(url: string){
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+  }
 
   fileChange(event, fileName) {
     const fileList: FileList = event.target.files;
@@ -111,7 +115,6 @@ export class StudentFormComponent implements OnInit {
 
   updateFileList() {
     this.userDetails.studentInfo.attachments.forEach(a => {
-      console.log(a.name.split('.')[0]);
       this.FILE_LIST.forEach(f => {
         if (a.name.split('.')[0] === f.file) {
           f.used = true;
@@ -137,13 +140,5 @@ export class StudentFormComponent implements OnInit {
     });
   }
 
-  download(filename, data) {
-    const elem = window.document.createElement('a');
-    elem.href = data;
-    elem.download = filename;
-    document.body.appendChild(elem);
-    elem.click();
-    document.body.removeChild(elem);
-  }
 }
 
