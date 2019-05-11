@@ -41,7 +41,7 @@
           <th mat-header-cell *matHeaderCellDef> Détails </th>
           <td mat-cell *matCellDef="let element">
            <button mat-icon-button color="primary">
-             <i *ngIf="element.reservedBy !== undefined" class="material-icons">
+             <i *ngIf="element.reservedBy !== undefined" class="material-icons" routerLink="student/{{element.reservedBy._id}}">
                reorder
              </i>
              <i *ngIf="element.reservedBy === undefined" class="material-icons">

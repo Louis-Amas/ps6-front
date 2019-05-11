@@ -47,8 +47,8 @@ export class TeacherUniversityDetailsComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddCourseOverviewDialogComponent, {
-      height: '500px',
-      width: '800px',
+      height: '600px',
+      width: '1000px',
       data: {
         univ: this.university,
         user: this.teacher,

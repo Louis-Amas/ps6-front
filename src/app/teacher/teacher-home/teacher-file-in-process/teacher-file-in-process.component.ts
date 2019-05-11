@@ -26,7 +26,7 @@ export class TeacherFileInProcessComponent implements OnInit {
 
 
   getConcernedStudent() {
-    this.studentService.getStudentsByStatus('waitTeacher').subscribe(t => {
+    this.studentService.getStudentsByStatus('waitTeacher', this.teacher.teacherInfo.responsible).subscribe(t => {
       this.studentsConcerned = t;
       this.studentsFilter = t;
     });

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {MatDatepickerInputEvent, MatDialog, MatTableDataSource} from '@angular/material';
+import {DateAdapter, MatDatepickerInputEvent, MatDialog, MatTableDataSource} from '@angular/material';
 import {BriService} from '../../../../services/bri/bri.service';
 import {BriAppointmentCreationDialogComponent} from '../bri-appointment-creation-dialog/bri-appointment-creation-dialog.component';
 import {User} from '../../../../models/user';
@@ -18,10 +18,11 @@ export class BriAppointmentComponent implements OnInit {
   private drawTable: boolean;
   dataSource = new MatTableDataSource();
 
-  constructor(private briService: BriService, public dialog: MatDialog) { }
+  constructor(private briService: BriService, public dialog: MatDialog, private adapter: DateAdapter<any>) { }
 
   ngOnInit() {
     this.drawTable = false;
+    this.adapter.setLocale('fr');
   }
 
   dateUsed = (d: Date) => {

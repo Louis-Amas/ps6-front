@@ -24,12 +24,12 @@ export class TeacherFileProcessedComponent implements OnInit {
   }
 
   getConcernedStudent() {
-    this.studentService.getStudentsByStatus('waitBriVerif').subscribe(t => {
+    this.studentService.getStudentsByStatus('waitBriVerif', this.teacher.teacherInfo.responsible).subscribe(t => {
       this.studentsConcerned = t;
       this.studentsFilter = t;
-      this.studentService.getStudentsByStatus('waitValidate').subscribe(stu => {
+      this.studentService.getStudentsByStatus('waitValidate', this.teacher.teacherInfo.responsible).subscribe(stu => {
         stu.forEach( s => this.studentsFilter.push(s));
-        this.studentService.getStudentsByStatus('validate').subscribe(st => {
+        this.studentService.getStudentsByStatus('validate', this.teacher.teacherInfo.responsible).subscribe(st => {
           st.forEach(stud => this.studentsFilter.push(stud));
         });
       });
