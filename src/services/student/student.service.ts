@@ -26,10 +26,6 @@ export class StudentService {
   constructor(private http: HttpClient) {
   }
 
-
-  getAllStudents() {
-    return this.http.get<User[]>(this.studentUrl);
-  }
   getStudentById(id: string): Observable<Student> {
     return this.http.get<Student>(this.studentUrl + '/' + id);
   }
@@ -84,19 +80,6 @@ export class StudentService {
     });
 
   }
-  /*refactorStudent(student: Student) {
-    student.phoneNumber = this.testFormValue(student.phoneNumber);
-    student.major = this.testFormValue(student.major);
-    student.year = this.testFormValue(student.year);
-  }*/
-  /*
-    testFormValue(value: string) {
-      if (value === undefined) {
-        return '';
-      }
-      return value;
-    }*/
-
   addWish(coursesId: string[], univId: string, studentId: string) {
     return this.http.post(this.studentUrl + '/student/' + studentId + '/wishes', {
       university: univId,
@@ -121,12 +104,11 @@ export class StudentService {
     });
   }
 
-  uploadFile(file: string, studentId: string) {
-    const body = {filename: file};
-
-    return this.http.put(this.studentUrl + '/student/' + studentId + '/attachments', body, {
-      responseType : 'blob',
-      headers: new HttpHeaders().append('Content-Type', 'application/json')
+  uploadFile(file: any, studentId: string) {
+    const attachs = [];
+    attachs.push(file);
+    return this.http.post(this.studentUrl + '/student/' + studentId + '/attachments', {
+      attachments: attachs,
     });
   }
 

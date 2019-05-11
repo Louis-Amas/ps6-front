@@ -4,9 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Student} from '../../../models/student';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../../models/user';
-import {Observable} from 'rxjs';
-import {Attachment} from '../../../models/attachment';
-
+import {isElementScrolledOutsideView} from '@angular/cdk/overlay/typings/position/scroll-clip';
 
 
 function getBase64(file, cb) {
@@ -21,21 +19,39 @@ function getBase64(file, cb) {
 })
 export class StudentFormComponent implements OnInit {
 
-  MAJOR_LIST: string[] = [
-    'SI',
-    'MAM',
-    'GB',
-    'GE',
-    'ELEC' ];
+  FILE_LIST: any[] = [
+    {
+      name: 'Curriculum Vitae',
+      file: 'cv',
+      used: false
+    },
+    {
+      name: 'Lettre de Motivation',
+      file: 'lettreMotivation',
+      used: false
+    },
+    {
+      name: 'Certificat de Compétence Linguistique',
+      file: 'compLinguistique',
+      used: false
+    },
+    {
+      name: 'Carte Européenne',
+      file: 'carteEuro',
+      used: false
+    }
+  ];
 
-  YEAR_LIST: string[] = [
-    '3',
-    '4',
-    '5'
+  SPE_LIST: string[] = [
+    'info',
+    'dev',
+    'test'
   ];
 
   public studentForm: FormGroup;
   public attachmentForm: FormGroup;
+  public specialityForm: FormGroup;
+  public noteForm: FormGroup;
   public attachments: any[] = [];
 
   public userDetails: User;
@@ -43,23 +59,29 @@ export class StudentFormComponent implements OnInit {
   constructor(public formBuilder: FormBuilder,
               public studentService: StudentService,
               private route: ActivatedRoute) {
-    this.studentForm = this.formBuilder.group({
-      major: ['', [Validators.required]],
-      year: ['', [Validators.required]],
-    });
     this.attachmentForm = this.formBuilder.group({
-      transcript: ['', [Validators.required]],
-      coveringLetter: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+      value: [''],
+      nameAssociate: ['']
     });
-
+    this.specialityForm = this.formBuilder.group({
+      speciality: ['', [Validators.required]]
+    });
+    this.noteForm = this.formBuilder.group({
+      year: ['', [Validators.required]],
+      schoolLevel: ['', [Validators.required]],
+      school: ['', [Validators.required]],
+      note: ['', [Validators.required]],
+    });
   }
 
   ngOnInit() {
     const userId = this.route.snapshot.paramMap.get('id');
-    this.studentService.getUserById(userId)
-      .subscribe(user => {
+    this.studentService.getUserById(userId).subscribe(user => {
         this.userDetails = user;
-      });
+        console.log(user);
+        this.updateFileList();
+    });
   }
 
   initializeStudentForm() {
@@ -71,7 +93,7 @@ export class StudentFormComponent implements OnInit {
       });
       this.attachmentForm.setValue({
         transcript: this.userDetails.studentInfo.attachments[0].name,
-        coveringLetter: '',
+        ohterDocs: '',
       });
     }
   }
@@ -83,11 +105,8 @@ export class StudentFormComponent implements OnInit {
     this.userDetails.studentInfo.attachments = this.attachments;
     this.attachmentForm.setValue({
       transcript: this.userDetails.studentInfo.attachments[0].name,
-      coveringLetter: '',
+      otherDocs: '',
     });
-    /*this.user = student;
-    console.log(this.user);
-    console.log(student);*/
     this.studentService.updateStudent(this.userDetails).subscribe(user => console.log(user));
   }
 
@@ -99,22 +118,52 @@ export class StudentFormComponent implements OnInit {
     this.initializeStudentForm();
   }
 
-  fileChange(event) {
+  fileChange(event, fileName) {
     const fileList: FileList = event.target.files;
     if (fileList.length > 0) {
       const file: File = fileList[0];
       const name1: string = file.name;
       getBase64(file, (result) => {
-        this.attachments.push(
-          {
-            name: name1,
-            type: event.target.id,
-            data: result
+        let find = false;
+        this.attachments.forEach(a => {
+          if (a.name.split('.', 1)[0] === fileName) {
+            a.name = fileName + '.' + name1.split('.')[1];
+            a.data = result;
+            find = true;
           }
-        );
-        console.log(event.target.id);
+        });
+        if (!find) {
+          this.attachments.push(
+            {
+              name: fileName + '.' + name1.split('.')[1],
+              data: result
+            }
+          );
+        }
       });
     }
+  }
+
+  updateFileList() {
+    this.userDetails.studentInfo.attachments.forEach(a => {
+      const res = this.FILE_LIST.reduce(f => a.name.split('.')[1] === f.file);
+      if (res) {
+        console.log('bo');
+        res.used = true;
+      }
+    });
+  }
+
+  validateFile(fileName) {
+    if (this.attachments.length === 0) {
+      return;
+    }
+    const attach = this.attachments.reduce(a => a.name.split('.')[1] === fileName);
+    console.log(attach);
+    this.studentService.uploadFile(attach, this.userDetails._id).subscribe(student => {
+      console.log('la');
+      console.log(student);
+    });
   }
 }
 

@@ -1,67 +1,71 @@
 
 <button mat-button routerLink="..">Retour</button>
 
+<div *ngIf="userDetails != undefined">
+  <app-student-info [currentStudent]="userDetails"></app-student-info>
 
-<app-form [user]="userDetails" (currentUser)="updateUser($event)"></app-form>
+  <mat-card class="card-spe">
+    <mat-card-title>Modifier votre spéciliatié de dernière année</mat-card-title>
+    <mat-card-content>
+      <form class="spe-form" [formGroup]="specialityForm">
+        <mat-form-field class="spe-form-field">
+          <mat-label>Spécialité de dernère année</mat-label>
+          <mat-select [formControlName]="'speciality'">
+            <mat-option *ngFor="let spe of SPE_LIST" [value]="spe">{{spe}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button class="validate-spe" mat-button>Valider</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
 
+  <mat-card>
+    <mat-card-title>Vos bulletins & notes</mat-card-title>
+    <mat-card-content>
+      <span>Relevés de notes depuis l’entrée dans l’enseignement supérieur (PDF) :</span>
 
-<div class="form-container">
+      <mat-list role="list">
+        <mat-list-item role="listitem" *ngFor="let att of userDetails.studentInfo.attachments">
 
-  <form class ='student-form' [formGroup]="studentForm" id="form">
+        </mat-list-item>
+      </mat-list>
 
+      <form class='attachment-form' [formGroup]="attachmentForm">
+          <input type="file" id="transcript"
+                 accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf,.zip"
+                 (change)="fileChange($event, 'bo')">
+          <mat-form-field class="form-container2">
+            <input matInput type="text" [formControlName]="'name'" value="{{attachmentForm.value['name']}}" readonly>
+          </mat-form-field>
+        <form class="note-form" [formGroup]="noteForm">
 
-    <mat-form-field>
-      <mat-select placeholder="Filière" [formControlName]="'major'">
-        <mat-option *ngFor="let major of MAJOR_LIST" [value]="major">{{major}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+        </form>
+      </form>
+    </mat-card-content>
+  </mat-card>
 
-    <mat-form-field>
-      <mat-select placeholder="Année" [formControlName]="'year'">
-        <mat-option *ngFor="let year of YEAR_LIST" [value]="year" >{{year}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+  <mat-card>
+    <mat-card-title>Autres document à saisir</mat-card-title>
+    <mat-card-content>
 
-  </form>
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let file of FILE_LIST">
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{file.name}}</mat-panel-title>
+            <mat-panel-description>NON RENSEIGNÉ</mat-panel-description>
+          </mat-expansion-panel-header>
+          <div *ngIf="!file.used">
+            <input type="file" id="coveringLetter"
+                   accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf"
+                   (change)="fileChange($event, file.file)">
+            <button mat-button class="validate-spe" (click)="validateFile(file.file)">Valider</button>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+  </mat-card>
+
+  <br>
 </div>
-
-<br>
-<br>
-
-<form class ='attachment-form' [formGroup]="attachmentForm" id="form2">
-  <div class = "upload-container">
-    <span>Relevés de notes depuis l’entrée dans l’enseignement supérieur (PDF) :
-    </span>
-    <br>
-    <input type="file" id="transcript"
-           form="form"
-           accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf,.zip"
-           (change)="fileChange($event)">
-    <mat-form-field class="form-container2">
-      <input matInput type="text" [formControlName]="'transcript'" value="{{attachmentForm.value['transcript']}}" readonly>
-    </mat-form-field>
-
-    <br>
-    <br>
-    <span>Lettre de motivation - Destinée à la commission de sélection de la composante,
-      elle présentera l’ensemble de votre projet et justifiera l’ordre de votre choix
-      (il peut vous être demandé une lettre de motivation dans la langue où seront dispensés les enseignements)
-    </span>
-    <br>
-    <input type="file" id="coveringLetter"
-           accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf"
-           (change)="fileChange($event)"
-
-    >
-
-  </div>
-
-  <div class = "form-container">
-    <button mat-button (click)="saveChanges()"> Sauvegarder les modification </button>
-  </div>
-
-</form>
-
-[formControlName]="'coveringLetter'"
 
 

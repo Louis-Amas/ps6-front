@@ -32,6 +32,25 @@
   color: #0046FF;
 }
 
-.form-container2 {
-  margin-right: 30%;
+.attachment-form{
+  text-align: center;
+}
+
+.mat-card{
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3%;
+}
+
+.spe-form{
+  text-align: center;
+}
+
+.spe-form-field{
+  width: 500px;
+}
+
+.validate-spe{
+  margin-left: 1%;
 }
