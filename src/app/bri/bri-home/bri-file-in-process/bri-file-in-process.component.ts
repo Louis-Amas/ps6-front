@@ -33,7 +33,7 @@ export class BriFileInProcessComponent implements OnInit {
   }
 
   getStudentsByState() {
-    this.studentService.getStudentsByStatus('waitBriVerif').subscribe(s => {
+    this.studentService.getStudentsByStatus('waitBriVerif', undefined).subscribe(s => {
       this.studentsConcerned = s;
       this.studentsFilter = s;
       this.dataSource = new MatTableDataSource<User>(this.studentsConcerned);

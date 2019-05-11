@@ -139,8 +139,13 @@ export class StudentService {
   }
 
 
-  getStudentsByStatus(state: string) {
-    return this.http.get<User[]>(this.studentUrl + '/student/status/' + state);
+  getStudentsByStatus(state: string, major: string) {
+    if (major !== undefined) {
+      return this.http.get<User[]>(this.studentUrl + '/student/status/' + state + '?major=' + major);
+
+    } else {
+      return this.http.get<User[]>(this.studentUrl + '/student/status/' + state);
+    }
   }
 
   updateWish(id: string, univ: string, courses: Course[]) {
