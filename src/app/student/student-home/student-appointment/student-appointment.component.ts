@@ -1,7 +1,12 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {BriService} from '../../../../services/bri/bri.service';
 import {User} from '../../../../models/user';
-import {MatDatepickerInputEvent, MatDialog, MatTableDataSource} from '@angular/material';
+import {
+  DateAdapter,
+  MatDatepickerInputEvent,
+  MatDialog,
+  MatTableDataSource
+} from '@angular/material';
 import {StudentAppointmentDialogComponent} from '../student-appointment-dialog/student-appointment-dialog.component';
 import {TimeSlot} from '../../../../models/timeSlot';
 
@@ -22,11 +27,12 @@ export class StudentAppointmentComponent implements OnInit {
   private displayedColumns: string[] = ['reserved', 'timeSlot', 'choose'];
   dataSource = new MatTableDataSource();
 
-  constructor(public briService: BriService, public dialog: MatDialog) { }
+  constructor(public briService: BriService, public dialog: MatDialog, private adapter: DateAdapter<any>) { }
 
   ngOnInit() {
     this.drawTable = false;
-    if (this.student.studentInfo.appointment !== undefined){
+    this.adapter.setLocale('fr');
+    if (this.student.studentInfo.appointment !== undefined) {
       this.timeSlot = this.student.studentInfo.appointment.timeSlot;
       this.initTimeSlot();
     }

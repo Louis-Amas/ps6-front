@@ -45,7 +45,7 @@
     </table>
   </div>
   <mat-card-content *ngIf="student.studentInfo.appointment != undefined">
-    <p>Vous avez choisi un rendez-vous le {{student.studentInfo.appointment.timeSlot.departureTime.getDate()}}/{{student.studentInfo.appointment.timeSlot.departureTime.getMonth()}}/{{student.studentInfo.appointment.timeSlot.departureTime.getFullYear()}}</p>
+    <p>Vous avez choisi un rendez-vous le {{student.studentInfo.appointment.timeSlot.departureTime.getDate()}}/{{student.studentInfo.appointment.timeSlot.departureTime.getMonth()+1}}/{{student.studentInfo.appointment.timeSlot.departureTime.getFullYear()}}</p>
     <p>De {{student.studentInfo.appointment.timeSlot.departureTime.getHours()}}h
       {{student.studentInfo.appointment.timeSlot.departureTime.getMinutes()}}mn à
       {{student.studentInfo.appointment.timeSlot.endTime.getHours()}}h

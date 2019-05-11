@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Prise de rendez-vous</h1>
 <div mat-dialog-content>
-  <p>Vous avez choisi un rendez-vous le {{departureTime.getDate()}}/{{departureTime.getMonth()}}/{{departureTime.getFullYear()}}</p>
+  <p>Vous avez choisi un rendez-vous le {{departureTime.getDate()}}/{{departureTime.getMonth()+1}}/{{departureTime.getFullYear()}}</p>
   <p>De {{departureTime.getHours()}}h {{departureTime.getMinutes()}}mn à {{endTime.getHours()}}h {{endTime.getMinutes()}}mn</p>
 </div>
 <mat-toolbar>
