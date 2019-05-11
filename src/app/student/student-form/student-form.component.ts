@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {StudentService} from '../../../services/student/student.service';
 import {ActivatedRoute} from '@angular/router';
-import {Student} from '../../../models/student';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../../models/user';
-import {isElementScrolledOutsideView} from '@angular/cdk/overlay/typings/position/scroll-clip';
 
 
 function getBase64(file, cb) {
@@ -23,22 +21,22 @@ export class StudentFormComponent implements OnInit {
     {
       name: 'Curriculum Vitae',
       file: 'cv',
-      used: false
+      used: false,
     },
     {
       name: 'Lettre de Motivation',
       file: 'lettreMotivation',
-      used: false
+      used: false,
     },
     {
       name: 'Certificat de Compétence Linguistique',
       file: 'compLinguistique',
-      used: false
+      used: false,
     },
     {
       name: 'Carte Européenne',
       file: 'carteEuro',
-      used: false
+      used: false,
     }
   ];
 
@@ -79,44 +77,10 @@ export class StudentFormComponent implements OnInit {
     const userId = this.route.snapshot.paramMap.get('id');
     this.studentService.getUserById(userId).subscribe(user => {
         this.userDetails = user;
-        console.log(user);
         this.updateFileList();
     });
   }
 
-  initializeStudentForm() {
-
-    if (this.userDetails && this.userDetails.studentInfo) {
-      this.studentForm.setValue({
-        major: this.userDetails.studentInfo.major,
-        year: this.userDetails.studentInfo.year,
-      });
-      this.attachmentForm.setValue({
-        transcript: this.userDetails.studentInfo.attachments[0].name,
-        ohterDocs: '',
-      });
-    }
-  }
-
-  saveChanges() {
-    const student: Student = this.studentForm.getRawValue();
-    this.userDetails.studentInfo.major = student.major;
-    this.userDetails.studentInfo.year = student.year;
-    this.userDetails.studentInfo.attachments = this.attachments;
-    this.attachmentForm.setValue({
-      transcript: this.userDetails.studentInfo.attachments[0].name,
-      otherDocs: '',
-    });
-    this.studentService.updateStudent(this.userDetails).subscribe(user => console.log(user));
-  }
-
-  updateUser(user1: User) {
-    this.userDetails.firstName = user1.firstName;
-    this.userDetails.lastName = user1.lastName;
-    this.userDetails.email = user1.email;
-    this.userDetails.phoneNumber = user1.phoneNumber;
-    this.initializeStudentForm();
-  }
 
   fileChange(event, fileName) {
     const fileList: FileList = event.target.files;
@@ -146,11 +110,13 @@ export class StudentFormComponent implements OnInit {
 
   updateFileList() {
     this.userDetails.studentInfo.attachments.forEach(a => {
-      const res = this.FILE_LIST.reduce(f => a.name.split('.')[1] === f.file);
-      if (res) {
-        console.log('bo');
-        res.used = true;
-      }
+      this.FILE_LIST.forEach(f => {
+        if (a.name.split('.')[0] === f.file) {
+          f.used = true;
+          f.data = a.data;
+          f.nameFinal = a.name;
+        }
+      });
     });
   }
 
@@ -158,12 +124,35 @@ export class StudentFormComponent implements OnInit {
     if (this.attachments.length === 0) {
       return;
     }
-    const attach = this.attachments.reduce(a => a.name.split('.')[1] === fileName);
-    console.log(attach);
-    this.studentService.uploadFile(attach, this.userDetails._id).subscribe(student => {
-      console.log('la');
-      console.log(student);
+    const attach = this.attachments.filter(a => a.name.split('.')[0] === fileName)[0];
+    this.FILE_LIST.map(f => {
+      if (f.name === fileName) {
+        f.used = true;
+      }
     });
+    this.download(attach.name, attach.data);
+    this.studentService.uploadFile(attach, this.userDetails._id).subscribe(student => {
+      this.userDetails = student;
+    });
+  }
+
+  //try to downloas
+  download(filename, data) {
+    const byteString = atob(data);
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i += 1) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    const newBlob = new Blob([ab], {
+      type: 'document/pdf',
+    });
+    const elem = window.document.createElement('a');
+    elem.href = window.URL.createObjectURL(newBlob);
+    elem.download = filename;
+    document.body.appendChild(elem);
+    elem.click();
+    document.body.removeChild(elem);
   }
 }
 

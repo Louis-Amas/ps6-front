@@ -52,13 +52,17 @@
         <mat-expansion-panel *ngFor="let file of FILE_LIST">
           <mat-expansion-panel-header>
             <mat-panel-title>{{file.name}}</mat-panel-title>
-            <mat-panel-description>NON RENSEIGNÉ</mat-panel-description>
+            <mat-panel-description class="red-span" *ngIf="!file.used">NON RENSEIGNÉ</mat-panel-description>
+            <mat-panel-description class="green-span" *ngIf="file.used">RENSEIGNÉ</mat-panel-description>
           </mat-expansion-panel-header>
-          <div *ngIf="!file.used">
+          <div class="add-file" *ngIf="!file.used">
             <input type="file" id="coveringLetter"
                    accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf"
                    (change)="fileChange($event, file.file)">
             <button mat-button class="validate-spe" (click)="validateFile(file.file)">Valider</button>
+          </div>
+          <div class="add-file" *ngIf="file.used">
+            <a href="data:text/octet-stream;base64,{{file.data}}" download="{{file.name.pdf}}">bo</a>
           </div>
         </mat-expansion-panel>
       </mat-accordion>

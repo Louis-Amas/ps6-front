@@ -54,3 +54,15 @@
 .validate-spe{
   margin-left: 1%;
 }
+
+.green-span {
+  color: forestgreen;
+}
+
+.red-span {
+  color: #f44336;
+}
+
+.add-file {
+  text-align: center;
+}

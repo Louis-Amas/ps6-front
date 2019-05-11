@@ -52,34 +52,12 @@ export class StudentService {
     return this.http.delete<Wish[]>(this.studentUrl + '/student/' + studentId + '/wishes/' + univId);
   }
 
-  updateStudent(user: User) {
-    /* const id: string = studentForm.value._id;
-     const index: number = this.studentList.findIndex((stud) => stud._id === id.toString());
-     const tmp: Student[] = this.studentList.slice(index, index + 1);
-     const student: Student = tmp[0];
-     const student1: Student = studentForm.getRawValue() as Student;
-     student.firstName = student1.firstName;
-     student.lastName = student1.lastName;
-     student.email = student1.email;
-     student.phoneNumber = student1.phoneNumber;
-     student.major = student1.major;
-     student.year = student1.year;
-     this.studentList.push(student);
-     console.log(this.studentList[0]); */
-    const id: string = user._id;
-    return this.http.put<User>(this.studentUrl + '/' + id, {
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      phoneNumber: user.phoneNumber,
-      studentInfo: {
-        major: user.studentInfo.major,
-        year: user.studentInfo.year,
-        attachments: user.studentInfo.attachments,
-      }
+  updateStudentLastYearSpeciality(studentId: string, speciality: string) {
+    return this.http.put<User>(this.studentUrl + '/student/' + studentId, {
+      lastYearMajor: speciality
     });
-
   }
+
   addWish(coursesId: string[], univId: string, studentId: string) {
     return this.http.post(this.studentUrl + '/student/' + studentId + '/wishes', {
       university: univId,
@@ -111,15 +89,6 @@ export class StudentService {
       attachments: attachs,
     });
   }
-
-  updateStudentAttachments(name: string, data: string, studentId: string) {
-  }
-
-  findStudentAttachment(student: Student) {
-    const studentId: string =  student._id;
-    return this.http.get<Attachment[]>(this.studentUrl + '/student/' + studentId + '/attachments');
-  }
-
 
   getStudentsByStatus(state: string, major: string) {
     if (major !== undefined) {
