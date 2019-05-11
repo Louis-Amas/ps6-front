@@ -1,6 +1,7 @@
 .grid-form-university {
   display: grid;
-  grid-template-columns: 70% auto;
+  grid-template-columns: 1fr;
+  place-items: center center;
 }
 .dynamic_list {
   border: solid 1px #ccc;

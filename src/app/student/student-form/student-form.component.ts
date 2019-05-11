@@ -3,6 +3,7 @@ import {StudentService} from '../../../services/student/student.service';
 import {ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../../models/user';
+import {DomSanitizer} from '@angular/platform-browser';
 
 
 function getBase64(file, cb) {
@@ -56,7 +57,8 @@ export class StudentFormComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder,
               public studentService: StudentService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private sanitizer: DomSanitizer) {
     this.attachmentForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       value: [''],
@@ -81,6 +83,9 @@ export class StudentFormComponent implements OnInit {
     });
   }
 
+  sanitize(url: string){
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+  }
 
   fileChange(event, fileName) {
     const fileList: FileList = event.target.files;
@@ -130,29 +135,10 @@ export class StudentFormComponent implements OnInit {
         f.used = true;
       }
     });
-    this.download(attach.name, attach.data);
     this.studentService.uploadFile(attach, this.userDetails._id).subscribe(student => {
       this.userDetails = student;
     });
   }
 
-  //try to downloas
-  download(filename, data) {
-    const byteString = atob(data);
-    const ab = new ArrayBuffer(byteString.length);
-    const ia = new Uint8Array(ab);
-    for (let i = 0; i < byteString.length; i += 1) {
-      ia[i] = byteString.charCodeAt(i);
-    }
-    const newBlob = new Blob([ab], {
-      type: 'document/pdf',
-    });
-    const elem = window.document.createElement('a');
-    elem.href = window.URL.createObjectURL(newBlob);
-    elem.download = filename;
-    document.body.appendChild(elem);
-    elem.click();
-    document.body.removeChild(elem);
-  }
 }
 
