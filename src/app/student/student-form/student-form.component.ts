@@ -77,6 +77,7 @@ export class StudentFormComponent implements OnInit {
     const userId = this.route.snapshot.paramMap.get('id');
     this.studentService.getUserById(userId).subscribe(user => {
         this.userDetails = user;
+        console.log(user);
         this.updateFileList();
     });
   }
@@ -110,6 +111,7 @@ export class StudentFormComponent implements OnInit {
 
   updateFileList() {
     this.userDetails.studentInfo.attachments.forEach(a => {
+      console.log(a.name.split('.')[0]);
       this.FILE_LIST.forEach(f => {
         if (a.name.split('.')[0] === f.file) {
           f.used = true;
@@ -130,25 +132,14 @@ export class StudentFormComponent implements OnInit {
         f.used = true;
       }
     });
-    this.download(attach.name, attach.data);
     this.studentService.uploadFile(attach, this.userDetails._id).subscribe(student => {
       this.userDetails = student;
     });
   }
 
-  //try to downloas
   download(filename, data) {
-    const byteString = atob(data);
-    const ab = new ArrayBuffer(byteString.length);
-    const ia = new Uint8Array(ab);
-    for (let i = 0; i < byteString.length; i += 1) {
-      ia[i] = byteString.charCodeAt(i);
-    }
-    const newBlob = new Blob([ab], {
-      type: 'document/pdf',
-    });
     const elem = window.document.createElement('a');
-    elem.href = window.URL.createObjectURL(newBlob);
+    elem.href = data;
     elem.download = filename;
     document.body.appendChild(elem);
     elem.click();
