@@ -32,21 +32,43 @@ export class TeacherService {
     return this.http.get<User>(this.teacherUrl + '/' + id);
   }
 
-  filterStudent(id: string, filterStu: User[], idUniv: string, search: string) {
-    if (idUniv !== undefined && search !== undefined) {
+  filterStudent(id: string, filterStu: User[], idUniv: string, search: string, major: string) {
+    if (idUniv !== undefined && search !== undefined && major !== undefined) {
       return filterStu.filter(stu => stu.studentInfo.wishes.find(wish =>
         wish.university._id === idUniv) && (stu.lastName.toLowerCase().includes(search) ||
-        stu.firstName.toLowerCase().includes(search) || stu.studentInfo.numStu.toString().includes(search)));
+        stu.firstName.toLowerCase().includes(search) || stu.studentInfo.numStu.toString().includes(search))
+        && stu.studentInfo.lastYearMajor === major);
     } else {
-        if (idUniv !== undefined) {
+        if (idUniv !== undefined && search !== undefined) {
           return filterStu.filter(stu => stu.studentInfo.wishes.find(wish =>
-            wish.university._id === idUniv));
+            wish.university._id === idUniv) && stu.firstName.toLowerCase().includes(search) || stu.lastName.toLowerCase().includes(search)
+            || stu.studentInfo.numStu.toString().includes(search));
         } else {
-          if (search !== undefined) {
+          if (search !== undefined && major !== undefined) {
             return filterStu.filter(stu => stu.firstName.toLowerCase().includes(search) || stu.lastName.toLowerCase().includes(search)
-              || stu.studentInfo.numStu.toString().includes(search));
+              || stu.studentInfo.numStu.toString().includes(search) && stu.studentInfo.lastYearMajor === major);
           } else {
-            return filterStu;
+            if (idUniv !== undefined && major !== undefined) {
+              return filterStu.filter(stu => stu.studentInfo.wishes.find(wish =>
+                wish.university._id === idUniv) && stu.studentInfo.lastYearMajor === major);
+            } else {
+              if (idUniv !== undefined) {
+                return filterStu.filter(stu => stu.studentInfo.wishes.find(wish =>
+                  wish.university._id === idUniv));
+              } else {
+                if (major !== undefined) {
+                  return filterStu.filter(stu => stu.studentInfo.lastYearMajor === major);
+                } else {
+                  if (search !== undefined) {
+                    return filterStu.filter(stu => stu.firstName.toLowerCase().includes(search) ||
+                      stu.lastName.toLowerCase().includes(search)
+                      || stu.studentInfo.numStu.toString().includes(search));
+                  } else {
+                    return filterStu;
+                  }
+                }
+              }
+            }
         }
       }
     }

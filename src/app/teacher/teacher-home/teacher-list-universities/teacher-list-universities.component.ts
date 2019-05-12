@@ -23,7 +23,6 @@ export class TeacherListUniversitiesComponent implements OnInit {
   }
 
   getUniversity() {
-    console.log(this.teacher);
     this.universityService.getByMajor(this.teacher.teacherInfo.responsible).subscribe(univ => {
       this.universityList = univ;
       this.universityFilter = univ;

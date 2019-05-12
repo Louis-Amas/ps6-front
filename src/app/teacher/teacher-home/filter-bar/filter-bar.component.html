@@ -18,9 +18,9 @@
       </mat-form-field>
       <mat-form-field class="specialty">
         <mat-label>Filière de dernière année</mat-label>
-        <mat-select name="specialty">
-          <mat-option *ngFor="let food of foods" [value]="food.value">
-            {{food.viewValue}} <!-- a changer -->
+        <mat-select (selectionChange)="onMajorSelected($event)" name="specialty">
+          <mat-option *ngFor="let major of SPE_LIST" [value]="major">
+            {{major}}
           </mat-option>
         </mat-select>
       </mat-form-field>
