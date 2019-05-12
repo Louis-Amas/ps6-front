@@ -5,11 +5,11 @@
   <app-student-info [currentStudent]="userDetails"></app-student-info>
 
   <mat-card class="card-spe">
-    <mat-card-title>Modifier votre spéciliatié de dernière année</mat-card-title>
+    <mat-card-title>Modifier votre spécialité de dernière année</mat-card-title>
     <mat-card-content>
       <form class="spe-form" [formGroup]="specialityForm">
         <mat-form-field class="spe-form-field">
-          <mat-label>Spécialité de dernère année</mat-label>
+          <mat-label>Spécialité de dernière année</mat-label>
           <mat-select [formControlName]="'speciality'">
             <mat-option *ngFor="let spe of SPE_LIST" [value]="spe">{{spe}}</mat-option>
           </mat-select>
@@ -62,13 +62,13 @@
     </mat-card-content>
     <mat-card-footer>
       <button mat-button class="createSlot" (click)="openDialog()">
-        Ajouter un relevé de note
+        Ajouter un relevé de notes
       </button>
     </mat-card-footer>
   </mat-card>
 
   <mat-card>
-    <mat-card-title>Autres document à saisir</mat-card-title>
+    <mat-card-title>Autres documents à saisir</mat-card-title>
     <mat-card-content>
 
       <mat-accordion>

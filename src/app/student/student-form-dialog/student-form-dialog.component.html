@@ -1,13 +1,34 @@
+<p>
+  Renseignez les différentes informations suivantes pour ajouter une note.
+  N'oubliez pas d'ajouter votre bulletin à la suite.
+</p>
+
 <form class="spe-form" [formGroup]="noteForm">
   <mat-form-field class="spe-form-field">
     <mat-label>Année</mat-label>
     <mat-select [formControlName]="'year'">
-      <mat-option *ngFor="let year of YEAR" [value]="year">{{year}}</mat-option>
+      <mat-option *ngFor="let year of YEAR" [value]="'year'">{{year}}</mat-option>
     </mat-select>
   </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="Niveau d'études" [formControlName]="'schoolLevel'">
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="Etablissement" [formControlName]="'school'">
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="Moyenne" [formControlName]="'note'">
+  </mat-form-field>
+  <br>
+  <input type="file" id="coveringLetter"
+         accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf"
+         (change)="fileChange($event, file.file)">
 </form>
 <mat-toolbar>
   <button mat-button color="primary" (click)="onNoClick()">Retour</button>
   <span class="tmp"></span>
-  <button mat-button color="warn" (click)="updateStudentState()">Transmettre</button>
+  <button mat-button color="warn" (click)="updateStudent()">Transmettre</button>
 </mat-toolbar>

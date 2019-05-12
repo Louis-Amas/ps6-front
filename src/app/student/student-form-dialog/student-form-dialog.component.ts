@@ -13,7 +13,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class StudentFormDialogComponent implements OnInit {
 
   YEAR: number[] = [];
-  noteForm: FormGroup
+  noteForm: FormGroup;
 
   constructor(public dialogRef: MatDialogRef<StudentFormDialogComponent>, private route: ActivatedRoute,
               private studentService: StudentService, private formBuilder: FormBuilder,
@@ -37,7 +37,11 @@ export class StudentFormDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  updateStudentState() {
+  updateStudent() {
+    const year = this.noteForm.get('year').value;
+    const schoolLevel = this.noteForm.get('schoolLevel').value;
+    const school = this.noteForm.get('school').value;
+    const mark = this.noteForm.get('note').value;
   }
 
 }

@@ -5,3 +5,12 @@
 .mat-toolbar{
   background-color: white;
 }
+
+p {
+  font-family: Arial;
+  text-align: center;
+}
+
+form {
+  text-align: center;
+}
