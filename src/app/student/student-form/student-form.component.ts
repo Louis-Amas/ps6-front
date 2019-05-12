@@ -140,6 +140,20 @@ export class StudentFormComponent implements OnInit {
     }
   }
 
+  download(filename) {
+    const data = this.userDetails.studentInfo.attachments.filter(a => a.name === filename)[0].data;
+    const element = document.createElement('a');
+    element.setAttribute('href', data);
+    element.setAttribute('download', filename);
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+  }
+
   updateSpecialty() {
     this.studentService.updateStudentLastYearSpeciality(this.userDetails._id, this.specialityForm.value.speciality.toString())
       .subscribe(stu => {
@@ -152,7 +166,6 @@ export class StudentFormComponent implements OnInit {
       this.FILE_LIST.forEach(f => {
         if (a.name.split('.')[0] === f.file) {
           f.used = true;
-          f.data = a.data;
           f.nameFinal = a.name;
         }
       });
@@ -171,6 +184,7 @@ export class StudentFormComponent implements OnInit {
     });
     this.studentService.uploadFile(attach, this.userDetails._id).subscribe(student => {
       this.userDetails = student;
+      this.updateFileList();
     });
   }
 

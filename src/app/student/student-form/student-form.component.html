@@ -62,7 +62,8 @@
             <button mat-button class="validate-spe" (click)="validateFile(file.file)">Valider</button>
           </div>
           <div class="add-file" *ngIf="file.used">
-            <a [href]="sanitize(file.data)">bo</a>
+            <span>Vous avez mis le fichier suivant : {{file.nameFinal}}</span>
+            <button mat-button class="validate-spe" (click)="download(file.nameFinal)">Voir le fichier</button>
           </div>
         </mat-expansion-panel>
       </mat-accordion>
