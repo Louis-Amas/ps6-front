@@ -65,4 +65,9 @@ export class StudentHomeComponent implements OnInit {
       this.initState();
     });
   }
+
+  updateStudent(student: User) {
+    this.student = student;
+    this.initState();
+  }
 }
