@@ -8,7 +8,7 @@ import {User} from '../../../models/user';
 })
 export class StudentInfoComponent implements OnInit {
 
-  MAJOR_LIST: any[] = [
+  public MAJOR_LIST: any[] = [
     {
       major: 'BAT',
       specialty: []

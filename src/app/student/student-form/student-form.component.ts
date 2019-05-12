@@ -41,13 +41,39 @@ export class StudentFormComponent implements OnInit {
     }
   ];
 
-  SPE_LIST: string[] = [
-    'info',
-    'dev',
-    'test'
+  SPE_LIST: any[];
+
+  MAJOR_LIST: any[] = [
+    {
+      major: 'BAT',
+      specialty: []
+    },
+    {
+      major: 'SI',
+      specialty: ['Architecture logicielle', 'Cryptographie, sécurité et vie privée dans les applications et les réseaux',
+        'Intelligence Ambiante', 'Interactions Homme - Machine', 'Sciences, Technologies, Ressources et Applications du Web',
+        'Informatique et Mathématiques Appliquées à la Finance et à l\'Assurance', 'Science des Données']
+    },
+    {
+      major: 'MAM',
+      specialty: ['Informatique et mathématiques appliquées à la finance et l\'assurance', 'Ingénierie numérique',
+        'Science des données']
+    },
+    {
+      major: 'ELEC',
+      specialty: ['Conception de circuits et systèmes', 'Génie du système embarqué', 'Télécommunications et réseaux ']
+    },
+    {
+      major: 'GB',
+      specialty: ['Pharmacologie et Biotechnologie', 'Toxicologie et Sécurité en Santé et Environnement',
+        'Bioinformatique et Modélisation pour la Biologie']
+    },
+    {
+      major: 'GE',
+      specialty: ['Exploitation des services publics de l\'eau', 'Hydroinformatique']
+    },
   ];
 
-  public studentForm: FormGroup;
   public attachmentForm: FormGroup;
   public specialityForm: FormGroup;
   public noteForm: FormGroup;
@@ -79,11 +105,12 @@ export class StudentFormComponent implements OnInit {
     const userId = this.route.snapshot.paramMap.get('id');
     this.studentService.getUserById(userId).subscribe(user => {
         this.userDetails = user;
+        this.SPE_LIST = this.MAJOR_LIST.filter(m => m.major === user.studentInfo.major)[0].specialty;
         this.updateFileList();
     });
   }
 
-  sanitize(url: string){
+  sanitize(url: string) {
     return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 
@@ -111,6 +138,13 @@ export class StudentFormComponent implements OnInit {
         }
       });
     }
+  }
+
+  updateSpecialty() {
+    this.studentService.updateStudentLastYearSpeciality(this.userDetails._id, this.specialityForm.value.speciality.toString())
+      .subscribe(stu => {
+        this.userDetails = stu;
+    });
   }
 
   updateFileList() {

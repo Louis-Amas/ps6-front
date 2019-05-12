@@ -6,7 +6,7 @@ export interface Student {
   lastName?: string;
   firstName?: string;
   email?: string;
-  phoneNumber?: string;
+  lastYearMajor: string;
   password?: string;
   numStu?: number;
   lastConnection?: Date;
