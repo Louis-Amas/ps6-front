@@ -4,6 +4,8 @@ import {ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../../models/user';
 import {DomSanitizer} from '@angular/platform-browser';
+import {MatDialog, MatTableDataSource} from '@angular/material';
+import {StudentFormDialogComponent} from '../student-form-dialog/student-form-dialog.component';
 
 
 function getBase64(file, cb) {
@@ -74,6 +76,9 @@ export class StudentFormComponent implements OnInit {
     },
   ];
 
+  private displayedColumns: string[] = ['year', 'schoolLevel', 'school', 'note', 'file'];
+  dataSource = new MatTableDataSource();
+
   public attachmentForm: FormGroup;
   public specialityForm: FormGroup;
   public noteForm: FormGroup;
@@ -84,7 +89,7 @@ export class StudentFormComponent implements OnInit {
   constructor(public formBuilder: FormBuilder,
               public studentService: StudentService,
               private route: ActivatedRoute,
-              private sanitizer: DomSanitizer) {
+              private sanitizer: DomSanitizer, public dialogRef: MatDialog, public dialog: MatDialog) {
     this.attachmentForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       value: [''],
@@ -93,12 +98,6 @@ export class StudentFormComponent implements OnInit {
     this.specialityForm = this.formBuilder.group({
       speciality: ['', [Validators.required]]
     });
-    this.noteForm = this.formBuilder.group({
-      year: ['', [Validators.required]],
-      schoolLevel: ['', [Validators.required]],
-      school: ['', [Validators.required]],
-      note: ['', [Validators.required]],
-    });
   }
 
   ngOnInit() {
@@ -106,6 +105,7 @@ export class StudentFormComponent implements OnInit {
     this.studentService.getUserById(userId).subscribe(user => {
         this.userDetails = user;
         this.SPE_LIST = this.MAJOR_LIST.filter(m => m.major === user.studentInfo.major)[0].specialty;
+        this.dataSource = new MatTableDataSource<any>(user.studentInfo.notes);
         this.updateFileList();
     });
   }
@@ -188,5 +188,18 @@ export class StudentFormComponent implements OnInit {
     });
   }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(StudentFormDialogComponent, {
+      height: '370px',
+      width: '800px',
+      data: this.userDetails
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.userDetails = result;
+      }
+    });
+  }
 }
 

@@ -1,0 +1,13 @@
+<form class="spe-form" [formGroup]="noteForm">
+  <mat-form-field class="spe-form-field">
+    <mat-label>Année</mat-label>
+    <mat-select [formControlName]="'year'">
+      <mat-option *ngFor="let year of YEAR" [value]="year">{{year}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
+<mat-toolbar>
+  <button mat-button color="primary" (click)="onNoClick()">Retour</button>
+  <span class="tmp"></span>
+  <button mat-button color="warn" (click)="updateStudentState()">Transmettre</button>
+</mat-toolbar>

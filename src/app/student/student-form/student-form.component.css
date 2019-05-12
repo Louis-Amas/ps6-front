@@ -66,3 +66,12 @@
 .add-file {
   text-align: center;
 }
+
+.createSlot{
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 5px;
+  background-color: #00aeef;
+  color: white;
+}
