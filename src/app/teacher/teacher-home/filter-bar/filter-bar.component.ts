@@ -3,6 +3,7 @@ import {UniversityService} from '../../../../services/university/university.serv
 import {User} from '../../../../models/user';
 import {University} from '../../../../models/university';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {MAJOR_MOCKED} from '../../../../mocks/speciality.mocks';
 
 @Component({
   selector: 'app-filter-bar',
@@ -19,6 +20,11 @@ export class FilterBarComponent implements OnInit {
   @Output()
   nameEvent: EventEmitter<string> = new EventEmitter<string>();
 
+  @Output()
+  majorEvent: EventEmitter<string> = new EventEmitter<string>();
+
+  SPE_LIST: any[];
+
   universities: University[] = [];
   nameValue: string;
 
@@ -32,6 +38,7 @@ export class FilterBarComponent implements OnInit {
 
   ngOnInit() {
     this.getUniversity();
+    this.SPE_LIST = MAJOR_MOCKED.filter(m => m.major === this.teacher.teacherInfo.responsible)[0].specialty;
   }
 
   onUniversitySelected($event) {
@@ -51,6 +58,15 @@ export class FilterBarComponent implements OnInit {
       this.nameEvent.emit(undefined);
     }
 
+  }
+
+  onMajorSelected($event) {
+    const major = $event.value;
+    if (major !== undefined) {
+      this.majorEvent.emit(major.toString());
+    } else {
+      this.majorEvent.emit(undefined);
+    }
   }
 
   getUniversity() {

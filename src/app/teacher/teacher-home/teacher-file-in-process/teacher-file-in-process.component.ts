@@ -16,6 +16,7 @@ export class TeacherFileInProcessComponent implements OnInit {
   studentsFilter: User[] = [];
   university: string;
   searchBar: string;
+  major: string;
 
   constructor(public teacherService: TeacherService, public studentService: StudentService) {
   }
@@ -44,7 +45,13 @@ export class TeacherFileInProcessComponent implements OnInit {
     this.filterStudent();
   }
 
+  updateMajor(major: string) {
+    this.major = major;
+    this.filterStudent();
+  }
+
   filterStudent() {
-    this.studentsFilter = this.teacherService.filterStudent(this.teacher._id, this.studentsConcerned, this.university, this.searchBar);
+    this.studentsFilter = this.teacherService.filterStudent(this.teacher._id, this.studentsConcerned, this.university,
+      this.searchBar, this.major);
   }
 }
