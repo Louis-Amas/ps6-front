@@ -18,7 +18,7 @@ export class StudentDetailsComponent implements OnInit {
   public bri: User;
   public wishes: Wish[];
 
-  public FILE_LIST: any[];
+  public FILE_LIST: any[] = [];
 
   private displayedColumns: string[] = ['year', 'schoolLevel', 'school', 'note', 'file'];
   dataSource = new MatTableDataSource();
@@ -37,8 +37,9 @@ export class StudentDetailsComponent implements OnInit {
     this.studentService.getUserById(id).subscribe( student => {
       this.currentStudent = student;
       this.dataSource = new MatTableDataSource<any>(this.currentStudent.studentInfo.notes);
-      // this.getStudentWishes();
-      this.FILE_LIST = FILE_MOCKED;
+      FILE_MOCKED.forEach(f => {
+        this.FILE_LIST.push(Object.assign({}, f));
+      });
       this.updateFileList();
 
     });

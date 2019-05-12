@@ -61,7 +61,7 @@
         </table>
     </mat-card-content>
     <mat-card-footer>
-      <button mat-button class="createSlot" (click)="openDialog()">
+      <button mat-button class="createSlot"  *ngIf="userDetails.studentInfo.stateValidation == 'waitStudent'" (click)="openDialog()">
         Ajouter un relevé de notes
       </button>
     </mat-card-footer>
@@ -79,7 +79,7 @@
             <mat-panel-description class="green-span" *ngIf="file.used">RENSEIGNÉ</mat-panel-description>
           </mat-expansion-panel-header>
           <div class="add-file" *ngIf="!file.used">
-            <input type="file" id="coveringLetter"
+            <input type="file" id="coveringLetter" *ngIf="userDetails.studentInfo.stateValidation == 'waitStudent'"
                    accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf"
                    (change)="fileChange($event, file.file)">
             <button mat-button color="primary" *ngIf="userDetails.studentInfo.stateValidation == 'waitStudent'" class="validate-spe" (click)="validateFile(file.file)">Valider</button>
@@ -87,7 +87,7 @@
           <div class="add-file" *ngIf="file.used">
             <span>Vous avez mis le fichier suivant : {{file.nameFinal}}</span>
             <button mat-button class="validate-spe" color="primary" (click)="download(file.nameFinal)">Voir le fichier</button>
-            <button mat-icon-button color="warn" (click)="deleteFile(file.nameFinal)">
+            <button mat-icon-button color="warn" *ngIf="userDetails.studentInfo.stateValidation == 'waitStudent'" (click)="deleteFile(file.nameFinal)">
               <i class="material-icons">
                 delete_forever
               </i></button>

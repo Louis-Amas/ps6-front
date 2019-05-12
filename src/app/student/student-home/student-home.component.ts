@@ -67,7 +67,6 @@ export class StudentHomeComponent implements OnInit {
   }
 
   updateStudent(student: User) {
-    this.student = student;
-    this.initState();
+    location.reload();
   }
 }

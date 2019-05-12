@@ -16,7 +16,7 @@ import {FILE_MOCKED} from '../../../mocks/file.mocks';
 })
 export class StudentFormComponent implements OnInit {
 
-  FILE_LIST: any[] ;
+  FILE_LIST: any[] = [];
 
   SPE_LIST: any[];
 
@@ -46,7 +46,10 @@ export class StudentFormComponent implements OnInit {
 
   ngOnInit() {
     const userId = this.route.snapshot.paramMap.get('id');
-    this.FILE_LIST = FILE_MOCKED;
+    FILE_MOCKED.forEach(f => {
+      this.FILE_LIST.push(Object.assign({}, f));
+    });
+
     this.studentService.getUserById(userId).subscribe(user => {
         this.userDetails = user;
         this.SPE_LIST = MAJOR_MOCKED.filter(m => m.major === user.studentInfo.major)[0].specialty;
@@ -161,6 +164,11 @@ export class StudentFormComponent implements OnInit {
   deleteFile(nameFinal: any) {
     this.studentService.deleteFile(nameFinal, this.userDetails._id).subscribe(student => {
       this.userDetails = student;
+      this.FILE_LIST = [];
+      FILE_MOCKED.forEach(f => console.log(f.used));
+      FILE_MOCKED.forEach(f => {
+        this.FILE_LIST.push(Object.assign({}, f));
+      });
       this.updateFileList();
     });
   }
