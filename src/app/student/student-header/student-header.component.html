@@ -1,6 +1,6 @@
 <header class="student-header">
   <mat-toolbar>
-    <i class="material-icons" routerLink="form">
+    <i class="material-icons"  *ngIf="student.studentInfo.stateValidation === 'waitStudent'" routerLink="form">
       settings
     </i>
     <span class="space"></span>
