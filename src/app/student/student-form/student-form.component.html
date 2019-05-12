@@ -14,7 +14,7 @@
             <mat-option *ngFor="let spe of SPE_LIST" [value]="spe">{{spe}}</mat-option>
           </mat-select>
         </mat-form-field>
-        <button *ngIf="userDetails.studentInfo.stateValidation == 'waitStudent'"  class="validate-spe" (click)="updateSpecialty()" mat-button>Valider</button>
+        <button *ngIf="userDetails.studentInfo.stateValidation == 'waitStudent'" color="primary"  class="validate-spe" (click)="updateSpecialty()" mat-button>Modifer</button>
       </form>
     </mat-card-content>
   </mat-card>
@@ -82,11 +82,15 @@
             <input type="file" id="coveringLetter"
                    accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf"
                    (change)="fileChange($event, file.file)">
-            <button mat-button *ngIf="userDetails.studentInfo.stateValidation == 'waitStudent'" class="validate-spe" (click)="validateFile(file.file)">Valider</button>
+            <button mat-button color="primary" *ngIf="userDetails.studentInfo.stateValidation == 'waitStudent'" class="validate-spe" (click)="validateFile(file.file)">Valider</button>
           </div>
           <div class="add-file" *ngIf="file.used">
             <span>Vous avez mis le fichier suivant : {{file.nameFinal}}</span>
-            <button mat-button class="validate-spe" (click)="download(file.nameFinal)">Voir le fichier</button>
+            <button mat-button class="validate-spe" color="primary" (click)="download(file.nameFinal)">Voir le fichier</button>
+            <button mat-icon-button color="warn" (click)="deleteFile(file.nameFinal)">
+              <i class="material-icons">
+                delete_forever
+              </i></button>
           </div>
         </mat-expansion-panel>
       </mat-accordion>

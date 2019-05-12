@@ -176,5 +176,12 @@ export class StudentFormComponent implements OnInit {
       this.download(file[0].name);
     }
   }
+
+  deleteFile(nameFinal: any) {
+    this.studentService.deleteFile(nameFinal, this.userDetails._id).subscribe(student => {
+      this.userDetails = student;
+      this.updateFileList();
+    });
+  }
 }
 

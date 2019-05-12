@@ -127,5 +127,9 @@ export class StudentService {
       note: mark,
     });
   }
+
+  deleteFile(filename, userId: string) {
+    return this.http.delete<User>(this.studentUrl + '/student/' + userId + '/attachments/' + filename);
+  }
 }
 

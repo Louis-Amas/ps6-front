@@ -31,5 +31,5 @@
       </mat-step>
     </mat-horizontal-stepper>
   </mat-card>
-  <app-student-wish-list [student]="student" (studentOut)="student = $event"></app-student-wish-list>
+  <app-student-wish-list [student]="student" (studentOut)="updateStudent($event)"></app-student-wish-list>
 </div>
