@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import {Student} from '../../models/student';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 import {Wish} from '../../models/wish';
 import {User} from '../../models/user';
-import {Attachment} from '../../models/attachment';
 import {Course} from '../../models/course';
 
 @Injectable({
@@ -104,6 +103,28 @@ export class StudentService {
     courses.forEach( c => res.push(c._id));
     return this.http.put<Student>(this.studentUrl + '/student/' + id + '/wishes/' + univ, {
       courses: res
+    });
+  }
+
+  createFileNameWithNote(note: any, filename: string) {
+    let mark = '';
+    note.note.toString().split('.').forEach(n =>  mark += n);
+    if (filename) {
+      const end = filename.split('.')[1];
+      return 'note' + note.year + mark + '.' + end;
+    }
+    return 'note' + note.year + mark;
+  }
+
+  getBase64(file, cb) {
+    const reader = new FileReader();
+    reader.onload = (event) => cb(reader.result);
+    reader.readAsDataURL(file);
+  }
+
+  insertNote(mark: any, userId: string) {
+    return this.http.post<User>(this.studentUrl + '/student/' + userId + '/notes', {
+      note: mark,
     });
   }
 }

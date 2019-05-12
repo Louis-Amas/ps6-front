@@ -14,6 +14,7 @@ export class StudentFormDialogComponent implements OnInit {
 
   YEAR: number[] = [];
   noteForm: FormGroup;
+  private attachment: any;
 
   constructor(public dialogRef: MatDialogRef<StudentFormDialogComponent>, private route: ActivatedRoute,
               private studentService: StudentService, private formBuilder: FormBuilder,
@@ -22,7 +23,7 @@ export class StudentFormDialogComponent implements OnInit {
       year: [2019, [Validators.required]],
       schoolLevel: ['', [Validators.required]],
       school: ['', [Validators.required]],
-      note: [10, [Validators.required]],
+      note: ['', [Validators.required]],
     });
   }
 
@@ -38,10 +39,28 @@ export class StudentFormDialogComponent implements OnInit {
   }
 
   updateStudent() {
-    const year = this.noteForm.get('year').value;
-    const schoolLevel = this.noteForm.get('schoolLevel').value;
-    const school = this.noteForm.get('school').value;
-    const mark = this.noteForm.get('note').value;
+    if (this.attachment !== undefined) {
+       this.attachment.name = this.studentService.createFileNameWithNote(this.noteForm.value, this.attachment.name);
+       this.studentService.uploadFile(this.attachment, this.student._id).subscribe(() => {
+         this.studentService.insertNote(this.noteForm.value, this.student._id).subscribe( stu => {
+           this.dialogRef.close(stu);
+         });
+       });
+    }
+  }
+
+  fileChange(event) {
+    const fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+      const file: File = fileList[0];
+      const filename = file.name;
+      this.studentService.getBase64(file, (result) => {
+        this.attachment = {
+          name: filename,
+          data: result
+        };
+      });
+    }
   }
 
 }

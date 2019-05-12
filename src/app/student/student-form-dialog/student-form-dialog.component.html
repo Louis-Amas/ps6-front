@@ -7,7 +7,7 @@
   <mat-form-field class="spe-form-field">
     <mat-label>Année</mat-label>
     <mat-select [formControlName]="'year'">
-      <mat-option *ngFor="let year of YEAR" [value]="'year'">{{year}}</mat-option>
+      <mat-option *ngFor="let year of YEAR" [value]=year>{{year}}</mat-option>
     </mat-select>
   </mat-form-field>
   <br>
@@ -25,7 +25,7 @@
   <br>
   <input type="file" id="coveringLetter"
          accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf"
-         (change)="fileChange($event, file.file)">
+         (change)="fileChange($event)">
 </form>
 <mat-toolbar>
   <button mat-button color="primary" (click)="onNoClick()">Retour</button>

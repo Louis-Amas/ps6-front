@@ -8,12 +8,6 @@ import {MatDialog, MatTableDataSource} from '@angular/material';
 import {StudentFormDialogComponent} from '../student-form-dialog/student-form-dialog.component';
 import {MAJOR_MOCKED} from '../../../mocks/speciality.mocks';
 
-
-function getBase64(file, cb) {
-  const reader = new FileReader();
-  reader.onload = (event) => cb(reader.result);
-  reader.readAsDataURL(file);
-}
 @Component({
   selector: 'app-student-form',
   templateUrl: './student-form.component.html',
@@ -89,7 +83,7 @@ export class StudentFormComponent implements OnInit {
     if (fileList.length > 0) {
       const file: File = fileList[0];
       const name1: string = file.name;
-      getBase64(file, (result) => {
+      this.studentService.getBase64(file, (result) => {
         let find = false;
         this.attachments.forEach(a => {
           if (a.name.split('.', 1)[0] === fileName) {
@@ -160,7 +154,7 @@ export class StudentFormComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(StudentFormDialogComponent, {
-      height: '500px',
+      height: '600px',
       width: '800px',
       data: this.userDetails
     });
@@ -168,8 +162,19 @@ export class StudentFormComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
         this.userDetails = result;
+        this.dataSource = new MatTableDataSource<any>(result.studentInfo.notes);
       }
     });
+  }
+
+  downloadFileMark(element: any) {
+    console.log(element.note);
+    const filename = this.studentService.createFileNameWithNote(element, null);
+    console.log('bo');
+    const file = this.userDetails.studentInfo.attachments.filter(a => a.name.split('.')[0] === filename);
+    if (file.length > 0) {
+      this.download(file[0].name);
+    }
   }
 }
 

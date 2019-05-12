@@ -75,3 +75,7 @@
   background-color: #00aeef;
   color: white;
 }
+
+.mat-table {
+  width: 100%;
+}
