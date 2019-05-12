@@ -7,6 +7,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {MatDialog, MatTableDataSource} from '@angular/material';
 import {StudentFormDialogComponent} from '../student-form-dialog/student-form-dialog.component';
 import {MAJOR_MOCKED} from '../../../mocks/speciality.mocks';
+import {FILE_MOCKED} from '../../../mocks/file.mocks';
 
 @Component({
   selector: 'app-student-form',
@@ -15,28 +16,7 @@ import {MAJOR_MOCKED} from '../../../mocks/speciality.mocks';
 })
 export class StudentFormComponent implements OnInit {
 
-  FILE_LIST: any[] = [
-    {
-      name: 'Curriculum Vitae',
-      file: 'cv',
-      used: false,
-    },
-    {
-      name: 'Lettre de Motivation',
-      file: 'lettreMotivation',
-      used: false,
-    },
-    {
-      name: 'Certificat de Compétence Linguistique',
-      file: 'compLinguistique',
-      used: false,
-    },
-    {
-      name: 'Carte Européenne',
-      file: 'carteEuro',
-      used: false,
-    }
-  ];
+  FILE_LIST: any[] ;
 
   SPE_LIST: any[];
 
@@ -66,6 +46,7 @@ export class StudentFormComponent implements OnInit {
 
   ngOnInit() {
     const userId = this.route.snapshot.paramMap.get('id');
+    this.FILE_LIST = FILE_MOCKED;
     this.studentService.getUserById(userId).subscribe(user => {
         this.userDetails = user;
         this.SPE_LIST = MAJOR_MOCKED.filter(m => m.major === user.studentInfo.major)[0].specialty;

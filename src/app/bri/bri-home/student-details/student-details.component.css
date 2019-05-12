@@ -17,3 +17,6 @@ div {
   display: block;
 }
 
+.mat-table {
+  width: 100%;
+}
