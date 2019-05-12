@@ -55,9 +55,12 @@ export class BriOverviewComponent implements OnInit {
   computeRanksForStudents() {
     this.rankedStudents.forEach(student => {
       student.studentInfo.wishes.forEach(wish => {
-        wish.rank = this.currentUniv.rankings.map(user => user._id).indexOf(student._id);
+        const rankings = wish.university.rankings as any;
+        wish.rank = rankings.map(user => user.studentId).indexOf(student._id);
       });
       this.rankedStudents.forEach(elem => this.getBestRank(elem));
+
+
     });
   }
 
@@ -66,7 +69,7 @@ export class BriOverviewComponent implements OnInit {
       .subscribe((users) => {
           this.unRankedStudents = users
             .filter(user => {
-              for (let elem of this.rankedStudents) {
+              for (const elem of this.rankedStudents) {
                 if (user._id.toString() === elem._id.toString()) {
                   return false;
                 }
@@ -100,11 +103,13 @@ export class BriOverviewComponent implements OnInit {
       this.rankedStudents[event.currentIndex] = prev;
       this.universityService.updateRankingPosition(this.currentUniv._id, prev._id, event.currentIndex)
         .subscribe((res) => {
-          this.currentUniv = res;
-          const rankings = res.rankings as any[];
-          this.rankedStudents = rankings.map(stud => stud.studentId) as User[];
-          this.currentUniv.rankings = this.rankedStudents;
-          this.computeRanksForStudents();
+            this.universityService.getUniversityById(this.currentUniv._id).subscribe(univ => {
+              const rankings = univ.rankings as any[];
+              this.rankedStudents = rankings.map(ranks => ranks.studentId);
+              this.currentUniv.rankings = this.rankedStudents;
+              this.computeRanksForStudents();
+              this.getUnrankedStudents();
+              });
         });
     } else {
       // unRankedStudents => rankedStudent
