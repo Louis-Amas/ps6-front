@@ -64,6 +64,7 @@ import { StudentAppointmentDialogComponent } from './student/student-home/studen
 import { StudentInfoComponent } from './commons/student-info/student-info.component';
 import { StudentInfoWishesComponent } from './commons/student-info-wishes/student-info-wishes.component';
 import { StudentFormDialogComponent } from './student/student-form-dialog/student-form-dialog.component';
+import { BackHeaderComponent } from './commons/back-header/back-header.component';
 
 @NgModule({
   declarations: [
@@ -107,7 +108,8 @@ import { StudentFormDialogComponent } from './student/student-form-dialog/studen
     FooterComponent,
     StudentInfoComponent,
     StudentInfoWishesComponent,
-    StudentFormDialogComponent
+    StudentFormDialogComponent,
+    BackHeaderComponent
   ],
   imports: [
     BrowserModule,

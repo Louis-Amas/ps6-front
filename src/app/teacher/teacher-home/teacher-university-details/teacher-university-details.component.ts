@@ -27,7 +27,6 @@ export class TeacherUniversityDetailsComponent implements OnInit {
               public dialog: MatDialog, public teacherService: TeacherService) { }
 
   ngOnInit() {
-    this.getCurrentUniversity();
     this.getTeacher();
   }
 
@@ -35,14 +34,18 @@ export class TeacherUniversityDetailsComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('univId');
     this.universityService.getUniversityById(id).subscribe(univ => {
         this.university = univ;
+        this.filterUniv();
         this.dataSource = new MatTableDataSource<User>(this.university.courses);
       }
     );
   }
 
   deleteCourse(course: Course) {
-    this.universityService.deleteCourse(course, this.university._id).subscribe();
-    this.getCurrentUniversity();
+    this.universityService.deleteCourse(course, this.university._id).subscribe(u => {
+      this.university = u;
+      this.filterUniv();
+      this.dataSource = new MatTableDataSource<User>(this.university.courses);
+    });
   }
 
   openDialog(): void {
@@ -68,6 +71,7 @@ export class TeacherUniversityDetailsComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.teacherService.getTeacherById(id).subscribe(t => {
         this.teacher = t;
+        this.getCurrentUniversity();
       }
     );
   }
@@ -104,6 +108,12 @@ export class TeacherUniversityDetailsComponent implements OnInit {
       });
     }
     this.dataSource = new MatTableDataSource<User>(this.university.courses);
+  }
+
+  filterUniv() {
+    this.university.courses = this.university.courses.filter(c => {
+      return c.major.toString() === this.teacher.teacherInfo.responsible.toString();
+    });
   }
 
 }

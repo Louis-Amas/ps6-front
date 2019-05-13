@@ -70,7 +70,7 @@ export class UniversityService {
   }
 
   deleteCourse(course: Course, id: string) {
-    return this.http.delete<Course[]>(this.universityUrl + '/' + id + '/courses/' + course._id);
+    return this.http.delete<University>(this.universityUrl + '/' + id + '/courses/' + course._id);
   }
 
   deleteStudentFromRanking(univId: string, studentId: string) {

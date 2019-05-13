@@ -1,5 +1,4 @@
-
-<button mat-button routerLink="..">Retour</button>
+<app-back-header [backNumber]="1" ></app-back-header>
 
 <div *ngIf="userDetails != undefined">
   <app-student-info [currentStudent]="userDetails"></app-student-info>

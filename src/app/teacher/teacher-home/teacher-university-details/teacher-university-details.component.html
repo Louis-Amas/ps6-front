@@ -1,4 +1,4 @@
-<button mat-button routerLink="../../">Retour</button>
+<app-back-header [backNumber]="2"></app-back-header>
 <br>
 
 <mat-card *ngIf="university !== undefined">
@@ -27,7 +27,7 @@
 
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom du cours </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        <td mat-cell *matCellDef="let element"> <a href="{{element.link_to_courses}}">{{element.name}}</a></td>
       </ng-container>
 
       <ng-container matColumnDef="ECTS">
@@ -48,7 +48,7 @@
       <ng-container matColumnDef="delete">
         <th mat-header-cell *matHeaderCellDef> Supprimer ce cours </th>
         <td mat-cell *matCellDef="let element">
-          <button mat-icon-button color="primary" (click)="deleteCourse(element)" >
+          <button mat-icon-button color="warn" (click)="deleteCourse(element)" >
             <i class="material-icons">
               clear
             </i>
