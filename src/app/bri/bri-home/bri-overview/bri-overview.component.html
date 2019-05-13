@@ -50,7 +50,7 @@
                   {{ elem.firstName }}
                 </p>
                 <mat-divider [vertical]="true"></mat-divider>
-                <p>
+                <p *ngIf="elem.studentInfo.bestWishRank < 10">
                   {{ elem.studentInfo.bestWishRank + 1 }}
                 </p>
               </div>
@@ -82,7 +82,7 @@
               <tr *ngFor="let wish of elem.studentInfo.wishes; let i = index">
                 <th class="mat-cell">{{i + 1}}</th>
                 <th class="mat-cell">{{wish.university.name}}</th>
-                <th class="mat-cell">{{wish.rank}}</th>
+                <th class="mat-cell" *ngIf="wish.rank < 10">{{wish.rank + 1}}</th>
               </tr>
             </table>
           </div>
@@ -127,7 +127,7 @@
                   {{ elem.firstName }}
                 </p>
                 <mat-divider [vertical]="true"></mat-divider>
-                <p>
+                <p *ngIf="elem.studentInfo.bestWishRank < 10">
                   {{ elem.studentInfo.bestWishRank + 1 }}
                 </p>
               </div>

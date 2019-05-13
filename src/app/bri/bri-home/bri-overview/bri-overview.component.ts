@@ -49,16 +49,17 @@ export class BriOverviewComponent implements OnInit {
   }
   private getBestRank(user) {
       user.studentInfo.bestWishRank =
-        user.studentInfo.wishes.reduce((acc, curr) => curr.rank < acc ? curr.rank : acc, 9999);
+        user.studentInfo.wishes.reduce((acc, curr) => curr.rank < acc ? curr.rank : acc, 10);
   }
 
-  computeRanksForStudents() {
-    this.rankedStudents.forEach(student => {
+  computeRanksForStudents(studentsList: User[]) {
+    studentsList.forEach(student => {
       student.studentInfo.wishes.forEach(wish => {
         const rankings = wish.university.rankings as any;
-        wish.rank = rankings.map(user => user.studentId).indexOf(student._id);
+        const rank = rankings.map(user => user.studentId).indexOf(student._id);
+        wish.rank = rank !== -1 ? rank : 10;
       });
-      this.rankedStudents.forEach(elem => this.getBestRank(elem));
+      studentsList.forEach(elem => this.getBestRank(elem));
 
 
     });
@@ -76,6 +77,7 @@ export class BriOverviewComponent implements OnInit {
               }
               return true;
             });
+          this.computeRanksForStudents(this.unRankedStudents);
       });
   }
 
@@ -85,14 +87,17 @@ export class BriOverviewComponent implements OnInit {
 
     this.currentUniv = univ;
     if (univ === '') { return; }
-    this.universityService.getUniversityById(univ._id)
-      .subscribe(univProcessed => {
-        const rankings = univProcessed.rankings as any[];
-        this.rankedStudents = rankings.map(ranks => ranks.studentId);
-        this.currentUniv.rankings = this.rankedStudents;
-        this.computeRanksForStudents();
-        this.getUnrankedStudents();
-      });
+    this.loadCurrentUniv();
+  }
+
+  loadCurrentUniv() {
+    this.universityService.getUniversityById(this.currentUniv._id).subscribe(univ => {
+      const rankings = univ.rankings as any[];
+      this.rankedStudents = rankings.map(ranks => ranks.studentId);
+      this.currentUniv.rankings = this.rankedStudents;
+      this.computeRanksForStudents(this.rankedStudents);
+      this.getUnrankedStudents();
+    });
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -103,13 +108,7 @@ export class BriOverviewComponent implements OnInit {
       this.rankedStudents[event.currentIndex] = prev;
       this.universityService.updateRankingPosition(this.currentUniv._id, prev._id, event.currentIndex)
         .subscribe((res) => {
-            this.universityService.getUniversityById(this.currentUniv._id).subscribe(univ => {
-              const rankings = univ.rankings as any[];
-              this.rankedStudents = rankings.map(ranks => ranks.studentId);
-              this.currentUniv.rankings = this.rankedStudents;
-              this.computeRanksForStudents();
-              this.getUnrankedStudents();
-              });
+           this.loadCurrentUniv();
         });
     } else {
       // unRankedStudents => rankedStudent
@@ -118,17 +117,20 @@ export class BriOverviewComponent implements OnInit {
         this.rankedStudents,
         event.previousIndex,
         event.currentIndex);
-      this.computeRanksForStudents();
       this.universityService.addStudentToRanking(this.currentUniv._id,
         user._id,
         event.currentIndex)
-          .subscribe((res) => console.log(res));
+          .subscribe((res) => {
+            this.loadCurrentUniv();
+          });
     }
   }
 
   dropFromListUnRanked(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
+      // unRanked => unRanked
       moveItemInArray(this.unRankedStudents, event.previousIndex, event.currentIndex);
+      console.log(this.unRankedStudents);
     } else {
       // ranked => unRankedStudent
       const user = this.rankedStudents[event.previousIndex];
@@ -137,10 +139,11 @@ export class BriOverviewComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
-      this.computeRanksForStudents();
       this.universityService
         .deleteStudentFromRanking(this.currentUniv._id, user._id)
-        .subscribe(res => console.log(res));
+        .subscribe(res => {
+          this.loadCurrentUniv();
+        });
     }
   }
 }
