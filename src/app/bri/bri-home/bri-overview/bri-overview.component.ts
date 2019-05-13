@@ -1,12 +1,11 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {User} from '../../../../models/user';
-import {MatSort, MatTableDataSource} from '@angular/material';
+import {MatSort} from '@angular/material';
 import {StudentService} from '../../../../services/student/student.service';
 import {University} from '../../../../models/university';
 import {UniversityService} from '../../../../services/university/university.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import {Wish} from '../../../../models/wish';
 
 @Component({
   selector: 'app-bri-overview',
@@ -90,6 +89,7 @@ export class BriOverviewComponent implements OnInit {
         const rankings = univProcessed.rankings as any[];
         this.rankedStudents = rankings.map(ranks => ranks.studentId);
         this.currentUniv.rankings = this.rankedStudents;
+        console.log(univProcessed);
         this.computeRanksForStudents();
         this.getUnrankedStudents();
       });
