@@ -19,6 +19,7 @@
       <mat-form-field class="specialty">
         <mat-label>Filière de dernière année</mat-label>
         <mat-select (selectionChange)="onMajorSelected($event)" name="specialty">
+          <mat-option>None</mat-option>
           <mat-option *ngFor="let major of SPE_LIST" [value]="major">
             {{major}}
           </mat-option>
