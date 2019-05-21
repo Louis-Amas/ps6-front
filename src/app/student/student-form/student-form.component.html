@@ -73,9 +73,12 @@
       <mat-accordion>
         <mat-expansion-panel *ngFor="let file of FILE_LIST">
           <mat-expansion-panel-header>
-            <mat-panel-title>{{file.name}}</mat-panel-title>
-            <mat-panel-description class="red-span" *ngIf="!file.used">NON RENSEIGNÉ</mat-panel-description>
-            <mat-panel-description class="green-span" *ngIf="file.used">RENSEIGNÉ</mat-panel-description>
+            <mat-panel-title  class="grid-file-provided">
+              <p>{{file.name}}</p>
+              <p class="red-span" *ngIf="!file.used">NON RENSEIGNÉ</p>
+              <p class="green-span" *ngIf="file.used">RENSEIGNÉ</p>
+            </mat-panel-title>
+
           </mat-expansion-panel-header>
           <div class="add-file" *ngIf="!file.used">
             <input type="file" id="coveringLetter" *ngIf="userDetails.studentInfo.stateValidation == 'waitStudent'"

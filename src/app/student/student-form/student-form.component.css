@@ -5,6 +5,12 @@
   margin-top: 10vh;
 }
 
+.grid-file-provided {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  place-items: left right;
+}
+
 .form-container > * {
   width: 30%;
 }
