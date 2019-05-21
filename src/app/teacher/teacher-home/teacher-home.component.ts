@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {TeacherService} from '../../../services/teacher/teacher.service';
-import {Teacher} from '../../../models/teacher';
 import {User} from '../../../models/user';
 
 @Component({
@@ -23,7 +22,6 @@ export class TeacherHomeComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.teacherService.getTeacherById(id).subscribe(t => {
         this.teacher = t;
-        console.log(this.teacher);
       }
     );
   }

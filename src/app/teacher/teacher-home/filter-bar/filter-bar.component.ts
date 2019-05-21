@@ -52,12 +52,11 @@ export class FilterBarComponent implements OnInit {
 
   onNameSelected($event) {
     const name = $event.target.value;
-    if (name !== undefined) {
-      this.nameEvent.emit(name.toString());
+    if (name === '') {
+      this.nameEvent.emit('undefined');
     } else {
-      this.nameEvent.emit(undefined);
+      this.nameEvent.emit(name.toString());
     }
-
   }
 
   onMajorSelected($event) {

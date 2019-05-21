@@ -34,7 +34,7 @@
 <br>
 <br>
   <div *ngIf="university!=null">
-    <p> Vous avez choisi l'université <a href="{{university.url_to_website}}">{{university.name}}</a> </p>
+    <p> Vous avez choisi l'université <a href="{{university.url_to_website}}" target="_blank">{{university.name}}</a> </p>
   </div>
 <br>
 
@@ -53,7 +53,7 @@
 
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom du cours </th>
-        <td mat-cell *matCellDef="let element"> <a href="{{element.link_to_courses}}"> {{element.name}} </a></td>
+        <td mat-cell *matCellDef="let element"> <a href="{{element.link_to_courses}}" target="_blank"> {{element.name}} </a></td>
       </ng-container>
 
       <ng-container matColumnDef="ECTS">
@@ -97,6 +97,7 @@
     <p>Vous avez sélectionné un nombre d'ECTS supérieur à celui exigé : {{nbECTS}}. Veuillez modifier les cours sélectionnés afin de
       pouvoir valider votre voeu.</p>
     </div>
+    <button *ngIf="nbECTS<30" mat-button class="button-validate-disabled" disabled>Valider ce voeu</button>
     <button *ngIf="nbECTS>=30 && nbECTS<=40" mat-button class="button-validate" (click)="validateWish()">Valider ce voeu</button>
     <p *ngIf="error == true" class="message-error"> Vous avez déjà effectué un voeu dans cette université. Veuillez changer d'université
       afin de pouvoir de nouveau effectuer un voeu.</p>

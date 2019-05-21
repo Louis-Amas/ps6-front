@@ -4,7 +4,7 @@ import {Wish} from '../../../../models/wish';
 import {StudentService} from '../../../../services/student/student.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BriService} from '../../../../services/bri/bri.service';
-import {MatTableDataSource} from '@angular/material';
+import {MatSnackBar, MatTableDataSource} from '@angular/material';
 import {FILE_MOCKED} from '../../../../mocks/file.mocks';
 
 @Component({
@@ -24,7 +24,7 @@ export class StudentDetailsComponent implements OnInit {
   dataSource = new MatTableDataSource();
 
   constructor(public studentService: StudentService, public briService: BriService,
-              public route: ActivatedRoute, public router: Router) { }
+              public route: ActivatedRoute, public router: Router, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.getStudent();
@@ -55,6 +55,7 @@ export class StudentDetailsComponent implements OnInit {
   acceptStudent() {
     this.studentService.updateStudentState(this.currentStudent._id, 'waitValidate').subscribe(() => {
       this.router.navigate([`/bri/` + this.bri._id]);
+      this.openSnackBar();
     });
   }
 
@@ -94,6 +95,12 @@ export class StudentDetailsComponent implements OnInit {
           f.nameFinal = a.name;
         }
       });
+    });
+  }
+
+  openSnackBar() {
+    this.snackBar.open( 'Vous avez validé le dossier de cet étudiant !', undefined, {
+      duration: 4000,
     });
   }
 

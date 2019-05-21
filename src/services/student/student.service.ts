@@ -51,6 +51,10 @@ export class StudentService {
     return this.http.delete<Wish[]>(this.studentUrl + '/student/' + studentId + '/wishes/' + univId);
   }
 
+  deleteMarkOfStudent(studentId: string, noteId: string) {
+    return this.http.delete<User>(this.studentUrl + '/student/' + studentId + '/notes/' + noteId);
+  }
+
   updateStudentLastYearSpeciality(studentId: string, speciality: string) {
     return this.http.put<User>(this.studentUrl + '/student/' + studentId, {
       lastYearMajor: speciality

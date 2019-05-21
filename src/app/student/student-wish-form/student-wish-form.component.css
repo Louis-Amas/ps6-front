@@ -33,6 +33,11 @@ width: 50%;
   color: white;
 }
 
+.button-validate-disabled {
+  margin: auto;
+  display: block;
+  background-color: white;
+}
 .mat-card {
   width:90%;
   margin: auto;
