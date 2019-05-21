@@ -1,5 +1,11 @@
 <mat-tab-group *ngIf="teacher != undefined">
-  <mat-tab label="A traiter"> <app-teacher-file-in-process [teacher]="teacher"></app-teacher-file-in-process> </mat-tab>
+  <mat-tab *ngIf="nbBadge!=0">
+    <ng-template matTabLabel>
+      <span matBadge="{{nbBadge}}" matBadgeOverlap="false">A traiter</span>
+    </ng-template>
+    <app-teacher-file-in-process [teacher]="teacher" (studentsConcernedEvent)="updateList($event)"></app-teacher-file-in-process>
+  </mat-tab>
+  <mat-tab *ngIf="nbBadge==0" label="A traiter"> <app-teacher-file-in-process [teacher]="teacher"> </app-teacher-file-in-process> </mat-tab>
   <mat-tab label="Traités"> <app-teacher-file-processed [teacher]="teacher"> </app-teacher-file-processed> </mat-tab>
   <mat-tab label="Universités"> <app-teacher-list-universities [teacher]="teacher"> </app-teacher-list-universities></mat-tab>
 </mat-tab-group>

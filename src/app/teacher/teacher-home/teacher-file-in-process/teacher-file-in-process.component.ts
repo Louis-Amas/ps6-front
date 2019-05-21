@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {User} from '../../../../models/user';
 import {TeacherService} from '../../../../services/teacher/teacher.service';
 import {StudentService} from '../../../../services/student/student.service';
@@ -18,6 +18,9 @@ export class TeacherFileInProcessComponent implements OnInit {
   searchBar: string;
   major: string;
 
+  @Output()
+  studentsConcernedEvent: EventEmitter<User[]> = new EventEmitter<User[]>();
+
   constructor(public teacherService: TeacherService, public studentService: StudentService) {
   }
 
@@ -30,6 +33,7 @@ export class TeacherFileInProcessComponent implements OnInit {
     this.studentService.getStudentsByStatus('waitTeacher', this.teacher.teacherInfo.responsible).subscribe(t => {
       this.studentsConcerned = t;
       this.studentsFilter = t;
+      this.studentsConcernedEvent.emit(this.studentsConcerned);
     });
   }
 

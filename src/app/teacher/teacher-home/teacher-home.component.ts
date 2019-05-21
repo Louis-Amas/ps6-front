@@ -12,6 +12,10 @@ export class TeacherHomeComponent implements OnInit {
 
   public teacher: User;
 
+  public studentsConcerned: User[];
+
+  public nbBadge: string;
+
   constructor(private route: ActivatedRoute, public teacherService: TeacherService) { }
 
   ngOnInit() {
@@ -24,5 +28,10 @@ export class TeacherHomeComponent implements OnInit {
         this.teacher = t;
       }
     );
+  }
+
+  updateList(list: User[]) {
+    this.studentsConcerned = list;
+    this.nbBadge = this.studentsConcerned.length.toString();
   }
 }
