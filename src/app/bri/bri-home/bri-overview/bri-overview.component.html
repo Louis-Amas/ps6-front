@@ -1,5 +1,4 @@
-<app-bri-appointment [bri]="bri"></app-bri-appointment>
-<mat-card>
+<mat-card cdkDropListGroup class="bri-rankings-grid">
 
   <div [formGroup]="universityForm" class="grid-form-university">
     <mat-card-title>Choisir la destination</mat-card-title>
@@ -12,10 +11,8 @@
       </mat-select>
     </mat-form-field>
   </div>
-</mat-card>
 
-<div cdkDropListGroup class="container">
-  <mat-card>
+  <div class="container">
     <mat-card-title>
       Étudiants à classer
     </mat-card-title>
@@ -57,117 +54,64 @@
             </mat-panel-title>
           </mat-expansion-panel-header>
           <div class="grid-student-overview">
-            <h1>Notes</h1>
-            <table class="mat-table">
-              <tr class="mat-header-row">
-                <th class="mat-cell">Année</th>
-                <th class="mat-cell">Niveau après le bac</th>
-                <th class="mat-cell">École</th>
-                <th class="mat-cell">Note</th>
-              </tr>
-              <tr *ngFor="let note of elem.studentInfo.notes">
-                <th class="mat-cell">{{note.year}}</th>
-                <th class="mat-cell">{{note.schoolLevel}}</th>
-                <th class="mat-cell">{{note.school}}</th>
-                <th class="mat-cell">{{note.note}}</th>
-              </tr>
-            </table>
-            <h2>Voeu(x)</h2>
-            <table class="mat-table">
-              <tr class="mat-header-row">
-                <th class="mat-cell">Rang</th>
-                <th class="mat-cell">Université</th>
-                <th class="mat-cell">Classement</th>
-              </tr>
-              <tr *ngFor="let wish of elem.studentInfo.wishes; let i = index">
-                <th class="mat-cell">{{i + 1}}</th>
-                <th class="mat-cell">{{wish.university.name}}</th>
-                <th class="mat-cell" *ngIf="wish.rank < 10">{{wish.rank + 1}}</th>
-              </tr>
-            </table>
+            <app-notes-table [notes]="elem.studentInfo.notes"></app-notes-table>
+            <app-wishes-table [wishes]="elem.studentInfo.wishes"></app-wishes-table>
           </div>
         </mat-expansion-panel>
       </div>
     </mat-accordion>
-  </mat-card>
+  </div>
 
-  <mat-card>
-    <mat-card-title>Classements des étudiants</mat-card-title>
-    <mat-accordion>
+  <div class="container">
+  <mat-card-title>Classements des étudiants</mat-card-title>
+  <mat-accordion>
 
-      <mat-expansion-panel [disabled]="true">
+    <mat-expansion-panel [disabled]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="grid-student-ranking-title">
+          <p>Rang</p>
+          <mat-divider [vertical]="true"></mat-divider>
+          <p>Email</p>
+          <mat-divider [vertical]="true"></mat-divider>
+          <p>Prénom</p>
+          <mat-divider [vertical]="true"></mat-divider>
+          <p>Meilleur rang</p>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+    </mat-expansion-panel>
+    <div cdkDropList
+         class="dynamic_list"
+         [cdkDropListData]="rankedStudents"
+         [cdkDropListConnectedTo]="['unRankedList']"
+         (cdkDropListDropped)="drop($event)">
+      <mat-expansion-panel *ngFor="let elem of rankedStudents; let i = index" cdkDrag>
         <mat-expansion-panel-header>
-          <mat-panel-title class="grid-student-ranking-title">
-            <p>Rang</p>
-            <mat-divider [vertical]="true"></mat-divider>
-            <p>Email</p>
-            <mat-divider [vertical]="true"></mat-divider>
-            <p>Prénom</p>
-            <mat-divider [vertical]="true"></mat-divider>
-            <p>Meilleur rang</p>
+          <mat-panel-title>
+            <div class="grid-student-ranking-title">
+              <p class="index">{{ i + 1 }}</p>
+              <mat-divider [vertical]="true"></mat-divider>
+              <p>
+                {{ elem.email }}
+              </p>
+              <mat-divider [vertical]="true"></mat-divider>
+              <p>
+                {{ elem.firstName }}
+              </p>
+              <mat-divider [vertical]="true"></mat-divider>
+              <p *ngIf="elem.studentInfo.bestWishRank < 10">
+                {{ elem.studentInfo.bestWishRank + 1 }}
+              </p>
+            </div>
           </mat-panel-title>
         </mat-expansion-panel-header>
+        <div class="grid-student-overview">
+          <app-notes-table [notes]="elem.studentInfo.notes"></app-notes-table>
+          <app-wishes-table [wishes]="elem.studentInfo.wishes"></app-wishes-table>
+        </div>
       </mat-expansion-panel>
-      <div cdkDropList
-           class="dynamic_list"
-           [cdkDropListData]="rankedStudents"
-           [cdkDropListConnectedTo]="['unRankedList']"
-           (cdkDropListDropped)="drop($event)">
-        <mat-expansion-panel *ngFor="let elem of rankedStudents; let i = index" cdkDrag>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <div class="grid-student-ranking-title">
-                <p class="index">{{ i + 1 }}</p>
-                <mat-divider [vertical]="true"></mat-divider>
-                <p>
-                  {{ elem.email }}
-                </p>
-                <mat-divider [vertical]="true"></mat-divider>
-                <p>
-                  {{ elem.firstName }}
-                </p>
-                <mat-divider [vertical]="true"></mat-divider>
-                <p *ngIf="elem.studentInfo.bestWishRank < 10">
-                  {{ elem.studentInfo.bestWishRank + 1 }}
-                </p>
-              </div>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <div class="grid-student-overview">
-            <h1>Notes</h1>
-            <table class="mat-table">
-              <tr class="mat-header-row">
-                <th class="mat-cell">Année</th>
-                <th class="mat-cell">Niveau après le bac</th>
-                <th class="mat-cell">École</th>
-                <th class="mat-cell">Note</th>
-              </tr>
-              <tr *ngFor="let note of elem.studentInfo.notes">
-                  <th class="mat-cell">{{note.year}}</th>
-                  <th class="mat-cell">{{note.schoolLevel}}</th>
-                  <th class="mat-cell">{{note.school}}</th>
-                  <th class="mat-cell">{{note.note}}</th>
-              </tr>
-            </table>
-            <h2>Voeu(x)</h2>
-            <table class="mat-table">
-              <tr class="mat-header-row">
-                <th class="mat-cell">Rang</th>
-                <th class="mat-cell">Université</th>
-                <th class="mat-cell">Classement</th>
-              </tr>
-              <tr *ngFor="let wish of elem.studentInfo.wishes; let i = index">
-                <th class="mat-cell">{{i + 1}}</th>
-                <th class="mat-cell">{{wish.university.name}}</th>
-                <th class="mat-cell">{{wish.rank + 1}}</th>
-              </tr>
-            </table>
-          </div>
-        </mat-expansion-panel>
-      </div>
-    </mat-accordion>
+    </div>
+  </mat-accordion>
+  </div>
+</mat-card>
 
-  </mat-card>
-
-</div>
 

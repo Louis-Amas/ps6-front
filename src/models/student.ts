@@ -1,5 +1,6 @@
 import {Wish} from './wish';
 import {TimeSlot} from './timeSlot';
+import {Note} from './note';
 
 export interface Student {
   _id?: string;
@@ -16,13 +17,7 @@ export interface Student {
   stateValidation?: string;
   attachments: any[];
   bestWishRank: number;
-  notes?: [
-    {
-      year: number,
-      schoolLevel: string,
-      school: string,
-      note: number
-    }];
+  notes?: [Note];
   appointment?: {
     timeSlot?: TimeSlot;
     bri?: string;

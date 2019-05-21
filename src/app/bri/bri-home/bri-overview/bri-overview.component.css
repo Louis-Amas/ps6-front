@@ -5,10 +5,16 @@
 }
 .dynamic_list {
   border: solid 1px #ccc;
-  min-height: 60px;
+  min-height: 49px;
   background: white;
   overflow: hidden;
   display: block;
+}
+
+.bri-rankings-grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 50px;
 }
 .grid-student-ranking-title {
   display: grid;
