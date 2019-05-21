@@ -1,0 +1,13 @@
+<h1>Voeu(x)</h1>
+<table class="mat-table">
+  <tr class="mat-header-row">
+    <th class="mat-cell">Rang</th>
+    <th class="mat-cell">Université</th>
+    <th class="mat-cell">Classement</th>
+  </tr>
+  <tr *ngFor="let wish of wishes; let i = index">
+    <th class="mat-cell">{{i + 1}}</th>
+    <th class="mat-cell">{{wish.university.name}}</th>
+    <th *ngIf="wish.rank < 10" class="mat-cell">{{wish.rank + 1}}</th>
+  </tr>
+</table>
