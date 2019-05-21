@@ -13,7 +13,7 @@
             <mat-option *ngFor="let spe of SPE_LIST" [value]="spe">{{spe}}</mat-option>
           </mat-select>
         </mat-form-field>
-        <button *ngIf="userDetails.studentInfo.stateValidation == 'waitStudent'" color="primary"  class="validate-spe" (click)="updateSpecialty()" mat-button>Modifer</button>
+        <button *ngIf="userDetails.studentInfo.stateValidation == 'waitStudent'" color="primary"  class="validate-spe" (click)="updateSpecialty()" mat-button>Valider</button>
       </form>
     </mat-card-content>
   </mat-card>

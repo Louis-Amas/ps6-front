@@ -20,7 +20,8 @@ import {
   MatTabsModule,
   MatDividerModule, MatExpansionModule,
   MatDialogModule, MatSidenavModule, MatBadgeModule,
-  MatSortModule, MatDatepickerModule, MatNativeDateModule, MatStepperModule
+  MatSortModule, MatDatepickerModule, MatNativeDateModule, MatStepperModule,
+  MatSnackBarModule
 } from '@angular/material';
 import {MatListModule} from '@angular/material/list';
 import { ConnectionComponent } from './connection/connection.component';
@@ -149,7 +150,8 @@ import {NotesTableComponent} from './commons/notes-table/notes-table.component';
     MatSortModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatStepperModule
+    MatStepperModule,
+    MatSnackBarModule
   ],
   providers: [StudentService,
     {

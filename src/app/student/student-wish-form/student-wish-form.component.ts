@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {UniversityService} from '../../../services/university/university.service';
 import {University} from '../../../models/university';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -7,7 +7,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {Course} from '../../../models/course';
 import {CourseService} from '../../../services/course/course.service';
 import {User} from '../../../models/user';
-import {MatDialog, MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
 import {AddCourseOverviewDialogComponent} from '../../commons/add-course-overview-dialog/add-course-overview-dialog';
 
 @Component({
@@ -42,7 +42,7 @@ export class StudentWishFormComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder, private route: ActivatedRoute,
               private studentService: StudentService, public universityService: UniversityService,
-              public courseService: CourseService, public dialog: MatDialog, public router: Router) {
+              public courseService: CourseService, public dialog: MatDialog, public router: Router, public snackBar: MatSnackBar) {
 
     this.wishForm = this.formBuilder.group({
       semester: [''],
@@ -110,6 +110,7 @@ export class StudentWishFormComponent implements OnInit {
     this.coursesSelected.forEach(course => coursesId.push(course._id));
     this.studentService.addWish(coursesId, this.university._id, this.student._id).subscribe(() => {
       this.router.navigate([`student/${this.student._id}`]);
+      this.openSnackBar();
     }, (err) => {
       this.error = true;
     });
@@ -167,6 +168,12 @@ export class StudentWishFormComponent implements OnInit {
       }
     });
 
+  }
+
+  openSnackBar() {
+    this.snackBar.open( 'Vous avez formulé un voeu !', undefined, {
+      duration: 4000,
+    });
   }
 
 }

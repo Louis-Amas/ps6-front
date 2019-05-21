@@ -4,7 +4,7 @@ import {TeacherService} from '../../../services/teacher/teacher.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {User} from '../../../models/user';
 import {Wish} from '../../../models/wish';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {WishOverviewDialogComponent} from '../wish-overview-dialog/wish-overview-dialog.component';
 
 @Component({
@@ -19,7 +19,8 @@ export class TeacherStudentDetailsComponent implements OnInit {
   public wishes: Wish[];
 
   constructor(public studentService: StudentService, public teacherService: TeacherService,
-              public route: ActivatedRoute, public router: Router, public dialog: MatDialog) { }
+              public route: ActivatedRoute, public router: Router, public dialog: MatDialog,
+              public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.getStudent();
@@ -52,6 +53,7 @@ export class TeacherStudentDetailsComponent implements OnInit {
   validateStudent() {
     this.studentService.updateStudentState(this.currentStudent._id, 'waitBriVerif').subscribe(() => {
       this.router.navigate([`/teacher/` + this.teacher._id]);
+      this.openSnackBar();
     });
   }
 
@@ -70,6 +72,12 @@ export class TeacherStudentDetailsComponent implements OnInit {
           this.router.navigate([`/teacher/` + this.teacher._id]);
         });
       }
+    });
+  }
+
+  openSnackBar() {
+    this.snackBar.open( 'Vous avez validé le dossier de cet étudiant !', undefined, {
+      duration: 4000,
     });
   }
 }
