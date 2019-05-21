@@ -18,6 +18,7 @@ export interface Student {
   bestWishRank: number;
   notes?: [
     {
+      _id: string,
       year: number,
       schoolLevel: string,
       school: string,
