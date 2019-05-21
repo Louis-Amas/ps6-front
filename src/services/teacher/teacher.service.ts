@@ -14,11 +14,7 @@ export class TeacherService {
    */
 
   private teacherUrl = 'http://127.0.0.1:9428/api/users';
-  private teacherUrl2 = 'http://127.0.0.1:9428/api/users/teacher';
-  public studentList: User[] = [];
 
-
-  public students$: BehaviorSubject<User[]> = new BehaviorSubject(this.studentList);
 
   /**
    * Observable which contains the list of the tickets.
@@ -33,45 +29,44 @@ export class TeacherService {
   }
 
   filterStudent(id: string, filterStu: User[], idUniv: string, search: string, major: string) {
-    if (idUniv !== undefined && search !== undefined && major !== undefined) {
+    if (idUniv !== undefined && search !== 'undefined' && major !== undefined) {
       return filterStu.filter(stu => stu.studentInfo.wishes.find(wish =>
         wish.university._id === idUniv) && (stu.lastName.toLowerCase().includes(search) ||
         stu.firstName.toLowerCase().includes(search) || stu.studentInfo.numStu.toString().includes(search))
         && stu.studentInfo.lastYearMajor === major);
-    } else {
-        if (idUniv !== undefined && search !== undefined) {
-          return filterStu.filter(stu => stu.studentInfo.wishes.find(wish =>
-            wish.university._id === idUniv) && stu.firstName.toLowerCase().includes(search) || stu.lastName.toLowerCase().includes(search)
-            || stu.studentInfo.numStu.toString().includes(search));
-        } else {
-          if (search !== undefined && major !== undefined) {
-            return filterStu.filter(stu => stu.firstName.toLowerCase().includes(search) || stu.lastName.toLowerCase().includes(search)
-              || stu.studentInfo.numStu.toString().includes(search) && stu.studentInfo.lastYearMajor === major);
-          } else {
-            if (idUniv !== undefined && major !== undefined) {
-              return filterStu.filter(stu => stu.studentInfo.wishes.find(wish =>
-                wish.university._id === idUniv) && stu.studentInfo.lastYearMajor === major);
-            } else {
-              if (idUniv !== undefined) {
-                return filterStu.filter(stu => stu.studentInfo.wishes.find(wish =>
-                  wish.university._id === idUniv));
-              } else {
-                if (major !== undefined) {
-                  return filterStu.filter(stu => stu.studentInfo.lastYearMajor === major);
-                } else {
-                  if (search !== undefined) {
-                    return filterStu.filter(stu => stu.firstName.toLowerCase().includes(search) ||
-                      stu.lastName.toLowerCase().includes(search)
-                      || stu.studentInfo.numStu.toString().includes(search));
-                  } else {
-                    return filterStu;
-                  }
-                }
-              }
-            }
-        }
-      }
     }
-
+    if (idUniv !== undefined && search !== 'undefined') {
+      return filterStu.filter(stu => stu.studentInfo.wishes.find(wish =>
+        wish.university._id === idUniv) && stu.firstName.toLowerCase().includes(search) || stu.lastName.toLowerCase().includes(search)
+        || stu.studentInfo.numStu.toString().includes(search));
+    }
+    if (search !== 'undefined' && major !== undefined) {
+      return filterStu.filter(stu => stu.firstName.toLowerCase().includes(search) || stu.lastName.toLowerCase().includes(search)
+        || stu.studentInfo.numStu.toString().includes(search) && stu.studentInfo.lastYearMajor === major);
+    }
+    if (idUniv !== undefined && major !== undefined) {
+      return filterStu.filter(stu => stu.studentInfo.wishes.find(wish =>
+        wish.university._id === idUniv) && stu.studentInfo.lastYearMajor === major);
+    }
+    if (idUniv !== undefined) {
+      return filterStu.filter(stu => stu.studentInfo.wishes.find(wish =>
+        wish.university._id === idUniv));
+    }
+    if (major !== undefined) {
+      return filterStu.filter(stu => stu.studentInfo.lastYearMajor === major);
+    }
+    if (search !== 'undefined') {
+      return filterStu.filter(stu => stu.firstName.toLowerCase().includes(search) ||
+        stu.lastName.toLowerCase().includes(search)
+        || stu.studentInfo.numStu.toString().includes(search));
+    }
+    return filterStu;
   }
+
+
+
+
+
+
+
 }
