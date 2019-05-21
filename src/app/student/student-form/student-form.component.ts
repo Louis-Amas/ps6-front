@@ -20,7 +20,7 @@ export class StudentFormComponent implements OnInit {
 
   SPE_LIST: any[];
 
-  private displayedColumns: string[] = ['year', 'schoolLevel', 'school', 'note', 'file'];
+  private displayedColumns: string[] = ['year', 'schoolLevel', 'school', 'note', 'file', 'delete'];
   dataSource = new MatTableDataSource();
 
   public attachmentForm: FormGroup;
@@ -138,7 +138,7 @@ export class StudentFormComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(StudentFormDialogComponent, {
-      height: '600px',
+      height: '500px',
       width: '800px',
       data: this.userDetails
     });
@@ -154,10 +154,27 @@ export class StudentFormComponent implements OnInit {
   downloadFileMark(element: any) {
     console.log(element.note);
     const filename = this.studentService.createFileNameWithNote(element, null);
-    console.log('bo');
     const file = this.userDetails.studentInfo.attachments.filter(a => a.name.split('.')[0] === filename);
     if (file.length > 0) {
       this.download(file[0].name);
+    } else {
+      console.log('file not found');
+    }
+  }
+
+  deleteMarkAndFile(note: any) {
+    const filename = this.studentService.createFileNameWithNote(note, null);
+    const file = this.userDetails.studentInfo.attachments.filter(a => a.name.split('.')[0] === filename);
+    if (file.length > 0) {
+      this.studentService.deleteFile(file[0].name, this.userDetails._id).subscribe(() => {
+        this.studentService.deleteMarkOfStudent(this.userDetails._id, note._id).subscribe(student => {
+          this.userDetails = student;
+          this.updateFileList();
+          this.dataSource = new MatTableDataSource<any>(this.userDetails.studentInfo.notes);
+        });
+      });
+    } else {
+      console.log('file not found');
     }
   }
 
@@ -173,4 +190,3 @@ export class StudentFormComponent implements OnInit {
     });
   }
 }
-
