@@ -1,0 +1,15 @@
+<h1>Notes</h1>
+<table class="mat-table">
+  <tr class="mat-header-row">
+    <th class="mat-cell">Année</th>
+    <th class="mat-cell">Niveau après le bac</th>
+    <th class="mat-cell">École</th>
+    <th class="mat-cell">Note</th>
+  </tr>
+  <tr *ngFor="let note of notes">
+    <th class="mat-cell">{{note.year}}</th>
+    <th class="mat-cell">{{note.schoolLevel}}</th>
+    <th class="mat-cell">{{note.school}}</th>
+    <th class="mat-cell">{{note.note}}</th>
+  </tr>
+</table>
