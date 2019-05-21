@@ -1,9 +1,9 @@
 <h1 mat-dialog-title>Création d'un créneau</h1>
 <div class="content" mat-dialog-content>
   <mat-form-field class="appointment-form">
-    <input matInput [matDatepicker]="picker" placeholder="Choisissez une date" (dateChange)="onDateSelected($event)">
+    <input matInput [matDatepicker]="picker" [matDatepickerFilter]="myFilter" placeholder="Choisissez une date" (dateChange)="onDateSelected($event)" disabled>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
+    <mat-datepicker disabled="false" #picker></mat-datepicker>
   </mat-form-field>
   <form class="add-form" [formGroup]="dateForm" *ngIf="dateSelected">
     <mat-form-field>

@@ -40,6 +40,16 @@ export class BriAppointmentCreationDialogComponent implements OnInit {
     }
   }
 
+  myFilter = (d: Date): boolean => {
+    const day = d.getDay();
+    const date = new Date();
+    date.setSeconds(0);
+    date.setHours(0);
+    date.setMinutes(0);
+
+    return day !== 0 && (d.getTime() + 1000) > date.getTime();
+  }
+
   back() {
     this.dialogRef.close();
   }

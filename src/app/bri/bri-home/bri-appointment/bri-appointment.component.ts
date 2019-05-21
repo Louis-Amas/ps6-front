@@ -26,6 +26,10 @@ export class BriAppointmentComponent implements OnInit {
   }
 
   dateUsed = (d: Date) => {
+    return this.myFilter(d) ? 'appointment' : undefined;
+  }
+
+  myFilter = (d: Date): boolean => {
     let res = false;
     this.bri.briInfo.appointment.forEach( t => {
       const curDate = new Date(t.timeSlot.departureTime);
@@ -33,7 +37,7 @@ export class BriAppointmentComponent implements OnInit {
         res = true;
       }
     });
-    return res ? 'appointment' : undefined;
+    return res;
   }
 
   getDateChoose(event: MatDatepickerInputEvent<Date>) {
