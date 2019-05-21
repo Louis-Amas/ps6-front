@@ -3,10 +3,10 @@
   <mat-card-content>
     <div class="cardContent">
       <mat-form-field class="appointment-form">
-        <input matInput class="inputDate" [matDatepicker]="picker" placeholder="Choisissez une date"
-               (dateChange)="getDateChoose($event)">
+        <input matInput class="inputDate" [matDatepickerFilter]="myFilter" [matDatepicker]="picker" placeholder="Choisissez une date"
+               (dateChange)="getDateChoose($event)" disabled>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker [dateClass]="dateUsed" #picker></mat-datepicker>
+        <mat-datepicker [dateClass]="dateUsed" disabled="false" #picker></mat-datepicker>
       </mat-form-field>
 
       <table *ngIf="drawTable" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -57,7 +57,21 @@
        <mat-card-content>
          <mat-list role="list">
            <mat-list-item role="listitem">
+             Cliquer sur l'icône du calendrier&nbsp;
+             <i class="material-icons">
+              calendar_today
+            </i>
+             &nbsp;pour voir tous vos créneaux
+           </mat-list-item>
+           <mat-list-item role="listitem">
              <div id="cercle"></div> Date où vous avez défini vos disponibilités</mat-list-item>
+           <mat-list-item role="listitem">
+             Si vous n'avez pas défini de disponibilités ajoutez en ici&nbsp;
+             <button mat-icon-button color="primary" (click)="openDialog()">
+               <i class="material-icons">
+                 add_box
+               </i></button>
+           </mat-list-item>
          </mat-list>
        </mat-card-content>
      </mat-card>
