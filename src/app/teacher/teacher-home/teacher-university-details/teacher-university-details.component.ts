@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {UniversityService} from '../../../../services/university/university.service';
 import {University} from '../../../../models/university';
 import {Course} from '../../../../models/course';
-import {MatDialog, MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
 import {AddCourseOverviewDialogComponent} from '../../../commons/add-course-overview-dialog/add-course-overview-dialog';
 import {User} from '../../../../models/user';
 import {TeacherService} from '../../../../services/teacher/teacher.service';
@@ -24,7 +24,7 @@ export class TeacherUniversityDetailsComponent implements OnInit {
   teacher: User;
 
   constructor(private route: ActivatedRoute, public universityService: UniversityService,
-              public dialog: MatDialog, public teacherService: TeacherService) { }
+              public dialog: MatDialog, public teacherService: TeacherService, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.getTeacher();
@@ -45,6 +45,7 @@ export class TeacherUniversityDetailsComponent implements OnInit {
       this.university = u;
       this.filterUniv();
       this.dataSource = new MatTableDataSource<User>(this.university.courses);
+      this.openSnackBarDelete();
     });
   }
 
@@ -63,6 +64,7 @@ export class TeacherUniversityDetailsComponent implements OnInit {
         this.university = result;
       }
       this.getCurrentUniversity();
+      this.openSnackBarAdd();
     });
 
   }
@@ -113,6 +115,18 @@ export class TeacherUniversityDetailsComponent implements OnInit {
   filterUniv() {
     this.university.courses = this.university.courses.filter(c => {
       return c.major.toString() === this.teacher.teacherInfo.responsible.toString();
+    });
+  }
+
+  openSnackBarDelete() {
+    this.snackBar.open( 'Cours supprimé !', undefined, {
+      duration: 4000,
+    });
+  }
+
+  openSnackBarAdd() {
+    this.snackBar.open( 'Cours ajouté !', undefined, {
+      duration: 4000,
     });
   }
 

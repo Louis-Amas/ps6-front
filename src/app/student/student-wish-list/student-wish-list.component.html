@@ -10,13 +10,13 @@
               Voeu n°{{wish.position}}
             </mat-panel-title>
             <mat-panel-description>
-              <a href="{{wish.university.url_to_website}}">{{wish.university.name}}</a>
+              <a href="{{wish.university.url_to_website}}" target="_blank">{{wish.university.name}}</a>
             </mat-panel-description>
           </mat-expansion-panel-header>
 
           <mat-list>
             <mat-list-item *ngFor="let course of getCourseOfWish(wish)">
-              <a href="{{course.link_to_courses}}">{{course.name}}</a> &nbsp;- Nombre d'ECTS : {{course.ECTS_count}} - Semestre {{course.semester}}
+              <a href="{{course.link_to_courses}}" target="_blank">{{course.name}}</a> &nbsp;- Nombre d'ECTS : {{course.ECTS_count}} - Semestre {{course.semester}}
               <mat-divider></mat-divider>
             </mat-list-item>
           </mat-list>
