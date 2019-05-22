@@ -66,6 +66,7 @@ import { StudentInfoComponent } from './commons/student-info/student-info.compon
 import { StudentInfoWishesComponent } from './commons/student-info-wishes/student-info-wishes.component';
 import { StudentFormDialogComponent } from './student/student-form-dialog/student-form-dialog.component';
 import { BackHeaderComponent } from './commons/back-header/back-header.component';
+import { ImageSliderComponent } from './image-slider/image-slider.component';
 import { WishesTableComponent } from './commons/wishes-table/wishes-table.component';
 import {NotesTableComponent} from './commons/notes-table/notes-table.component';
 
@@ -112,6 +113,8 @@ import {NotesTableComponent} from './commons/notes-table/notes-table.component';
     StudentInfoComponent,
     StudentInfoWishesComponent,
     StudentFormDialogComponent,
+    BackHeaderComponent,
+    ImageSliderComponent,
     BackHeaderComponent,
     WishesTableComponent,
     NotesTableComponent
