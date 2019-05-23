@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {User} from '../../../../models/user';
 import {StudentService} from '../../../../services/student/student.service';
 import {MatSort, MatTableDataSource} from '@angular/material';
@@ -17,6 +17,9 @@ export class BriFileInProcessComponent implements OnInit {
   @Input() bri: User;
 
   @ViewChild(MatSort) sort: MatSort;
+
+  @Output()
+  studentsConcernedEvent: EventEmitter<User[]> = new EventEmitter<User[]>();
 
   studentsConcerned: User[] = [];
   studentsFilter: User[] = [];
@@ -37,6 +40,7 @@ export class BriFileInProcessComponent implements OnInit {
       this.studentsConcerned = s;
       this.studentsFilter = s;
       this.dataSource = new MatTableDataSource<User>(this.studentsConcerned);
+      this.studentsConcernedEvent.emit(this.studentsConcerned);
     });
   }
 

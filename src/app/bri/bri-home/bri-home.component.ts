@@ -12,6 +12,10 @@ export class BriHomeComponent implements OnInit {
 
   public bri: User;
 
+  public nbBadge: string;
+
+  studentsConcerned: User[];
+
   constructor(private route: ActivatedRoute, public briService: BriService, ) { }
 
   ngOnInit() {
@@ -24,6 +28,11 @@ export class BriHomeComponent implements OnInit {
         this.bri = b;
       }
     );
+  }
+
+  updateList(list: User[]) {
+    this.studentsConcerned = list;
+    this.nbBadge = this.studentsConcerned.length.toString();
   }
 
 }

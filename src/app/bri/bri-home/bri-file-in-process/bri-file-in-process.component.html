@@ -33,14 +33,14 @@
     <td mat-cell *matCellDef="let element">
       <button mat-icon-button color="primary" routerLink="student/{{element._id}}" >
         <i class="material-icons">
-          reorder
+          remove_red_eye
         </i>
       </button>
     </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+  <tr mat-row routerLink="student/{{row._id}}" *matRowDef="let row; columns: displayedColumns;">
   </tr>
 
 </table>
