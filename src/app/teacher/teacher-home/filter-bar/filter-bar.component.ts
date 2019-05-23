@@ -74,4 +74,8 @@ export class FilterBarComponent implements OnInit {
     }
     );
   }
+
+  reset() {
+    this.filterForm.reset();
+  }
 }

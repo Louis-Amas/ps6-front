@@ -9,7 +9,8 @@
   margin-left: 10%;
 }
 .specialty {
-
+  float: left;
+  margin-right: 10%;
 }
 
 .mat-card {
@@ -17,5 +18,5 @@
   width:90%;
   margin-left: auto;
   margin-right: auto;
+  height: max-content;
 }
-

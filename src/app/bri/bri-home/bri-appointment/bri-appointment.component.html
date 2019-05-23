@@ -44,7 +44,9 @@
              <i *ngIf="element.reservedBy !== undefined" class="material-icons" routerLink="student/{{element.reservedBy._id}}">
                reorder
              </i>
-             <i *ngIf="element.reservedBy === undefined" class="material-icons">
+           </button>
+             <button mat-icon-button color="primary" [disabled]="true">
+             <i *ngIf="element.reservedBy === undefined" class="material-icons" >
                clear
              </i>
            </button>
