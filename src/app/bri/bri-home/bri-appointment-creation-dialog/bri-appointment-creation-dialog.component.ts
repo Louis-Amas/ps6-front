@@ -1,6 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {ActivatedRoute} from '@angular/router';
+import {MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {BriService} from '../../../../services/bri/bri.service';
 import {User} from '../../../../models/user';
@@ -19,7 +18,8 @@ export class BriAppointmentCreationDialogComponent implements OnInit {
   public min: number[];
 
   constructor(public dialogRef: MatDialogRef<BriAppointmentCreationDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public bri: User, public formBuilder: FormBuilder, public briService: BriService) {
+              @Inject(MAT_DIALOG_DATA) public bri: User, public formBuilder: FormBuilder, public briService: BriService,
+              public snackBar: MatSnackBar) {
     this.dateForm = this.formBuilder.group({
       hourDep: 15,
       minDep: 0,
@@ -66,11 +66,18 @@ export class BriAppointmentCreationDialogComponent implements OnInit {
 
     this.briService.addTimeSlot(this.bri._id, dateDep, dateEnd).subscribe( bri => {
       this.dialogRef.close(bri);
+      this.openSnackBar();
     });
   }
 
   onDateSelected(event) {
     this.date = event.value;
     this.dateSelected = true;
+  }
+
+  openSnackBar() {
+    this.snackBar.open( 'Vous avez ajouté un nouveau créneau !', undefined, {
+      duration: 4000,
+    });
   }
 }
