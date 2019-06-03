@@ -103,9 +103,8 @@ export class BriService {
       if (a.available.length >= 0) {
         let hour = a.available[0].slot.departureTime.getHours();
         let bo = res.filter(r => r.hourDep === hour);
-        console.log(bo);
         if (bo[0] !== undefined) {
-          bo[0].bri.push({firstName: a.bri.firstName, lastName: a.bri.lastName});
+          bo[0].bri.push({firstName: a.bri.firstName, lastName: a.bri.lastName, id: a.bri.id});
         } else {
           res.push({hourDep: hour, bri: [{firstName: a.bri.firstName, lastName: a.bri.lastName, id: a.bri.id}]});
         }
@@ -115,7 +114,7 @@ export class BriService {
             hour += 1;
             bo = res.filter(r => r.hourDep === hour);
             if (bo[0] !== undefined) {
-              bo[0].bri.push({firstName: a.bri.firstName, lastName: a.bri.lastName});
+              bo[0].bri.push({firstName: a.bri.firstName, lastName: a.bri.lastName, id: a.bri.id});
             } else {
               res.push({hourDep: hour, bri: [{firstName: a.bri.firstName, lastName: a.bri.lastName, id: a.bri.id}]});
             }

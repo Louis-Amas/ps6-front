@@ -98,4 +98,13 @@ export class StudentAppointmentComponent implements OnInit {
     this.timeSlot.departureTime = new Date(this.timeSlot.departureTime);
     this.timeSlot.endTime = new Date(this.timeSlot.endTime);
   }
+
+  validate() {
+    const bri = this.options.get('bri').value;
+  }
+
+  selectValidate() {
+    const bri = this.options.get('bri').value;
+    return bri !== null;
+  }
 }
