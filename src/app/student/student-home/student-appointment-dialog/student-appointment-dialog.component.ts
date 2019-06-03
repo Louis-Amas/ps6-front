@@ -16,12 +16,13 @@ export class StudentAppointmentDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<StudentAppointmentDialogComponent>, private route: ActivatedRoute,
               private briService: BriService,
-              @Inject(MAT_DIALOG_DATA) public data: {appointment: any, studentId: string}, public snackBar: MatSnackBar) { }
+              @Inject(MAT_DIALOG_DATA) public data: {appointment: any, studentId: string, briId: string}, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.departureTime = this.data.appointment.available.slot.departureTime;
-    this.endTime = this.data.appointment.available.slot.endTime;
-    this.briId = this.data.appointment.id;
+    console.log(this.data);
+    this.departureTime = this.data.appointment.slot.departureTime;
+    this.endTime = this.data.appointment.slot.endTime;
+    this.briId = this.data.briId;
   }
 
   onNoClick(): void {
@@ -30,7 +31,7 @@ export class StudentAppointmentDialogComponent implements OnInit {
 
 
   validateTimeSlot() {
-    this.briService.studentReserveTimeSlot(this.briId, this.data.appointment.available._id, this.data.studentId).subscribe(student => {
+    this.briService.studentReserveTimeSlot(this.briId, this.data.appointment._id, this.data.studentId).subscribe(student => {
       this.dialogRef.close(student);
       this.openSnackBar();
     });

@@ -9,7 +9,6 @@ import {
 } from '@angular/material';
 import {StudentAppointmentDialogComponent} from '../student-appointment-dialog/student-appointment-dialog.component';
 import {TimeSlot} from '../../../../models/timeSlot';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-student-appointment',
@@ -24,15 +23,12 @@ export class StudentAppointmentComponent implements OnInit {
   appointments: User[];
   drawTable: boolean;
   timeSlot: TimeSlot;
-  options: FormGroup;
+  dateChoosed: Date;
 
-  private displayedColumns: string[] = ['timeSlot', 'bri', 'choose'];
+  private displayedColumns: string[] = ['timeSlot', 'choose'];
   dataSource = new MatTableDataSource();
 
-  constructor(public briService: BriService, public dialog: MatDialog, private adapter: DateAdapter<any>, fb: FormBuilder) {
-    this.options = fb.group({
-      bri: ['', [Validators.required]]
-    });
+  constructor(public briService: BriService, public dialog: MatDialog, private adapter: DateAdapter<any>) {
   }
 
   ngOnInit() {
@@ -60,6 +56,7 @@ export class StudentAppointmentComponent implements OnInit {
 
   getDateChoose(event: MatDatepickerInputEvent<Date>) {
     const available = [];
+    this.dateChoosed = event.value;
     this.appointments.forEach(bri => {
       const appointment = this.briService.findTimeSlotByDate(event.value, bri.briInfo);
       if (appointment !== undefined) {
@@ -78,11 +75,13 @@ export class StudentAppointmentComponent implements OnInit {
     }
   }
 
-  openDialog(timeSlot: any) {
+  openDialog(briId: string, hourDep: number) {
+    const timeSlot = this.briService.
+    findTimeSlotByhour(this.appointments.filter(a => a._id === briId)[0].briInfo, hourDep, this.dateChoosed)[0];
     const dialogRef = this.dialog.open(StudentAppointmentDialogComponent, {
       height: '280px',
       width: '800px',
-      data: {appointment: timeSlot, studentId: this.student._id}
+      data: {appointment: timeSlot, studentId: this.student._id, briId: briId}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -97,14 +96,5 @@ export class StudentAppointmentComponent implements OnInit {
   private initTimeSlot() {
     this.timeSlot.departureTime = new Date(this.timeSlot.departureTime);
     this.timeSlot.endTime = new Date(this.timeSlot.endTime);
-  }
-
-  validate() {
-    const bri = this.options.get('bri').value;
-  }
-
-  selectValidate() {
-    const bri = this.options.get('bri').value;
-    return bri !== null;
   }
 }

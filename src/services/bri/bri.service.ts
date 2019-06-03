@@ -100,8 +100,9 @@ export class BriService {
   createOneHourTimeSlot(appointment: any[]) {
     const res = [];
     appointment.forEach( a => {
-      if (a.available.length >= 0) {
-        let hour = a.available[0].slot.departureTime.getHours();
+      const avFree = a.available.filter(x => x.reservedBy === undefined);
+      if (avFree.length >= 0) {
+        let hour = avFree[0].slot.departureTime.getHours();
         let bo = res.filter(r => r.hourDep === hour);
         if (bo[0] !== undefined) {
           bo[0].bri.push({firstName: a.bri.firstName, lastName: a.bri.lastName, id: a.bri.id});
@@ -109,7 +110,7 @@ export class BriService {
           res.push({hourDep: hour, bri: [{firstName: a.bri.firstName, lastName: a.bri.lastName, id: a.bri.id}]});
         }
         const available = [];
-        a.available.forEach(av => {
+        avFree.forEach(av => {
           if (av.slot.departureTime.getHours() !== hour) {
             hour += 1;
             bo = res.filter(r => r.hourDep === hour);
@@ -125,5 +126,20 @@ export class BriService {
       }
     });
     return res;
+  }
+
+  findTimeSlotByhour(bri: Bri, hourDep: number, date: Date) {
+    const bo = bri.appointment.filter(a => {
+      const curDate = new Date(a.timeSlot.departureTime);
+      if (curDate.getDate() === date.getDate() && curDate.getMonth() === date.getMonth()
+        && curDate.getFullYear() === date.getFullYear()) {
+        return true;
+      }
+    })[0];
+    return bo.available.filter(av => {
+      if (av.reservedBy === undefined && av.slot.departureTime.getHours() === hourDep) {
+        return true;
+      }
+    });
   }
 }
