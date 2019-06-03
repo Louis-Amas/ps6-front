@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
 import {ActivatedRoute} from '@angular/router';
 import {BriService} from '../../../../services/bri/bri.service';
 
@@ -16,7 +16,7 @@ export class StudentAppointmentDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<StudentAppointmentDialogComponent>, private route: ActivatedRoute,
               private briService: BriService,
-              @Inject(MAT_DIALOG_DATA) public data: {appointment: any, studentId: string}) { }
+              @Inject(MAT_DIALOG_DATA) public data: {appointment: any, studentId: string}, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.departureTime = this.data.appointment.available.slot.departureTime;
@@ -32,6 +32,13 @@ export class StudentAppointmentDialogComponent implements OnInit {
   validateTimeSlot() {
     this.briService.studentReserveTimeSlot(this.briId, this.data.appointment.available._id, this.data.studentId).subscribe(student => {
       this.dialogRef.close(student);
+      this.openSnackBar();
+    });
+  }
+
+  openSnackBar() {
+    this.snackBar.open( 'Vous avez pris un rendez-vous avec le BRI !', undefined, {
+      duration: 4000,
     });
   }
 }
