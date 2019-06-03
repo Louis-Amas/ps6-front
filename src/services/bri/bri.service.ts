@@ -96,4 +96,35 @@ export class BriService {
       }
     })[0];
   }
+
+  createOneHourTimeSlot(appointment: any[]) {
+    const res = [];
+    appointment.forEach( a => {
+      if (a.available.length >= 0) {
+        let hour = a.available[0].slot.departureTime.getHours();
+        let bo = res.filter(r => r.hourDep === hour);
+        console.log(bo);
+        if (bo[0] !== undefined) {
+          bo[0].bri.push({firstName: a.bri.firstName, lastName: a.bri.lastName});
+        } else {
+          res.push({hourDep: hour, bri: [{firstName: a.bri.firstName, lastName: a.bri.lastName, id: a.bri.id}]});
+        }
+        const available = [];
+        a.available.forEach(av => {
+          if (av.slot.departureTime.getHours() !== hour) {
+            hour += 1;
+            bo = res.filter(r => r.hourDep === hour);
+            if (bo[0] !== undefined) {
+              bo[0].bri.push({firstName: a.bri.firstName, lastName: a.bri.lastName});
+            } else {
+              res.push({hourDep: hour, bri: [{firstName: a.bri.firstName, lastName: a.bri.lastName, id: a.bri.id}]});
+            }
+          } else {
+            available.push(av);
+          }
+        });
+      }
+    });
+    return res;
+  }
 }

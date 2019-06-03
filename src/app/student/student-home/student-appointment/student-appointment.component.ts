@@ -9,6 +9,7 @@ import {
 } from '@angular/material';
 import {StudentAppointmentDialogComponent} from '../student-appointment-dialog/student-appointment-dialog.component';
 import {TimeSlot} from '../../../../models/timeSlot';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-student-appointment',
@@ -23,11 +24,16 @@ export class StudentAppointmentComponent implements OnInit {
   appointments: User[];
   drawTable: boolean;
   timeSlot: TimeSlot;
+  options: FormGroup;
 
-  private displayedColumns: string[] = ['reserved', 'timeSlot', 'choose'];
+  private displayedColumns: string[] = ['timeSlot', 'bri', 'choose'];
   dataSource = new MatTableDataSource();
 
-  constructor(public briService: BriService, public dialog: MatDialog, private adapter: DateAdapter<any>) { }
+  constructor(public briService: BriService, public dialog: MatDialog, private adapter: DateAdapter<any>, fb: FormBuilder) {
+    this.options = fb.group({
+      bri: ['', [Validators.required]]
+    });
+  }
 
   ngOnInit() {
     this.drawTable = false;
@@ -61,10 +67,11 @@ export class StudentAppointmentComponent implements OnInit {
           a.slot.departureTime = new Date(a.slot.departureTime);
           a.slot.endTime = new Date(a.slot.endTime);
         });
-        appointment.available.forEach(a => available.push({available: a, id: bri._id}));
+        available.push({available: appointment.available, bri: {firstName: bri.firstName, lastName: bri.lastName, id: bri._id}});
     }});
-    if (available.length >= 1) {
-      this.dataSource = new MatTableDataSource<any>(available);
+    const res = this.briService.createOneHourTimeSlot(available);
+    if (res.length >= 1) {
+      this.dataSource = new MatTableDataSource<any>(res);
       this.drawTable = true;
     } else {
       this.drawTable = false;
