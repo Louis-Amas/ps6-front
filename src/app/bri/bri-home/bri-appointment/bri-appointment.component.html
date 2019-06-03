@@ -85,3 +85,20 @@
     </button>
   </mat-card-footer>
 </mat-card>
+
+<mat-card>
+  <mat-card-title>
+    Vos rendez-vous du jour
+  </mat-card-title>
+  <mat-card-content>
+    <p *ngIf="getAppointmentOfTheDay() === null">Vous n'avez pas de rendez-vous</p>
+    <mat-list *ngFor="let t of getAppointmentOfTheDay()">
+      <mat-list-item routerLink="student/{{t.reservedBy._id}}">
+      {{t.slot.departureTime.getHours()}}H{{t.slot.departureTime.getMinutes()}}
+        <br>
+        {{t.reservedBy.firstName}} {{t.reservedBy.lastName}}
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
