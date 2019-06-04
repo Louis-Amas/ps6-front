@@ -94,7 +94,7 @@ export class BriService {
           && curDate.getFullYear() === date.getFullYear()) {
         return true;
       }
-    })[0];
+    });
   }
 
   createOneHourTimeSlot(appointment: any[]) {

@@ -47,7 +47,10 @@ export class BriAppointmentComponent implements OnInit {
   getDateChoose(event: MatDatepickerInputEvent<Date>) {
     const appointment = this.briService.findTimeSlotByDate(event.value, this.bri.briInfo);
     if (appointment !== undefined) {
-      const available = appointment.available;
+      const available = [];
+      appointment.forEach(a => {
+        a.available.forEach(av => available.push((av)));
+      });
       // convert to date
       available.map(a => {
         a.slot.departureTime = new Date(a.slot.departureTime);
@@ -78,7 +81,10 @@ export class BriAppointmentComponent implements OnInit {
     const time = new Date();
     const appointment = this.briService.findTimeSlotByDate(time, this.bri.briInfo);
     if (appointment !== undefined) {
-      const available = appointment.available;
+      const available = [];
+      appointment.forEach(a => {
+        a.available.forEach(av => available.push((av)));
+      });
       // convert to date
       available.map(a => {
         a.slot.departureTime = new Date(a.slot.departureTime);

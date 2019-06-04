@@ -60,11 +60,13 @@ export class StudentAppointmentComponent implements OnInit {
     this.appointments.forEach(bri => {
       const appointment = this.briService.findTimeSlotByDate(event.value, bri.briInfo);
       if (appointment !== undefined) {
-        appointment.available.map(a => {
-          a.slot.departureTime = new Date(a.slot.departureTime);
-          a.slot.endTime = new Date(a.slot.endTime);
+        appointment.forEach(app => {
+          app.available.map(a => {
+            a.slot.departureTime = new Date(a.slot.departureTime);
+            a.slot.endTime = new Date(a.slot.endTime);
+          });
+          available.push({available: app.available, bri: {firstName: bri.firstName, lastName: bri.lastName, id: bri._id}});
         });
-        available.push({available: appointment.available, bri: {firstName: bri.firstName, lastName: bri.lastName, id: bri._id}});
     }});
     const res = this.briService.createOneHourTimeSlot(available);
     if (res.length >= 1) {
@@ -75,13 +77,13 @@ export class StudentAppointmentComponent implements OnInit {
     }
   }
 
-  openDialog(briId: string, hourDep: number) {
+  openDialog(id: string, hourDep: number) {
     const timeSlot = this.briService.
-    findTimeSlotByhour(this.appointments.filter(a => a._id === briId)[0].briInfo, hourDep, this.dateChoosed)[0];
+    findTimeSlotByhour(this.appointments.filter(a => a._id === id)[0].briInfo, hourDep, this.dateChoosed)[0];
     const dialogRef = this.dialog.open(StudentAppointmentDialogComponent, {
       height: '280px',
       width: '800px',
-      data: {appointment: timeSlot, studentId: this.student._id, briId: briId}
+      data: {appointment: timeSlot, studentId: this.student._id, briId: id}
     });
 
     dialogRef.afterClosed().subscribe(result => {
