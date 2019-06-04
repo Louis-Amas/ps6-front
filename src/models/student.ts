@@ -21,5 +21,6 @@ export interface Student {
   appointment?: {
     timeSlot?: TimeSlot;
     bri?: string;
+    status?: string;
   };
 }

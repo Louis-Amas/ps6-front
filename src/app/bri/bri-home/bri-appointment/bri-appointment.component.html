@@ -91,12 +91,13 @@
     Vos rendez-vous du jour
   </mat-card-title>
   <mat-card-content>
-    <p *ngIf="getAppointmentOfTheDay() === null">Vous n'avez pas de rendez-vous</p>
-    <mat-list *ngFor="let t of getAppointmentOfTheDay()">
+    <mat-list *ngFor="let t of appointmentOfTheDay">
       <mat-list-item routerLink="student/{{t.reservedBy._id}}">
       {{t.slot.departureTime.getHours()}}H{{t.slot.departureTime.getMinutes()}}
         <br>
         {{t.reservedBy.firstName}} {{t.reservedBy.lastName}}
+        <br>
+        Statut de l'étudiant :{{t.reservedBy.studentInfo.appointment.status}}
       </mat-list-item>
       <mat-divider></mat-divider>
     </mat-list>

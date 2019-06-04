@@ -18,12 +18,15 @@ export class BriAppointmentComponent implements OnInit {
   private drawTable: boolean;
   dataSource = new MatTableDataSource();
 
+  appointmentOfTheDay: any[] = [];
+
   constructor(private briService: BriService, public dialog: MatDialog, private adapter: DateAdapter<any>) {
   }
 
   ngOnInit() {
     this.drawTable = false;
     this.adapter.setLocale('fr');
+    this.getAppointmentOfTheDay();
   }
 
   dateUsed = (d: Date) => {
@@ -81,7 +84,7 @@ export class BriAppointmentComponent implements OnInit {
         a.slot.departureTime = new Date(a.slot.departureTime);
         a.slot.endTime = new Date(a.slot.endTime);
       });
-      return available.filter(a => a.reservedBy !== undefined);
+      this.appointmentOfTheDay =  available.filter(a => a.reservedBy !== undefined);
     }
   }
 }

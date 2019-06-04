@@ -19,7 +19,6 @@ export class StudentAppointmentDialogComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: {appointment: any, studentId: string, briId: string}, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    console.log(this.data);
     this.departureTime = this.data.appointment.slot.departureTime;
     this.endTime = this.data.appointment.slot.endTime;
     this.briId = this.data.briId;
