@@ -3,6 +3,8 @@ import {DateAdapter, MatDatepickerInputEvent, MatDialog, MatTableDataSource} fro
 import {BriService} from '../../../../services/bri/bri.service';
 import {BriAppointmentCreationDialogComponent} from '../bri-appointment-creation-dialog/bri-appointment-creation-dialog.component';
 import {User} from '../../../../models/user';
+import {Subscription} from 'rxjs';
+import {IMqttMessage, MqttService} from 'ngx-mqtt';
 
 
 @Component({
@@ -13,6 +15,10 @@ import {User} from '../../../../models/user';
 })
 export class BriAppointmentComponent implements OnInit, OnDestroy {
 
+  private subscription: Subscription;
+  public message: string;
+
+
   @Input() bri: User;
 
   private displayedColumns: string[] = ['firstName', 'lastName', 'major', 'timeSlot', 'details'];
@@ -22,8 +28,13 @@ export class BriAppointmentComponent implements OnInit, OnDestroy {
   appointmentOfTheDay: any[] = [];
   alive: boolean;
 
-  constructor(private briService: BriService, public dialog: MatDialog, private adapter: DateAdapter<any>) {
+  constructor(private briService: BriService, public dialog: MatDialog,
+              private adapter: DateAdapter<any>, private mqttService: MqttService) {
     this.alive = true;
+    this.subscription = this.mqttService.observe('rasp/button').subscribe((message: IMqttMessage) => {
+      this.message = message.payload.toString();
+      console.log('Salut depuis le raspberry: ' + this.message);
+    });
   }
 
   colorByStatus = {

@@ -70,6 +70,19 @@ import { ImageSliderComponent } from './image-slider/image-slider.component';
 import { WishesTableComponent } from './commons/wishes-table/wishes-table.component';
 import {NotesTableComponent} from './commons/notes-table/notes-table.component';
 
+import { Observable } from 'rxjs';
+import {
+  IMqttMessage,
+  MqttModule,
+  IMqttServiceOptions
+} from 'ngx-mqtt';
+
+export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
+  hostname: '192.168.43.135',
+  port: 9001,
+  path: '/rasp/button'
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -154,7 +167,8 @@ import {NotesTableComponent} from './commons/notes-table/notes-table.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatStepperModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MqttModule.forRoot(MQTT_SERVICE_OPTIONS)
   ],
   providers: [StudentService,
     {
