@@ -3,8 +3,7 @@ import {DateAdapter, MatDatepickerInputEvent, MatDialog, MatTableDataSource} fro
 import {BriService} from '../../../../services/bri/bri.service';
 import {BriAppointmentCreationDialogComponent} from '../bri-appointment-creation-dialog/bri-appointment-creation-dialog.component';
 import {User} from '../../../../models/user';
-import {takeWhile} from 'rxjs/operators';
-import {interval, Observable} from 'rxjs';
+
 
 @Component({
   selector: 'app-bri-appointment',
@@ -21,9 +20,10 @@ export class BriAppointmentComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource();
 
   appointmentOfTheDay: any[] = [];
-  alive: boolean = true;
+  alive: boolean;
 
   constructor(private briService: BriService, public dialog: MatDialog, private adapter: DateAdapter<any>) {
+    this.alive = true;
   }
 
   colorByStatus = {
@@ -37,12 +37,12 @@ export class BriAppointmentComponent implements OnInit, OnDestroy {
     this.drawTable = false;
     this.adapter.setLocale('fr');
     this.getAppointmentOfTheDay();
-
-    if (this.alive === true) {
-      setInterval(() => {
+    this.alive = true;
+    setInterval((cb) => {
+      if (this.alive === true) {
         this.getAppointmentOfTheDay();
-      }, 3000);
-    }
+      }
+    }, 3000);
   }
 
   ngOnDestroy() {
