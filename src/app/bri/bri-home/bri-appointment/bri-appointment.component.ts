@@ -1,8 +1,10 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {DateAdapter, MatDatepickerInputEvent, MatDialog, MatTableDataSource} from '@angular/material';
 import {BriService} from '../../../../services/bri/bri.service';
 import {BriAppointmentCreationDialogComponent} from '../bri-appointment-creation-dialog/bri-appointment-creation-dialog.component';
 import {User} from '../../../../models/user';
+import {takeWhile} from 'rxjs/operators';
+import {interval, Observable} from 'rxjs';
 
 @Component({
   selector: 'app-bri-appointment',
@@ -10,7 +12,7 @@ import {User} from '../../../../models/user';
   styleUrls: ['./bri-appointment.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BriAppointmentComponent implements OnInit {
+export class BriAppointmentComponent implements OnInit, OnDestroy {
 
   @Input() bri: User;
 
@@ -19,14 +21,32 @@ export class BriAppointmentComponent implements OnInit {
   dataSource = new MatTableDataSource();
 
   appointmentOfTheDay: any[] = [];
+  alive: boolean = true;
 
   constructor(private briService: BriService, public dialog: MatDialog, private adapter: DateAdapter<any>) {
   }
+
+  colorByStatus = {
+    none: '#FFFFFF',
+    waiting: '#98FB98',
+    inProcess: '#00aeef',
+    done: '#C0C0C0'
+  };
 
   ngOnInit() {
     this.drawTable = false;
     this.adapter.setLocale('fr');
     this.getAppointmentOfTheDay();
+
+    if (this.alive === true) {
+      setInterval(() => {
+        this.getAppointmentOfTheDay();
+      }, 3000);
+    }
+  }
+
+  ngOnDestroy() {
+    this.alive = false;
   }
 
   dateUsed = (d: Date) => {
@@ -78,19 +98,19 @@ export class BriAppointmentComponent implements OnInit {
   }
 
   getAppointmentOfTheDay() {
-    const time = new Date();
-    const appointment = this.briService.findTimeSlotByDate(time, this.bri.briInfo);
-    if (appointment !== undefined) {
-      const available = [];
-      appointment.forEach(a => {
-        a.available.forEach(av => available.push((av)));
-      });
-      // convert to date
-      available.map(a => {
-        a.slot.departureTime = new Date(a.slot.departureTime);
-        a.slot.endTime = new Date(a.slot.endTime);
-      });
-      this.appointmentOfTheDay =  available.filter(a => a.reservedBy !== undefined);
-    }
+    this.briService.getAppointmentOfTheDay(this.bri._id).subscribe(appointment => {
+      if (appointment !== undefined) {
+        const available = [];
+        appointment.forEach(a => {
+          a.available.forEach(av => available.push((av)));
+        });
+        // convert to date
+        available.map(a => {
+          a.slot.departureTime = new Date(a.slot.departureTime);
+          a.slot.endTime = new Date(a.slot.endTime);
+        });
+        this.appointmentOfTheDay = available.filter(a => a.reservedBy !== undefined);
+      }
+    });
   }
 }

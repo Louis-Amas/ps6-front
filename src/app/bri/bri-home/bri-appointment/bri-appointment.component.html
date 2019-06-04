@@ -90,14 +90,14 @@
   <mat-card-title>
     Vos rendez-vous du jour
   </mat-card-title>
-  <mat-card-content>
+  <mat-card-content  *ngIf="appointmentOfTheDay !== undefined">
     <mat-list *ngFor="let t of appointmentOfTheDay">
-      <mat-list-item routerLink="student/{{t.reservedBy._id}}">
-      {{t.slot.departureTime.getHours()}}H{{t.slot.departureTime.getMinutes()}}
-        <br>
+
+      <mat-list-item routerLink="student/{{t.reservedBy._id}}" >
+        <mat-toolbar [style.background-color]="this.colorByStatus[t.reservedBy.studentInfo.appointment.status]">
+          {{t.slot.departureTime.getHours()}}H{{t.slot.departureTime.getMinutes()}} <span class="tmp"></span>
         {{t.reservedBy.firstName}} {{t.reservedBy.lastName}}
-        <br>
-        Statut de l'étudiant :{{t.reservedBy.studentInfo.appointment.status}}
+        </mat-toolbar>
       </mat-list-item>
       <mat-divider></mat-divider>
     </mat-list>

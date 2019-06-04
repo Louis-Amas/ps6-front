@@ -40,6 +40,11 @@ export class BriService {
     return this.http.get<User[]>(this.briUrl + '/bri/appointment');
   }
 
+  getAppointmentOfTheDay(id: string): Observable<any[]> {
+    const date = new Date();
+    return this.http.get<any[]>(this.briUrl + '/bri/' + id + '/appointment/' + date.toISOString() );
+  }
+
   studentReserveTimeSlot(briId: string, timeSlotId: string, studentId: string) {
     return this.http.put<User>(this.briUrl + '/bri/' + briId + '/appointment/available/' + timeSlotId, {
       reservedBy: studentId
