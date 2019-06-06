@@ -40,16 +40,8 @@ export class BriAppointmentComponent implements OnInit, OnDestroy {
               private adapter: DateAdapter<any>, private mqttService: MqttService,
               private orchestator: OrchestatorService) {
 
-
-    this.orchestator.observeIonicApp()
-      .subscribe((message) => {
-        const res = {
-          studentId: message.payload.toString()
-        } as ResultOfAccept;
-        this.updateStatusOfStudent(res, 'waiting');
-      });
-
     this.statusOfAppointement = StateAppointement.NoBody;
+
     // Button clické
     this.mqttService.observe('/rasp/button').subscribe((message: IMqttMessage) => {
       this.message = message.payload.toString();
@@ -60,6 +52,7 @@ export class BriAppointmentComponent implements OnInit, OnDestroy {
            // si on a trouvé qq1
               if (result.result) {
                 this.statusOfAppointement = StateAppointement.Someone;
+                this.orchestator.stopBlinking();
                 this.orchestator.ledOn();
                 this.updateStatusOfStudent(result, 'inProcess');
               }
@@ -70,9 +63,25 @@ export class BriAppointmentComponent implements OnInit, OnDestroy {
               this.statusOfAppointement = StateAppointement.NoBody;
               this.orchestator.ledOff();
               this.updateStatusOfStudent(result, 'done');
+              this.appointmentOfTheDay.forEach(a => {
+                if(a.reservedBy.status === 'waiting') {
+                  this.orchestator.startBlinking();
+                }
+              });
           });
       }
     });
+
+    this.orchestator.observeIonicApp()
+      .subscribe((message) => {
+        const res = {
+          studentId: message.payload.toString()
+        } as ResultOfAccept;
+        this.updateStatusOfStudent(res, 'waiting');
+        if (this.statusOfAppointement === StateAppointement.NoBody) {
+          this.orchestator.startBlinking();
+        }
+      });
   }
 
   colorByStatus = {
