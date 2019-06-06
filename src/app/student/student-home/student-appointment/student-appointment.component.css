@@ -21,6 +21,7 @@
   margin-top: auto;
   margin-bottom: auto;
   font-size: 17px;
+  width: 20%;
 }
 
 .open{
@@ -31,6 +32,19 @@
   color: #f44336;
 }
 
+#cercle {
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+  margin-right: 10px;
+  background: #00aeef;
+}
+
 p{
+  text-align: center;
+}
+
+.details-card {
+  width: 70%;
   text-align: center;
 }
