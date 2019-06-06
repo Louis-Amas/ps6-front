@@ -78,9 +78,9 @@ import {
 } from 'ngx-mqtt';
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
-  hostname: '192.168.43.135',
+  hostname: 'localhost',
   port: 9001,
-  path: '/rasp/button'
+  path: '/'
 };
 
 @NgModule({

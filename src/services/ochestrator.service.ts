@@ -9,14 +9,8 @@ import {IMqttClient, IMqttServiceOptions, MqttService} from 'ngx-mqtt';
 })
 export class OrchestatorService {
 
-  private mqttService: MqttService;
-  constructor() {
-    const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
-      hostname: '127.0.0.1',
-      port: 9001,
-      path: ''
-    };
-    this.mqttService = new MqttService(MQTT_SERVICE_OPTIONS);
+
+  constructor(private mqttService: MqttService) {
   }
 
   ledOn() {
