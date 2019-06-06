@@ -6,7 +6,7 @@ import {User} from '../../../../models/user';
 import {Subscription} from 'rxjs';
 import {IMqttMessage, MqttService} from 'ngx-mqtt';
 import {ResultOfAccept} from '../../../../models/resultOfAccept';
-import {IotService} from '../../../../services/iot.service';
+import {OrchestatorService} from '../../../../services/ochestrator.service';
 
 enum StateAppointement {
   NoBody,
@@ -23,7 +23,6 @@ enum StateAppointement {
 })
 export class BriAppointmentComponent implements OnInit, OnDestroy {
 
-  private subscription: Subscription;
   public message: string;
 
 
@@ -34,20 +33,19 @@ export class BriAppointmentComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource();
 
   appointmentOfTheDay: any[] = [];
-  alive: boolean;
 
   statusOfAppointement: StateAppointement;
 
   constructor(private briService: BriService, public dialog: MatDialog,
-              private adapter: DateAdapter<any>, private mqttService: MqttService, private iotService: IotService) {
-    this.alive = true;
+              private adapter: DateAdapter<any>, private mqttService: MqttService,
+              private orchestator: OrchestatorService) {
+
 
     this.statusOfAppointement = StateAppointement.NoBody;
-
+    orchestator.stopBlinking();
     // Button clické
-    this.subscription = this.mqttService.observe('/rasp/button').subscribe((message: IMqttMessage) => {
+    this.mqttService.observe('/rasp/button').subscribe((message: IMqttMessage) => {
       this.message = message.payload.toString();
-      console.log(this.message);
       // Si il y a personne et que l'on click
       if (this.statusOfAppointement === StateAppointement.NoBody) {
        this.briService.acceptWaitingStudents(this.bri._id, 'waiting', 'inProcess')
@@ -55,8 +53,7 @@ export class BriAppointmentComponent implements OnInit, OnDestroy {
            // si on a trouvé qq1
               if (result.result) {
                 this.statusOfAppointement = StateAppointement.Someone;
-                this.iotService.changeLedState(true)
-                  .subscribe((_) => _.bo = 1);
+                this.orchestator.ledOn();
                 this.updateStatusOfStudent(result, 'inProcess');
               }
          });
@@ -64,8 +61,7 @@ export class BriAppointmentComponent implements OnInit, OnDestroy {
         this.briService.acceptWaitingStudents(this.bri._id, 'inProcess', 'done')
           .subscribe((result: ResultOfAccept) => {
               this.statusOfAppointement = StateAppointement.NoBody;
-              this.iotService.changeLedState(false)
-                .subscribe((_) => _.bo = 1);
+              this.orchestator.ledOff();
               this.updateStatusOfStudent(result, 'done');
           });
       }
@@ -83,16 +79,9 @@ export class BriAppointmentComponent implements OnInit, OnDestroy {
     this.drawTable = false;
     this.adapter.setLocale('fr');
     this.getAppointmentOfTheDay();
-    // this.alive = true;
-    // setInterval((cb) => {
-    //   if (this.alive === true) {
-    //     this.getAppointmentOfTheDay();
-    //   }
-    // }, 3000);
   }
 
   ngOnDestroy() {
-    this.alive = false;
   }
 
   dateUsed = (d: Date) => {
