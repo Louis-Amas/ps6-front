@@ -32,5 +32,9 @@ export class OrchestatorService {
     this.mqttService.publish('/rasp/led/blinking/stop', 'stop')
       .subscribe((test) => console.log());
   }
+
+  observeIonicApp() {
+    return this.mqttService.observe('/ionic/arrive');
+  }
 }
 

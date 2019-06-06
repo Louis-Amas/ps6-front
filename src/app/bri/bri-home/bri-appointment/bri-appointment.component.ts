@@ -41,8 +41,15 @@ export class BriAppointmentComponent implements OnInit, OnDestroy {
               private orchestator: OrchestatorService) {
 
 
+    this.orchestator.observeIonicApp()
+      .subscribe((message) => {
+        const res = {
+          studentId: message.payload.toString()
+        } as ResultOfAccept;
+        this.updateStatusOfStudent(res, 'waiting');
+      });
+
     this.statusOfAppointement = StateAppointement.NoBody;
-    orchestator.stopBlinking();
     // Button clické
     this.mqttService.observe('/rasp/button').subscribe((message: IMqttMessage) => {
       this.message = message.payload.toString();
