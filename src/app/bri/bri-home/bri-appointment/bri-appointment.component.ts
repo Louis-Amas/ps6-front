@@ -3,6 +3,16 @@ import {DateAdapter, MatDatepickerInputEvent, MatDialog, MatTableDataSource} fro
 import {BriService} from '../../../../services/bri/bri.service';
 import {BriAppointmentCreationDialogComponent} from '../bri-appointment-creation-dialog/bri-appointment-creation-dialog.component';
 import {User} from '../../../../models/user';
+import {Subscription} from 'rxjs';
+import {IMqttMessage, MqttService} from 'ngx-mqtt';
+import {ResultOfAccept} from '../../../../models/resultOfAccept';
+import {IotService} from '../../../../services/iot.service';
+
+enum StateAppointement {
+  NoBody,
+  Someone
+}
+
 
 
 @Component({
@@ -13,6 +23,10 @@ import {User} from '../../../../models/user';
 })
 export class BriAppointmentComponent implements OnInit, OnDestroy {
 
+  private subscription: Subscription;
+  public message: string;
+
+
   @Input() bri: User;
 
   private displayedColumns: string[] = ['firstName', 'lastName', 'major', 'timeSlot', 'details'];
@@ -22,8 +36,40 @@ export class BriAppointmentComponent implements OnInit, OnDestroy {
   appointmentOfTheDay: any[] = [];
   alive: boolean;
 
-  constructor(private briService: BriService, public dialog: MatDialog, private adapter: DateAdapter<any>) {
+  statusOfAppointement: StateAppointement;
+
+  constructor(private briService: BriService, public dialog: MatDialog,
+              private adapter: DateAdapter<any>, private mqttService: MqttService, private iotService: IotService) {
     this.alive = true;
+
+    this.statusOfAppointement = StateAppointement.NoBody;
+
+    // Button clické
+    this.subscription = this.mqttService.observe('/rasp/button').subscribe((message: IMqttMessage) => {
+      this.message = message.payload.toString();
+      console.log(this.message);
+      // Si il y a personne et que l'on click
+      if (this.statusOfAppointement === StateAppointement.NoBody) {
+       this.briService.acceptWaitingStudents(this.bri._id, 'waiting', 'inProcess')
+         .subscribe((result: ResultOfAccept) => {
+           // si on a trouvé qq1
+              if (result.result) {
+                this.statusOfAppointement = StateAppointement.Someone;
+                this.iotService.changeLedState(true)
+                  .subscribe((_) => _.bo = 1);
+                this.updateStatusOfStudent(result, 'inProcess');
+              }
+         });
+      } else {
+        this.briService.acceptWaitingStudents(this.bri._id, 'inProcess', 'done')
+          .subscribe((result: ResultOfAccept) => {
+              this.statusOfAppointement = StateAppointement.NoBody;
+              this.iotService.changeLedState(false)
+                .subscribe((_) => _.bo = 1);
+              this.updateStatusOfStudent(result, 'done');
+          });
+      }
+    });
   }
 
   colorByStatus = {
@@ -37,12 +83,12 @@ export class BriAppointmentComponent implements OnInit, OnDestroy {
     this.drawTable = false;
     this.adapter.setLocale('fr');
     this.getAppointmentOfTheDay();
-    this.alive = true;
-    setInterval((cb) => {
-      if (this.alive === true) {
-        this.getAppointmentOfTheDay();
-      }
-    }, 3000);
+    // this.alive = true;
+    // setInterval((cb) => {
+    //   if (this.alive === true) {
+    //     this.getAppointmentOfTheDay();
+    //   }
+    // }, 3000);
   }
 
   ngOnDestroy() {
@@ -110,6 +156,16 @@ export class BriAppointmentComponent implements OnInit, OnDestroy {
           a.slot.endTime = new Date(a.slot.endTime);
         });
         this.appointmentOfTheDay = available.filter(a => a.reservedBy !== undefined);
+      }
+    });
+  }
+
+
+  updateStatusOfStudent(result: ResultOfAccept, newStatus: string) {
+    this.appointmentOfTheDay.forEach((appointemnt: any) => {
+      if (appointemnt.reservedBy._id === result.studentId) {
+        appointemnt.reservedBy.studentInfo.appointment.status = newStatus;
+        return;
       }
     });
   }

@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {User} from '../../models/user';
 import {Observable} from 'rxjs';
 import {Bri} from '../../models/bri';
+import {ResultOfAccept} from '../../models/resultOfAccept';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,13 @@ export class BriService {
 
   getAllAppointment() {
     return this.http.get<User[]>(this.briUrl + '/bri/appointment');
+  }
+
+  acceptWaitingStudents(id: string, lastStatus: string, newStatus: string) {
+    return this.http.put<ResultOfAccept>(this.briUrl + `/bri/${id}/appointment/${new Date()}/accept`, {
+      lastStatus,
+      newStatus
+    });
   }
 
   getAppointmentOfTheDay(id: string): Observable<any[]> {
