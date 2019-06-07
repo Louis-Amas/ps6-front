@@ -36,5 +36,10 @@ export class OrchestatorService {
   observeIonicApp() {
     return this.mqttService.observe('/ionic/arrive');
   }
+
+  display4DigitNumber(num: number) {
+    this.mqttService.publish('/rasp/display', num.toString())
+      .subscribe((test) => console.log());
+  }
 }
 
