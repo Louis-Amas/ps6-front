@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import {Observable} from 'rxjs';
-import {IMqttClient, IMqttServiceOptions, MqttService} from 'ngx-mqtt';
+import {MqttService} from 'ngx-mqtt';
 
 
 @Injectable({
@@ -37,7 +36,7 @@ export class OrchestatorService {
     return this.mqttService.observe('/ionic/arrive');
   }
 
-  display4DigitNumber(num: number) {
+  display4DigitNumber(num: any) {
     this.mqttService.publish('/rasp/display', num.toString())
       .subscribe((test) => console.log());
   }

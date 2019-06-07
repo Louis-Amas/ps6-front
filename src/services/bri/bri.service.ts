@@ -59,6 +59,10 @@ export class BriService {
     });
   }
 
+  getDelay(briId: string) {
+    return this.http.get<any>(this.briUrl + '/bri/' + briId + '/appointment/delay');
+  }
+
   filterStudent(id: string, filterStu: User[], idUniv: string, search: string, major: string) {
     if (idUniv !== undefined && search !== undefined && major !== undefined) {
       return filterStu.filter(stu => stu.studentInfo.wishes.find(wish =>

@@ -61,9 +61,12 @@ export class BriAppointmentComponent implements OnInit, OnDestroy {
           .subscribe((result: ResultOfAccept) => {
               this.statusOfAppointement = StateAppointement.NoBody;
               this.orchestator.ledOff();
+              this.briService.getDelay(this.bri._id).subscribe(x => {
+                this.orchestator.display4DigitNumber(x.delay);
+              });
               this.updateStatusOfStudent(result, 'done');
               this.appointmentOfTheDay.forEach(a => {
-                if(a.reservedBy.status === 'waiting') {
+                if (a.reservedBy.status === 'waiting') {
                   this.orchestator.startBlinking();
                 }
               });
@@ -79,6 +82,9 @@ export class BriAppointmentComponent implements OnInit, OnDestroy {
         this.updateStatusOfStudent(res, 'waiting');
         if (this.statusOfAppointement === StateAppointement.NoBody) {
           this.orchestator.startBlinking();
+          this.briService.getDelay(this.bri._id).subscribe(x => {
+            this.orchestator.display4DigitNumber(x.delay);
+          });
         }
       });
   }
@@ -94,6 +100,10 @@ export class BriAppointmentComponent implements OnInit, OnDestroy {
     this.drawTable = false;
     this.adapter.setLocale('fr');
     this.getAppointmentOfTheDay();
+    this.briService.getDelay(this.bri._id).subscribe(x => {
+      console.log(x.delay);
+      this.orchestator.display4DigitNumber(x.delay);
+    });
   }
 
   ngOnDestroy() {
