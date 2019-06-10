@@ -30,6 +30,8 @@ export class FilterBarBriComponent implements OnInit {
   constructor(public formBuilder: FormBuilder, public universityService: UniversityService) {
     this.filterForm = this.formBuilder.group({
       search: [''],
+      destination: [''],
+      specialty: ['']
     });
   }
 
@@ -67,6 +69,13 @@ export class FilterBarBriComponent implements OnInit {
   getUniversities() {
     this.universityService.getUniversitiesObservable().subscribe(univ =>
         this.universities = univ);
+  }
+
+  reset() {
+    this.filterForm.reset();
+    this.majorEvent.emit(undefined);
+    this.universityEvent.emit(undefined);
+    this.nameEvent.emit('');
   }
 
 }

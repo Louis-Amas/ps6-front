@@ -10,7 +10,7 @@
       </mat-form-field>
       <mat-form-field class="destination">
         <mat-label>Destination</mat-label>
-        <mat-select (selectionChange)="onUniversitySelected($event)" name="destination">
+        <mat-select (selectionChange)="onUniversitySelected($event)" name="destination" [formControlName]="'destination'">
           <mat-option>None</mat-option>
           <mat-option *ngFor="let univ of universities" [value]="univ._id">
             {{univ.country}} - {{univ.name}}
@@ -18,9 +18,9 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field class="filiere">
+      <mat-form-field class="specialty">
         <mat-label>Filière</mat-label>
-        <mat-select (selectionChange)="onMajorSelected($event)" name="destination">
+        <mat-select (selectionChange)="onMajorSelected($event)" name="specialty" [formControlName]="'specialty'">
           <mat-option>None</mat-option>
           <mat-option value="SI">SI</mat-option>
           <mat-option value="MAM">MAM</mat-option>
@@ -31,5 +31,9 @@
         </mat-select>
       </mat-form-field>
     </form>
+    <button class="reinit-button" mat-icon-button color="primary" (click)="reset()">
+      <i class="material-icons">
+        refresh
+      </i></button>
   </mat-card-content>
 </mat-card>
