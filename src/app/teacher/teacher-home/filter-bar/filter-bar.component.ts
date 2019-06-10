@@ -33,6 +33,8 @@ export class FilterBarComponent implements OnInit {
   constructor(public formBuilder: FormBuilder, public universityService: UniversityService) {
     this.filterForm = this.formBuilder.group({
       search: [''],
+      dest: [''],
+      spe: ['']
     });
   }
 
@@ -52,11 +54,7 @@ export class FilterBarComponent implements OnInit {
 
   onNameSelected($event) {
     const name = $event.target.value;
-    if (name === '') {
-      this.nameEvent.emit('undefined');
-    } else {
-      this.nameEvent.emit(name.toString());
-    }
+    this.nameEvent.emit(name.toString());
   }
 
   onMajorSelected($event) {
@@ -77,5 +75,8 @@ export class FilterBarComponent implements OnInit {
 
   reset() {
     this.filterForm.reset();
+    this.majorEvent.emit(undefined);
+    this.nameEvent.emit('');
+    this.universityEvent.emit(undefined);
   }
 }

@@ -9,7 +9,7 @@
       </mat-form-field>
       <mat-form-field class="destination">
         <mat-label>Destination</mat-label>
-        <mat-select (selectionChange)="onUniversitySelected($event)" name="destination">
+        <mat-select (selectionChange)="onUniversitySelected($event)" [formControlName]="'dest'" name="destination">
           <mat-option [value]="undefined">None</mat-option>
           <mat-option *ngFor="let univ of universities" [value]="univ._id">
             {{univ.country}} - {{univ.name}}
@@ -18,7 +18,7 @@
       </mat-form-field>
       <mat-form-field class="specialty">
         <mat-label>Filière de dernière année</mat-label>
-        <mat-select (selectionChange)="onMajorSelected($event)" name="specialty">
+        <mat-select (selectionChange)="onMajorSelected($event)" [formControlName]="'spe'" name="specialty">
           <mat-option [value]="undefined">None</mat-option>
           <mat-option *ngFor="let major of SPE_LIST" [value]="major">
             {{major}}

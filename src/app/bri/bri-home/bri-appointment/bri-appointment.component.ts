@@ -3,7 +3,6 @@ import {DateAdapter, MatDatepickerInputEvent, MatDialog, MatTableDataSource} fro
 import {BriService} from '../../../../services/bri/bri.service';
 import {BriAppointmentCreationDialogComponent} from '../bri-appointment-creation-dialog/bri-appointment-creation-dialog.component';
 import {User} from '../../../../models/user';
-import {Subscription} from 'rxjs';
 import {IMqttMessage, MqttService} from 'ngx-mqtt';
 import {ResultOfAccept} from '../../../../models/resultOfAccept';
 import {OrchestatorService} from '../../../../services/ochestrator.service';
@@ -101,7 +100,6 @@ export class BriAppointmentComponent implements OnInit, OnDestroy {
     this.adapter.setLocale('fr');
     this.getAppointmentOfTheDay();
     this.briService.getDelay(this.bri._id).subscribe(x => {
-      console.log(x.delay);
       this.orchestator.display4DigitNumber(x.delay);
     });
   }
