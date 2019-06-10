@@ -62,9 +62,9 @@ export class TeacherUniversityDetailsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
         this.university = result;
+        this.openSnackBarAdd();
       }
       this.getCurrentUniversity();
-      this.openSnackBarAdd();
     });
 
   }
