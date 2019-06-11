@@ -111,7 +111,7 @@ export class StudentWishFormComponent implements OnInit {
     this.studentService.addWish(coursesId, this.university._id, this.student._id).subscribe(() => {
       this.router.navigate([`student/${this.student._id}`]);
       this.openSnackBar();
-    }, (err) => {
+    }, () => {
       this.error = true;
     });
   }
@@ -163,8 +163,11 @@ export class StudentWishFormComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
+        this.nbECTS = 0;
+        this.coursesSelected = [];
         this.university = result;
-        this.dataSource = new MatTableDataSource<User>(this.university.courses);
+        const semester = this.wishForm.get('semester').value;
+        this.getCoursesByUniv(this.university._id, semester);
       }
     });
 
